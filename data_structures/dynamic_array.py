@@ -82,16 +82,17 @@ class DynamicArray(object):
         self.start_idx = 0
 
 
-arr = DynamicArray()
-for i in range(10):
-    arr.push(i)
-print(arr)
-arr.pop()
-print(arr)
-arr.shift()
-print(arr)
-arr.unshift(10)
-arr.unshift(11)
-print(arr)
-arr.shift()
-print(arr)
+if __name__ == '__main__':
+    arr = DynamicArray()
+    for i in range(10):
+        arr.push(i)
+    print(arr)
+    arr.pop()
+    print(arr)
+    arr.shift()
+    print(arr)
+    arr.unshift(10)
+    arr.unshift(11)
+    print(arr)
+    arr.shift()
+    print(arr)
