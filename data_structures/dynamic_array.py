@@ -22,7 +22,7 @@ class DynamicArray(object):
     # O(1) for del arr[i]
     def __delitem__(self, i):
         i = self.get_index(i)
-        sef.store[i] = None
+        self.store[i] = None
 
     def __repr__(self):
         return self.store.__repr__()
