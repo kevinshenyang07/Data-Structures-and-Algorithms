@@ -12,6 +12,7 @@ from __future__ import print_function
 # in heapq module, all methods are static (no class definition)
 
 class Heap(object):
+    
     def __init__(self, store=[], key=lambda x: x):
         self.store = store
         self.key = key
