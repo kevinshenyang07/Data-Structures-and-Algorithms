@@ -114,15 +114,7 @@ class BinarySearchTree(object):
                 curr_level = next_level
 
 
-def inorder_rec(root, arr=[]):
-    if root:
-        inorder_rec(root.left, arr)
-        arr.append(root.val)
-        inorder_rec(root.right, arr)
-    return arr
 
-def is_balanced(root):
-    pass
 
 if __name__ == '__main__':
 
@@ -137,8 +129,3 @@ if __name__ == '__main__':
     print("deleting 2")
     bst.delete(2)
     bst.print_tree()
-
-    print("in order traversal")
-    print(inorder_rec(bst.root))
-
-    print("is this tree balanced? ", is_balanced(bst.root))
