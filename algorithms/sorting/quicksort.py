@@ -37,6 +37,11 @@ def partition(arr, start, end):
     return right
 
 
+# using quick select
+def kth_largest(nums, k):
+    pass
+
+
 if __name__ == '__main__':
     arr = [7, 5, 8, 2, 4, 3, 9, 1]
     quicksort(arr)

@@ -114,8 +114,6 @@ class BinarySearchTree(object):
                 curr_level = next_level
 
 
-
-
 if __name__ == '__main__':
 
     bst = BinarySearchTree()
@@ -129,3 +127,5 @@ if __name__ == '__main__':
     print("deleting 2")
     bst.delete(2)
     bst.print_tree()
+
+    print(inorder(bst.root))

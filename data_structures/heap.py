@@ -38,8 +38,6 @@ class Heap(object):
         self.sift_down(0)
         return ele
 
-    # time complexity O(klogk + (n-k)logk) = O(nlogk)
-    # same idea for k smallest elements
     @classmethod
     def k_largest(cls, arr, k):
         if k <= 0:
@@ -54,8 +52,9 @@ class Heap(object):
             heap.push(arr.pop())
             heap.extract()
         return heap.store
+    # time complexity O(klogk + (n-k)logk) = O(nlogk)
+    # same idea for k smallest elements
 
-    # time complexity O(nlogn)
     @classmethod
     def heapify(cls, arr, key=lambda x: x, end=None):
         if not end:
@@ -66,9 +65,8 @@ class Heap(object):
             heap.sift_down(i, end)
             i -= 1
         return heap.store
+    # time complexity O(nlogn)
 
-    # stable, worst case time complexity O(nlogn), space complexity O(1)
-    # sort result not stable (not guaranteed to reserve the original order)
     @classmethod
     def heap_sort(cls, arr, key=lambda x: x):
         # reverse the key to turn the array in max heap order
@@ -80,6 +78,8 @@ class Heap(object):
             max_heap.swap(0, i)
             max_heap.sift_down(0, i)
         return max_heap.store
+    # stable, worst case time complexity O(nlogn), space complexity O(1)
+    # sort result not stable (not guaranteed to reserve the original order)
 
     # helper methods
     def cmp(self, i, j):

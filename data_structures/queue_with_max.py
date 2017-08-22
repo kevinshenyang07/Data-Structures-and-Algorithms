@@ -29,10 +29,6 @@ class QueueWithMax(object):
         else:
             return self.max_queue[0]
 
-    def size(self):
-        # is .len() available here?
-        return len(self.queue)
-
 
 if __name__ == '__main__':
     qwm = QueueWithMax()
