@@ -47,12 +47,12 @@ class Heap(object):
         # start with an empty min-heap
         heap = cls()
         for i in range(k):
-            heap.push(arr.pop())
-        while len(arr) > 0:
-            heap.push(arr.pop())
+            heap.push(arr[i])
+        for j in range(k, len(arr)) > 0:
+            heap.push(arr[j])
             heap.extract()
         return heap.store
-    # time complexity O(klogk + (n-k)logk) = O(nlogk)
+    # O(klogk + (n-k)logk) = O(nlogk) time, O(k) space
     # same idea for k smallest elements
 
     @classmethod

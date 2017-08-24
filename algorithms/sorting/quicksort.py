@@ -1,10 +1,10 @@
 from __future__ import print_function
 
 
-# time complexity O(nlogn), worst case O(n^2)
-# result not stable 
 def quicksort(arr):
     quicksort_helper(arr, 0, len(arr) - 1)
+# time complexity O(nlogn), worst case O(n^2)
+# result not stable
 
 def quicksort_helper(arr, start, end):
     if start < end:
