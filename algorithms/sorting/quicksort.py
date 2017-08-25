@@ -5,34 +5,31 @@ def quicksort(arr):
     quicksort_helper(arr, 0, len(arr) - 1)
 
 
-def quicksort_helper(arr, start, end):
-    if start < end:
-       split_idx = partition(arr, start, end)
+def quicksort_helper(arr, left, right):
+    if left >= right:
+        return
 
-       quicksort_helper(arr, start, split_idx - 1)
-       quicksort_helper(arr, split_idx + 1, end)
+    pivot = partition(arr, left, right)
+
+    quicksort_helper(arr, left, pivot - 1)
+    quicksort_helper(arr, pivot + 1, right)
 
 
-def partition(arr, start, end):
-    pivot_val = arr[start]
-    left = start + 1
-    right = end
-
-    # until the right mark crosses the left
-    while left <= right:
-        while left <= right and arr[left] <= pivot_val:
-            left += 1
-        while left <= right and arr[right] >= pivot_val:
+def partition(nums, left, right):
+    # if using random init pivot, switch to the left anyway
+    pivot_val = nums[left]
+    while left < right:
+        while left < right and nums[right] >= pivot_val:
             right -= 1
-
-        if left <= right:
-            arr[left], arr[right] = arr[right], arr[left]
+        # the smaller number take the init pivot's place
+        nums[left] = nums[right]
+        while left < right and nums[left] <= pivot_val:
             left += 1
-            right -= 1
-
-    arr[start], arr[right] = arr[right], arr[start]
-
-    return right
+        # the bigger number move to the right side
+        nums[right] = nums[left]
+    # the pivot move to where it should be
+    nums[left] = pivot_val
+    return left
 
 
 # time complexity O(nlogn), worst case O(n^2)

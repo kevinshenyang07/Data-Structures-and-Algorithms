@@ -6,10 +6,30 @@ class TreeNode(object):
         self.right = None
 
 
+# divide & conquer version
 def depth(root):
     if not root:
         return 0
     return max(depth(root.left), depth(root.right)) + 1
+
+# iterative version, preorder
+def depth_iter(root):
+    if not root:
+        return 0
+    stack_node = [root]
+    stack_depth = [1]
+    max_depth = 0
+    while stack_node:
+        node = stack_node.pop()
+        depth = stack_depth.pop()
+        max_depth = max(max_depth, depth)
+        if node.right:
+            stack_node.append(node.right)
+            stack_depth.append(depth + 1)
+        if node.left:
+            stack_node.append(node.left)
+            stack_depth.append(depth + 1)
+    return max_depth
 
 
 # the depth of the two subtrees of every node never differ by more than 1
@@ -74,3 +94,13 @@ def build_tree(preorder, inorder):
         return root
     else:
         return None
+
+
+def has_path_sum(root, target):
+    if not root:
+        return False
+    if not root.left and not root.right and root.val == target:
+        return True
+    target -= root.val
+    return has_path_sum(root.left, target) or has_path_sum(root.right, target)
+
