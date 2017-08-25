@@ -1,9 +1,9 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 
 def depth(root):
@@ -35,14 +35,42 @@ def inorder(root):
     stack = []
     visited = []
     while root or stack:
-        if root:
+        while root:
             stack.append(root)
-            root = root.left
-        else:
-            root = stack.pop()
-            visited.append(root.val)
-            root = root.right
+            root = root.left        
+        root = stack.pop()
+        visited.append(root.val)
+        root = root.right
     return visited
 
 
+def is_valid_bst(root):
+    if not root:
+        return True
+    stack = []
+    prev, curr = None, root
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+        curr = stack.pop()
+        if prev and prev.val > curr.val:
+            return False
+        prev = curr
+        curr = curr.right
+    return True
 
+
+def build_tree(preorder, inorder):
+    # preorder and inorder are lists of node values
+    # return the root of built tree
+    # assume no duplicates
+    if inorder:
+        root_val = preorder.pop(0)
+        root_idx = inorder.index(root_val)
+        root = TreeNode(root_val)
+        root.left = build_tree(preorder, inorder[:root_idx])
+        root.right = build_tree(preorder, inorder[root_idx+1:])
+        return root
+    else:
+        return None

@@ -3,8 +3,7 @@ from __future__ import print_function
 
 def quicksort(arr):
     quicksort_helper(arr, 0, len(arr) - 1)
-# time complexity O(nlogn), worst case O(n^2)
-# result not stable
+
 
 def quicksort_helper(arr, start, end):
     if start < end:
@@ -19,27 +18,25 @@ def partition(arr, start, end):
     left = start + 1
     right = end
 
-    done = False
-    while not done:
-        # until the right mark crosses the left
+    # until the right mark crosses the left
+    while left <= right:
         while left <= right and arr[left] <= pivot_val:
-            left = left + 1
+            left += 1
         while left <= right and arr[right] >= pivot_val:
-            right = right - 1
+            right -= 1
 
-        if left > right:
-            done = True
-        else:
+        if left <= right:
             arr[left], arr[right] = arr[right], arr[left]
+            left += 1
+            right -= 1
 
     arr[start], arr[right] = arr[right], arr[start]
 
     return right
 
 
-# using quick select
-def kth_largest(nums, k):
-    pass
+# time complexity O(nlogn), worst case O(n^2)
+# result not stable
 
 
 if __name__ == '__main__':

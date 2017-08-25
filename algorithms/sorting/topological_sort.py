@@ -38,4 +38,6 @@ def can_finish(num_courses, prerequisites):
             if in_degrees[post_course] == 0:
                 queue.append(post_course)
     return num_can_finish == num_courses
+
+
 # O(V+E) time and O(V+E) space

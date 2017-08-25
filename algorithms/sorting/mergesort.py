@@ -7,8 +7,7 @@ def mergesort(arr):
     right = mergesort(arr[mid:])
     # conquer
     return merge(left, right)
-# O(nlogn) time / worst case, O(n) space
-# result is stable
+
 
 def merge(left, right):
     merged = []
@@ -18,6 +17,10 @@ def merge(left, right):
         else:
             merged.append(right.pop(0))
     return merged + left + right
+
+
+# O(nlogn) time / worst case, O(n) space
+# result is stable
 
 
 if __name__ == '__main__':
