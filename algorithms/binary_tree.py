@@ -104,3 +104,20 @@ def has_path_sum(root, target):
     target -= root.val
     return has_path_sum(root.left, target) or has_path_sum(root.right, target)
 
+
+def LCA(root, node1, node2):
+    # base cases
+    if root is None or root == node1 or root == node2:
+        return root
+    # divide
+    left = LCA(root.left, node1, node2)
+    right = LCA(root.right, node1, node2)
+    # conquer
+    # if node1 and node2 are in different subtrees
+    if left and right:
+        return root
+    if left:
+        return left
+    if right:
+        return right
+    return None

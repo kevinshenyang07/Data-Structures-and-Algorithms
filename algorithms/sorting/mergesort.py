@@ -19,10 +19,6 @@ def merge(left, right):
     return merged + left + right
 
 
-# O(nlogn) time / worst case, O(n) space
-# result is stable
-
-
 if __name__ == '__main__':
     nums = [1, 5, 3, 2, 4, 2, 11, 7]
     assert mergesort(nums) == sorted(nums)

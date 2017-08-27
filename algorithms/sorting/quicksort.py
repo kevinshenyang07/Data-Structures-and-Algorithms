@@ -32,10 +32,6 @@ def partition(nums, left, right):
     return left
 
 
-# time complexity O(nlogn), worst case O(n^2)
-# result not stable
-
-
 if __name__ == '__main__':
     arr = [7, 5, 8, 2, 4, 3, 9, 1]
     quicksort(arr)

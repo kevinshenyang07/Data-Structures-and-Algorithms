@@ -1,18 +1,6 @@
 from __future__ import print_function
 
 
-# Kahn's algorithm - repeatedly remove vertices that have no in edges
-# 1. queue up all vertices with no in edges
-# 2. Pop off vertices from the queue
-#    a. remove vertex and out edges from graph
-#    b. push vertex into a sorted array
-#    c. examine destination node and push onto queue if no more in edges
-
-# use cases
-# 1. task / dependencies (webpack)
-# 2. scheduling 
-
-
 # an in-edge from vertex a to b => a is the prerequisite to b
 # determine if one can finish all the courses
 def can_finish(num_courses, prerequisites):
@@ -38,6 +26,3 @@ def can_finish(num_courses, prerequisites):
             if in_degrees[post_course] == 0:
                 queue.append(post_course)
     return num_can_finish == num_courses
-
-
-# O(V+E) time and O(V+E) space
