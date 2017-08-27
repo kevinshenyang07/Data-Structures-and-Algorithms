@@ -85,15 +85,19 @@ def clone_graph(node):
 
 
 # Surrounded Regions
+# only horizontal and vertical are considered as adjacent
 def solve(board):
     if not any(board): return  # any() takes care of [] and [[]]
     m, n = len(board), len(board[0])
-    coors = [coor for k in range(m+n) fo coor in ((0, k), (m-1, k), (k, 0), (k, n-1))]
+    # get coordinates on the edge
+    coors = [coor for k in range(m+n) for coor in ((0, k), (m-1, k), (k, 0), (k, n-1))]
     while coors:
-        i, j = save.pop()
+        i, j = coors.pop()
         if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+            # mark 'O's connected to the edge as 'T'
             board[i][j] = 'T'
-            coors.append((i, j-1), (i, j+1), (i-1, j), (i+1, j))
+            # add nearby slots
+            coors += [(i, j - 1), (i, j + 1), (i - 1, j), (i + 1, j)]
     for row in board:
         for i, c in enumerate(row):
             row[i] = 'O' if c == 'T' else 'X'

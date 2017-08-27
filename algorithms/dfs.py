@@ -15,31 +15,49 @@ def subsets_dfs(nums):
         results.append(path)
         if depth == len(nums):
             return
+        # construct dfs calls by level
         for i in range(start, len(nums)):
+            # later numbers get less options
             dfs(depth + 1, i + 1, path + [nums[i]])
-    nums.sort()
+    nums.sort()  # optional
     results = []
     dfs(0, 0, [])
     return results
 
 
-def permutations_rec(nums):
-    if len(nums) <= 1:
-        return [nums]
-    sub_perms = permutations_rec(nums[:-1])
-    perms = []
-    for sub_perm in sub_perms:
-        for i in range(len(sub_perm) + 1):
-            perm = sub_perm[:i] + [nums[-1]] + sub_perm[i:]
-            perms.append(perm)
+def permute(nums):
+    perms = [[]]
+    # [[]] => [[1]] => [[1,2],[2,1]] => ...
+    for num in nums:
+        new_perms = []
+        for perm in perms:
+            # insert the number to all possible positions
+            for i in range(len(perm) + 1):
+                new_perms.append(perm[:i] + [num] + perm[i:])
+        perms = new_perms
     return perms
 
-def combination_sum():
 
+# an approach similar to subsets
+def permute_dfs(nums):
+    def dfs(depth, candidates, path):
+        if depth == len(nums):
+            results.append(path)  # only append full length permutation
+            return
+        for i in range(len(candidates)):
+            # construct dfs calls by level
+            dfs(depth + 1, candidates[:i] + candidates[i+1:], path + [candidates[i]])
+    nums.sort()  # optional
+    results = []
+    dfs(0, nums, [])
+    return results
+
+
+def combination_sum():
     pass
 
 
 if __name__ == '__main__':
-    nums = [1, 2, 3]
+    nums = [3, 2, 1]
     print(subsets_dfs(nums))
-    print(permutations_rec(nums))
+    print(permute(nums))
