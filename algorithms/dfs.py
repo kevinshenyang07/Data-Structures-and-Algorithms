@@ -91,6 +91,8 @@ def combination_sum(candidates, target):
 
 
 # Palindrome Partitioning
+# 1. seach all possible substrings
+# 2. stop early when a substring is not a palindrome
 def partition(s):
     def dfs(sub_str, path):
         if not sub_str:
@@ -104,7 +106,12 @@ def partition(s):
     return result
 
 def is_palindrome(s):
-    return s == s[::-1]
+    # return s == s[::-1]
+    for i in range(len(s) // 2):
+        j = len(s) - 1 - i
+        if s[i] != s[j]:
+            return False
+    return True
 
 
 if __name__ == '__main__':
