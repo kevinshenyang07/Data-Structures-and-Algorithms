@@ -55,7 +55,7 @@ def permute(nums):
     return perms
 
 
-# an approach similar to subsets
+# an approach similar to subsets, add candidates for backtracking
 def permute_dfs(nums):
     def dfs(depth, candidates, path):
         if depth == len(nums):
@@ -69,6 +69,23 @@ def permute_dfs(nums):
     dfs(0, nums, [])
     return result
 
+
+# nums can have duplicates, only return unique permutations
+def permute_unique(nums):
+    def dfs(depth, candidates, path):
+        if depth == len(nums):
+            result.append(path)
+            return
+        for i in range(len(candidates)):
+            # jump to next iteration if the candiate element is the same as previous
+            if i !=0 and candidates[i-1] = candidates[i]:
+                continue
+            dfs(depth + 1, candidates[:i] + candidates[i+1:], path + [candidates[i]])
+    nums.sort()  # necessary
+    result = []
+    dfs(0, nums, [])
+    return result
+            
 
 # notes: 
 # 1. candidates has no duplicates, each number can be used multiple times
@@ -112,6 +129,34 @@ def is_palindrome(s):
         if s[i] != s[j]:
             return False
     return True
+
+
+# modify nums in place, don't return anythin
+def next_permutation(nums):
+    # 1. find longest decreasing suffix
+    # starting from the right side
+    start = len(nums) - 1
+    while nums[start-1] >= nums[start] and start >= 1:
+        start -= 1
+    # simply reverse if it's sorted
+    if start == 0:
+        reverse(nums, 0, len(nums) - 1)
+        return
+    # 2. with pivot = start - 1, find successor = rightmost index that
+    # is greater than pivot value, then swap pivot and successor element
+    for i in range(len(nums) - 1, start - 1, -1):
+        if nums[start-1] < nums[i]:
+            nums[start-1], nums[i] = nums[i], nums[start-1]
+            break
+    # 3. reverse the suffix
+    reverse(nums, start, len(nums) - 1)
+
+
+def reverse(nums, left, right):
+    while left < right:
+        nums[left], nums[right] = nums[right], nums[left]
+        left += 1
+        right -= 1
 
 
 if __name__ == '__main__':

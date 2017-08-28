@@ -15,7 +15,7 @@ def ladder_length(begin_word, end_word, word_list):
     length = 2
     left, right = set([begin_word]), set([end_word])
     word_set = set(word_list)
-    # two-end BFS, 
+    # two-end BFS,
     while left:
         left = get_adj_words(left, word_set)
         if left & right:
