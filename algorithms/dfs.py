@@ -247,6 +247,64 @@ def letter_combinations_rec(digits):
     return result
 
 
+def solve_n_queens(n):
+    def dfs(queens, xy_dif, xy_sum):
+        p = len(queens)
+        # end case
+        if p == n:
+            solutions.append(queens)
+            return
+        for q in range(n):
+            # continue case
+            # when a location (x, y) is occupied, other locations (p, q) where 
+            # p + q == x + y or p - q == x - y would be invalid
+            if q not in queens and (p - q not in xy_dif) and (p + q not in xy_sum):
+                dfs(queens + [q], xy_dif + [p - q], xy_sum + [p + q])
+    solutions = []
+    dfs([], [], [])
+    # convert the result to required format
+    result = []
+    for solution in solutions:
+        board = []
+        for i in solution:
+            row = "." * i + "Q" + "." * (n - i - 1)
+            board.append(row)
+        result.append(board)
+    return result
+
+
+# a valid IP address format would be xxx.xxx.xxx.xxx
+# where xxx is an integer from 0 to 255
+def restore_IP_addresses(s):
+    '''
+    :type s: str, e.g. '19216801'
+    :rtype: List[str], all valid IP addresses
+    '''
+    def dfs(depth, sub_str, path):
+        # stop when too many chars are left
+        if len(sub_str) > (4 - depth) * 3:
+            return
+        # end case
+        if depth == 4:
+            result.append(path)
+            return
+        # limit iteration range
+        max_length = min(3, len(sub_str))
+        for i in range(max_length):
+            partial = sub_str[:i+1]
+            if int(partial) > 255:
+                continue
+            # if partial has two digits but starts with 0
+            if i > 0 and sub_str[0] == '0':
+                continue
+            dfs(depth + 1, sub_str[i+1:], path + [partial])
+
+    result = []
+    dfs(0, s, [])
+    return ['.'.join(r) for r in result]
+
+
+
 if __name__ == '__main__':
     nums = [3, 2, 1]
     print(subsets_tmp(nums))
