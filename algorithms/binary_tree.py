@@ -4,7 +4,7 @@ class TreeNode(object):
         self.val = x
         self.left = None
         self.right = None
-
+        self.next = None  # only for the last problem
 
 # divide & conquer version
 def depth(root):
@@ -121,3 +121,16 @@ def LCA(root, node1, node2):
     if right:
         return right
     return None
+
+
+# Populating Next Right Pointers in Each Node
+def connect(root):
+    while root and root.left:
+        next = root.left  # save the next node to be visited
+        while root:
+            root.left.next = root.right
+            # null if no sibling node, otherwise jump to another root
+            # and connect to its left child
+            root.right.next = root.next and root.next.left
+            root = root.next  # move right at the same level
+        root = next
