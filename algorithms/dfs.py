@@ -78,7 +78,7 @@ def permute_unique(nums):
             return
         for i in range(len(candidates)):
             # jump to next iteration if the candiate element is the same as previous
-            if i !=0 and candidates[i-1] = candidates[i]:
+            if i !=0 and candidates[i-1] == candidates[i]:
                 continue
             dfs(depth + 1, candidates[:i] + candidates[i+1:], path + [candidates[i]])
     nums.sort()  # necessary
@@ -208,6 +208,44 @@ def dfs(board, i, j, word):
     # restore the value of the current slot
     board[i][j] = tmp
     return result
+
+
+# Letter Combinations of a Phone Number
+def letter_combinations(digits):
+    """
+    :type digits: str
+    :rtype: List[str]
+    """
+    # mapping from 0 to 9
+    mapping = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+    result = [""]
+    for digit in digits:
+        chars = mapping[int(digit)]
+        new_result = []
+        for char in chars:
+            for sub_str in result:
+                new_result.append(sub_str + char)
+        result = new_result
+    return result
+
+
+# backtracking version
+def letter_combinations_rec(digits):
+    mapping = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+    # end cases
+    if len(digits) == 0:
+        return []
+    # since recursion will not produce the correct result
+    if len(digits) == 1:
+        return list(mapping[int(digits)])
+    result = []
+    sub_result = letter_combinations_rec(digits[:-1])
+    chars = mapping[int(digits[-1])]
+    for s in sub_result:
+        for c in chars:
+            result.append(s + c)
+    return result
+
 
 if __name__ == '__main__':
     nums = [3, 2, 1]
