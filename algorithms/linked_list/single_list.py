@@ -103,7 +103,6 @@ def reverse_k_nodes(head, k):
 
 
 # similar to clone graph, can have duplicate labels
-# create new nodes when traversing through links, then copy the links
 # O(n) time and space
 def copy_random_list(head):
     if not head:

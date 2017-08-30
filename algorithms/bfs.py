@@ -63,8 +63,6 @@ def level_order(root):
 
 # allows duplicate labels / self-cycle
 # assume a connect graph
-# create new nodes when traversing through edges, then copy the edges
-# 
 def clone_graph(node):
     '''
     :type node: UndirectedGraphNode 
@@ -85,7 +83,7 @@ def clone_graph(node):
                 queue.append(neighbor)
             # append a copied neighbor 
             mapping[curr].neighbors.append(mapping[neighbor])
-    return node_new
+    return mapping[node]
 
 
 # Surrounded Regions
