@@ -5,6 +5,13 @@ class ListNode(object):
         self.next = None
 
 
+class RandomListNode(object):
+    def __init__(self, x):
+        self.label = x
+        self.next = None
+        self.random = None
+
+
 def reverse(head):
     prev = None
     curr = head
@@ -56,9 +63,9 @@ def reverse_k_group(head, k):
     dummy = ListNode(0)
     dummy.next = head
     head = dummy
-
+    # stop when there are less than k nodes
     while True:
-        head = reverseK(head, k)
+        head = reverse_k_nodes(head, k)
         if not head:
             break
     return dummy.next
@@ -68,8 +75,8 @@ def reverse_k_group(head, k):
 # =>
 # head -> nk -> nk-1 ... n1 -> nk+1
 # return n1
-def reverse_k(head, k):
-    # iterated to kth node
+def reverse_k_nodes(head, k):
+    # iterated to kth node, stop if there are less than k nodes
     nk = head
     for i in range(k):
         if not nk:
@@ -93,3 +100,28 @@ def reverse_k(head, k):
     head.next = nk
     n1.next = nkplus
     return n1
+
+
+# similar to clone graph, can have duplicate labels
+# create new nodes when traversing through links, then copy the links
+# O(n) time and space
+def copy_random_list(head):
+    if not head:
+        return None
+    mapping = {}  # original node => copied node
+    mapping[head] = RandomListNode(head.label)
+    
+    curr = head
+    while curr:
+        if curr.next:
+            if curr.next not in mapping:
+                mapping[curr.next] = RandomListNode(curr.next.label)
+            mapping[curr].next = mapping[curr.next]
+        if curr.random:
+            if curr.random not in mapping:
+                mapping[curr.random] = RandomListNode(curr.random.label)
+            mapping[curr].random = mapping[curr.random]
+        curr = curr.next
+
+    return mapping[head]
+    

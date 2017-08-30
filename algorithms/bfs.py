@@ -61,7 +61,10 @@ def level_order(root):
     return visited
 
 
-# each node has a unique label
+# allows duplicate labels / self-cycle
+# assume a connect graph
+# create new nodes when traversing through edges, then copy the edges
+# 
 def clone_graph(node):
     '''
     :type node: UndirectedGraphNode 
@@ -69,18 +72,19 @@ def clone_graph(node):
     '''
     if not node:
         return None
-    node_new = UndirectedGraphNode(node.label)
+    mapping = {}  # original node => copied node
+    mapping[node] = UndirectedGraphNode(node.label)
     queue = [node]  # original nodes
-    mapping = {}  # label => new node
-    mapping[node.label] = node_new 
     while queue:
         curr = queue.pop(0)
+        # creating a new node here will cause neighbor not to be added
+        # in the queue since it's already in the mapping
         for neighbor in curr.neighbors:
-            if neighbor.label not in mapping:
-                mapping[neighbor.label] = UndirectedGraphNode(neighbor.label)
+            if neighbor not in mapping:
+                mapping[neighbor] = UndirectedGraphNode(neighbor.label)
                 queue.append(neighbor)
-            curr_new = mapping[curr.label]
-            curr_new.neighbors.append(mapping[neighbor.label])
+            # append a copied neighbor 
+            mapping[curr].neighbors.append(mapping[neighbor])
     return node_new
 
 
