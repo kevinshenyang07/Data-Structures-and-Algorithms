@@ -5,31 +5,35 @@ def quicksort(arr):
     quicksort_helper(arr, 0, len(arr) - 1)
 
 
-def quicksort_helper(arr, left, right):
-    if left >= right:
+def quicksort_helper(arr, start, end):
+    if start >= end:
         return
 
-    pivot = partition(arr, left, right)
+    pivot = partition(arr, start, end)
 
-    quicksort_helper(arr, left, pivot - 1)
-    quicksort_helper(arr, pivot + 1, right)
+    quicksort_helper(arr, start, pivot - 1)
+    quicksort_helper(arr, pivot + 1, end)
 
 
-def partition(nums, left, right):
-    # if using random init pivot, switch to the left anyway
-    pivot_val = nums[left]
-    while left < right:
-        while left < right and nums[right] >= pivot_val:
-            right -= 1
-        # the smaller number take the init pivot's place
-        nums[left] = nums[right]
-        while left < right and nums[left] <= pivot_val:
+# partition with two pointers, returns a partition index
+def partition(nums, start, end):
+    # if using random init pivot, swap to the left anyway
+    pivot_val = nums[start]
+    left = start + 1
+    right = end
+    # let right cross left to make sure nums[right] < pivot_val in the end
+    # left equal to right covers the two elements situation
+    while left <= right:
+        if nums[left] <= pivot_val:
             left += 1
-        # the bigger number move to the right side
-        nums[right] = nums[left]
-    # the pivot move to where it should be
-    nums[left] = pivot_val
-    return left
+        elif nums[right] >= pivot_val:
+            right -= 1
+        # if two pointers haven't crossed yet and ready to swap
+        else:
+            nums[left], nums[right] = nums[right], nums[left]
+    # swap pivot with the rightmost element that is smaller than pivot
+    nums[start], nums[right] = nums[right], nums[start]
+    return right
 
 
 if __name__ == '__main__':
