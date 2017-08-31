@@ -76,10 +76,11 @@ def merge(left, right):
         return right
     if not right:
         return left
-    
+    # create a new head
     dummy = ListNode(0)
     head = dummy
     while left and right:
+        # no need to cut the node than append to new list
         if left.val <= right.val:
             head.next = left
             left = left.next
@@ -87,7 +88,7 @@ def merge(left, right):
             head.next = right
             right = right.next
         head = head.next
-    
+    # splice the remaining list
     if left:
         head.next = left
     if right:
