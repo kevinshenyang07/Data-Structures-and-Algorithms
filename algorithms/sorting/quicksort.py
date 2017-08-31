@@ -22,7 +22,7 @@ def partition(nums, start, end):
     left = start + 1
     right = end
     # let right cross left to make sure nums[right] < pivot_val in the end
-    # left equal to right covers the two elements situation
+    # left equal to right covers the situation when start + 1 = end
     while left <= right:
         if nums[left] <= pivot_val:
             left += 1
