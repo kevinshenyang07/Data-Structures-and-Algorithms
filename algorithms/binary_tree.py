@@ -84,7 +84,7 @@ def is_valid_bst(root):
 def build_tree(preorder, inorder):
     # preorder and inorder are lists of node values
     # return the root of built tree
-    # assume no duplicates
+    # assumption: no duplicates
     if inorder:
         root_val = preorder.pop(0)
         root_idx = inorder.index(root_val)

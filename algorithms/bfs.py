@@ -62,7 +62,7 @@ def level_order(root):
 
 
 # allows duplicate labels / self-cycle
-# assume a connect graph
+# assumption: it's a connected graph
 def clone_graph(node):
     '''
     :type node: UndirectedGraphNode 
@@ -155,7 +155,7 @@ def valid_tree(n, edges):
 # Search Graph Node
 # Given a undirected graph, a node and a target, return the nearest node to 
 # given node which value of it is target. 
-# Assume there's only one available solution.
+# assume there's only one available solution.
 def search_node(graph, values, node, target):
     '''
     :type graph: List[UndirectedGraphNode]
