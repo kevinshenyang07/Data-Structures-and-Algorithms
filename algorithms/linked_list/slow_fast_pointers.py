@@ -89,10 +89,7 @@ def merge(left, right):
             right = right.next
         head = head.next
     # splice the remaining list
-    if left:
-        head.next = left
-    if right:
-        head.next = right
+    head.next = left or right
 
     return dummy.next
 
