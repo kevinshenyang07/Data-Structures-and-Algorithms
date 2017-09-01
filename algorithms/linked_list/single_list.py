@@ -12,6 +12,50 @@ class RandomListNode(object):
         self.random = None
 
 
+def swap_pairs(head):
+    # set up dummy node, which covers corner cases
+    # where head is None or head.next is None
+    dummy = ListNode(0)
+    dummy.next = head
+    head = dummy
+    # while there is at least 2 nodes to handle
+    while head.next and head.next.next:
+        # give nodes one by one
+        node1 = head.next
+        node2 = node1.next
+        node3 = node2.next
+        # set link left to right
+        head.next = node2
+        node2.next = node1
+        node1.next = node3
+        # move pointer
+        head = node1
+    return dummy.next
+
+
+# Remove Duplicates from Sorted List II
+# example: 1->1->2->3 returns 2->3
+def delete_duplicates(head):
+    # set up dummy node
+    dummy = ListNode(0)
+    dummy.next = head
+    head = dummy
+    # while there is at least 2 nodes to handle
+    # head and tail are nodes outside
+    while head.next and head.next.next:
+        curr_val = head.next.val
+        tail = head.next.next
+        # if there is duplicates, move tail forward
+        while tail and tail.val == curr_val:
+            tail = tail.next
+        # if tail has been moved
+        if head.next.next != tail:
+            head.next = tail
+        else:
+            head = head.next
+    return dummy.next
+
+
 def reverse(head):
     prev = None
     curr = head
