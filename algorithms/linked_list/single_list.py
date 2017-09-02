@@ -105,6 +105,14 @@ def reverse(head):
     return prev
 
 
+def reverse_rec(head, prev=None):
+    if not head:
+        return prev
+    node = head.next
+    head.next = prev
+    return reverse_rec(node, head)
+
+
 # reverse the list from mth to nth node, do it in-place and in one-pass
 # note: 1 <= m <= n <= length of the list
 def reverse_between(head, m, n):
