@@ -55,7 +55,45 @@ def delete_duplicates(head):
             head = head.next
     return dummy.next
 
+# Partition List
+# approach: maintain two queues, the first one stores all nodes with val
+# less than x, the second queue stores the rest nodes
+# finally, cut off extra nodes and concat these two queues
+def partition(head, x):
+    # dummy heads of two queues
+    dummy1, dummy2 = ListNode(0), ListNode(0)
+    # the end for each queue, extra nodes might follow
+    curr1, curr2 = dummy1, dummy2
+    while head:
+        if head.val < x:
+            curr1.next = head
+            curr1 = head
+        else:
+            curr2.next = head
+            curr2 = head
+        head = head.next
+    # splice two queues together
+    curr1.next = dummy2.next
+    # avoid cycle in linked list, since it might include nodes
+    # with val less than x 
+    curr2.next = None
+    return dummy1.next
 
+
+def split(head):
+    if not head or not head.next:
+        return head
+    slow = fast = head
+    # while there are at least two more nodes
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+    mid = slow.next
+    slow.next = None  # avoid cycle
+    return head, mid
+
+
+# build the reversed list from the end
 def reverse(head):
     prev = None
     curr = head

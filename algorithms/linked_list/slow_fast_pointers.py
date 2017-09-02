@@ -56,7 +56,7 @@ def get_intersection_node(head1, head2):
 def sort_list(head):
     if not head or not head.next:
         return head
-    slow, fast = head, head
+    slow = fast = head
     # loop until fast == last node or the node before last node
     # to correctly find middle
     while fast.next and fast.next.next:
