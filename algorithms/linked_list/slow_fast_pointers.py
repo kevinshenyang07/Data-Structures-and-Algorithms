@@ -93,3 +93,34 @@ def merge(left, right):
 
     return dummy.next
 
+
+# used in Reorder List
+# left half size >= right half size
+def split(head):
+    # assume at least one node
+    # zero node situation should be checked before calling
+    slow = fast = head
+    # while there are at least two more nodes
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+    mid = slow.next  
+    slow.next = None  # avoid cycle
+    return head, mid
+
+
+# used in Convert Sorted List to Binary Search Tree
+# altered the stucture of linkd list, might not be ideal
+# left half size < right half size
+def split2(head):
+    prev = None
+    slow = fast = head
+    while fast.next and fast.next.next:
+        prev = slow
+        slow = slow.next
+        fast = fast.next.next
+    if prev:  # pointers moved at least once
+        prev.next = None
+    else:
+        head = None
+    return head, slow  # slow to be the root of subtree

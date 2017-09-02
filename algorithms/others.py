@@ -1,3 +1,24 @@
+def longest_palindrome(s):
+    palindrome = ''
+    for i in range(len(s)):
+        # get a palindrome of odd length
+        palindrome_odd = expand_palindrome(s, i, i)
+        if len(palindrome_odd) > len(palindrome):
+            palindrome = palindrome_odd
+        # get a palindrome of even length
+        palindrome_even = expand_palindrome(s, i, i + 1)
+        if len(palindrome_even) > len(palindrome):
+            palindrome = palindrome_even
+    return palindrome
+
+
+def expand_palindrome(s, l, r):
+    while l >= 0 and r < len(s) and s[l] == s[r]:
+        l -= 1
+        r += 1
+    return s[l+1:r]
+
+
 def max_sub_array(nums):
     if not nums:
         return 0

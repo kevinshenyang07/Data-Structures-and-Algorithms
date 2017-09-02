@@ -80,19 +80,6 @@ def partition(head, x):
     return dummy1.next
 
 
-def split(head):
-    if not head or not head.next:
-        return head
-    slow = fast = head
-    # while there are at least two more nodes
-    while fast.next and fast.next.next:
-        slow = slow.next
-        fast = fast.next.next
-    mid = slow.next
-    slow.next = None  # avoid cycle
-    return head, mid
-
-
 # build the reversed list from the end
 def reverse(head):
     prev = None
