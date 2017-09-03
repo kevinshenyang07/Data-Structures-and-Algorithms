@@ -9,6 +9,10 @@ import heapq
 # pq.poll()  // extract
 
 
+# Valid Parentheses
+def is_valid(s):
+    
+
 def nth_ugly_number_pq(n):
     if n == 1:
         return 1
@@ -22,7 +26,7 @@ def nth_ugly_number_pq(n):
         heapq.heappush(pq, minimum * 5)
         # print(pq)
     return pq[0]
-    # O(nlogn) time, O(n) space
+# O(nlogn) time, O(n) space
 
 
 def nth_ugly_number(n):
@@ -44,7 +48,32 @@ def nth_ugly_number(n):
         ugly.append(min(ugly[i2] * 2, ugly[i3] * 3, ugly[i5] * 5))
         # print(ugly)
     return ugly[-1]
-    # O(n) time, O(n) space
+# O(n) time, O(n) space
+
+
+# find median in a stream
+class MedianFinder:
+
+    def __init__(self):
+        self.heaps = [], []
+
+    def addNum(self, num):
+        max_pq, min_pq = self.heaps
+        # push to min_pq, get the minimum, then push to max_pq
+        heapq.heappush(min_pq, num)
+        ele = heapq.heappop(min_pq)
+        heapq.heappush(max_pq, -ele)
+        # keep the balance between max_pq and min_pq
+        if len(max_pq) > len(min_pq):
+            # move one ele from max_pq to min_pq
+            ele = heapq.heappop(max_pq)
+            heapq.heappush(min_pq, -ele)
+
+    def findMedian(self):
+        max_pq, min_pq = self.heaps
+        if len(max_pq) < len(min_pq):
+            return float(min_pq[0])
+        return (min_pq[0] - max_pq[0]) / 2.0
 
 
 if __name__ == '__main__':

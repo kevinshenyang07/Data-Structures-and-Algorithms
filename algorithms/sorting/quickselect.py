@@ -43,3 +43,4 @@ def partition(nums, start, end):
 
 # O(n) time, O(n^2) worst case, O(1) space
 # the first call of partition takes O(n), the next take an average of O(n/2)...
+# worst case happens on selecting maximum on a sorted list, using 0 as pivot index
