@@ -9,10 +9,6 @@ import heapq
 # pq.poll()  // extract
 
 
-# Valid Parentheses
-def is_valid(s):
-    
-
 def nth_ugly_number_pq(n):
     if n == 1:
         return 1
@@ -49,6 +45,21 @@ def nth_ugly_number(n):
         # print(ugly)
     return ugly[-1]
 # O(n) time, O(n) space
+
+
+def longest_consecutive(nums):
+    num_set = set(nums)
+    max_length = 0
+    for num in num_set:
+        # only check num from smallest num of sequence
+        # range from [num, right)
+        if num - 1 not in num_set:
+            right = num + 1
+            while right in num_set:
+                right += 1
+            max_length = max(max_length, right - num)
+    return max_length
+# O(n+L) time, O(n) space, L is the length of the sequence
 
 
 # find median in a stream

@@ -4,6 +4,7 @@ from __future__ import print_function
 # import numpy as np
 
 
+# Longest Common Subsequence
 def lcs(lhs, rhs):
     '''
     state transition function:
