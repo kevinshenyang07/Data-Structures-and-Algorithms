@@ -16,6 +16,23 @@ def num_decodings(s):
     return res[-1]
 
 
+def unique_paths_with_obstacles(grid):
+    # f(i, j) = f(i-1, j) + f(i, j-1) if grid[i][j] == 0
+    #         = 0 if grid[i][j] == 1
+    m, n = len(grid), len(grid[0])
+    res = [[0 for j in range(n + 1)] for i in range(m + 1)]
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if grid[i-1][j-1] == 0:
+                if i == 1 and j == 1:
+                    res[i][j] = 1
+                else:
+                    res[i][j] = res[i-1][j] + res[i][j-1]
+    
+    return res[m][n]
+
+
 # the numbers in matrix are non-negative
 # the point can only move either down or right
 def min_path_sum(matrix):
