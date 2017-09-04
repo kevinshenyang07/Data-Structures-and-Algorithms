@@ -1,4 +1,5 @@
-# Two Sum - Sorted Array
+# Two Sum approach: hashmap or sort + pointers
+# Two Sum - Array is Sorted
 def two_sum2(nums, target):
     start, end = 0, len(nums) - 1
     while start < end:
@@ -11,15 +12,9 @@ def two_sum2(nums, target):
     return []
 # O(n) time, O(1) space
 
-
-# Two Sum - Closet to Target
-
-# Two Sum - Difference Equals to Target
-
-
-# 3Sum (same as Two Sum, use hashmap or sort+pointers)
+    
+# find element a, b, c that sum to 0, return unique combinations
 def three_sum(nums):
-    # find element a, b, c that sum to 0
     result = []
     nums.sort()
     for i in range(len(nums) - 2):
