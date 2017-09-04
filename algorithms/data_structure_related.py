@@ -62,6 +62,28 @@ def longest_consecutive(nums):
 # O(n+L) time, O(n) space, L is the length of the sequence
 
 
+# assumption: array is not empty, 1 <= k <= len(nums)
+def max_sliding_window(nums, k):
+    # using monotonic deque of indices, of which elements
+    # order form large to small
+    result = []
+    dq = []
+    for i in range(len(nums)):
+        # remove index if out of the windex [i-(k-1), i]
+        if dq and dq[0] < i - k + 1:
+            dq.pop(0)
+        # remove indices whose element is smallers than nums[i]
+        # since they don't have chance to be max any more
+        while dq and nums[dq[-1]] < nums[i]:
+            dq.pop()
+        # now i guaranteed to be smallest
+        dq.append(i)
+        # start adding to result from index k - 1
+        if i >= k - 1:
+            result.append(nums[dq[0]])
+    return result
+
+
 # find median in a stream
 class MedianFinder:
 

@@ -52,7 +52,8 @@ def rerange(nums):
         if num >= 0:
             num_pos += 1
     # determine if the array should start with pos or neg number
-    # initialize same-way pointers
+    # initialize same-way pointers, if more pos numbers the pointer
+    # must start from 0, otherwise will mess up the swapping
     if num_pos * 2 >= len(nums):
         pos, neg = 0, 1
     else:
