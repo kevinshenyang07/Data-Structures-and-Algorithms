@@ -40,6 +40,35 @@ def three_sum(nums):
 # O(n^2) time, O(1) space
 
 
+# Interleaving Positive and Negative Numbers
+# for example, [-1,-2,-3,4,5,6] => [-1,4,-2,5,-3,6]
+# do it in place without extra space
+def rerange(nums):
+    if len(nums) <= 1:
+        return
+    # find number of positive integers to 
+    num_pos = 0
+    for num in nums:
+        if num >= 0:
+            num_pos += 1
+    # determine if the array should start with pos or neg number
+    # initialize same-way pointers
+    if num_pos * 2 >= len(nums):
+        pos, neg = 0, 1
+    else:
+        neg, pos = 1, 0
+    # if either all pos numbers or all neg numbers are in their place,
+    # then it's done, the rest are extra neg/pos numbers
+    while pos < len(nums) and neg < len(nums):
+        if nums[pos] >= 0:  # then the element is in its place
+            pos += 2
+        elif nums[neg] < 0:
+            neg += 2
+        else:
+            nums[pos], nums[neg] = nums[neg], nums[pos]
+# O(n) time, O(1) space    
+
+
 # Merge Sorted Array
 # assumption: nums1 has extra space to hold all the elements in nums
 # m and n are the number of elements in these two static arrays
