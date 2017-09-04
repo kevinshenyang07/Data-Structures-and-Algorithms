@@ -1,5 +1,26 @@
-
-
+def my_pow(x, n):
+    """
+    :type x: float
+    :type n: int
+    :rtype: float
+    """
+    if n == 0:
+        return 1  # 0 ^ 0 = 1
+    if x == 0:
+        return 0
+    if n < 0:
+        x = 1 / x
+        n = -n
+    # bottom up
+    res = 1
+    while n > 0:
+        # pow(x, n) = pow(x * x, n // 2) * x if n is odd
+        if n % 2 == 1:
+            res = res * x
+        x = x * x
+        n = n // 2
+    return res
+    
 
 # Median of Two Sorted Arrays (hard but classic)
 # do it in O(log(m+n)) time
