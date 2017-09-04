@@ -19,28 +19,31 @@ def two_sum2(nums, target):
 
 # 3Sum (same as Two Sum, use hashmap or sort+pointers)
 def three_sum(nums):
-    # sum to 0
+    # find element a, b, c that sum to 0
     result = []
     nums.sort()
     for i in range(len(nums) - 2):
+        # if there are duplicates, move to the last one
         if i > 0 and nums[i-1] == nums[i]:
             continue
         l, r = i + 1, len(nums) - 1
         while l < r:
-            s = nums[i] + nums[l] + nums[r]
-            if s < 0:
+            sum_of_three = nums[i] + nums[l] + nums[r]
+            if sum_of_three < 0:
                 l += 1
-            elif s > 0:
+            elif sum_of_three > 0:
                 r -= 1
             else:
                 result.append([nums[i], nums[l], nums[r]])
+                # skip the duplicates
                 while l < r and nums[l] == nums[l+1]:
                     l += 1
                 while l < r and nums[r-1] == nums[r]:
                     r -= 1
-                l += 1
-                r -= 1
+                l += 1; r -= 1
     return result
+# O(n^2) time, O(1) space
+
 
 # Merge Sorted Array
 # assumption: nums1 has extra space to hold all the elements in nums
