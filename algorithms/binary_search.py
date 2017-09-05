@@ -98,4 +98,4 @@ def divide(dividend, divisor):
     if is_negative:
         return max(-ans, -2147483648)  # - 2 ^ 31
     else:
-        return min(ans, 2147483647)  # (2 ^ 32 - 1) / 2
+        return min(ans, 2147483647)  # (2 ^ 31 - 1) / 2

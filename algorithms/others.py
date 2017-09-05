@@ -71,3 +71,29 @@ def merge_intervals(intervals):
         else:
             merged.append(inter)
     return merged
+
+
+# things to handle:
+# surrounding whitespace chars
+# + or - sign
+# letters following digits can be ignored
+# integer should be within int range
+# return 0 for invalid input
+def my_atoi(s):
+    s = s.strip()
+    if len(s) == 0:
+        return 0
+    chars = list(s)
+
+    sign = -1 if chars[0] == '-' else 1
+    if chars[0] in ['+', '-']:
+        del chars[0]
+    
+    res, i = 0, 0
+    digits = '0123456789'
+    while i < len(chars) and chars[i] in digits:
+        res = res * 10 + digits.index(chars[i])
+        i += 1
+    
+    # return val in the range of [INT_MIN, INT_MAX]
+    return max(-2 ** 31, min(sign * res, 2 ** 31 - 1))
