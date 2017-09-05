@@ -83,18 +83,18 @@ def divide(dividend, divisor):
     if divisor < 0:
         divisor = -divisor
 
-    div = divisor  # current divisor
-    mul = 1  # doubled div / divisor
+    origin_divisor = divisor  # current divisor
+    multipler = 1  # doubled div / divisor
     ans = 0
-    while dividend >= divisor:
-        dividend -= div
-        ans += mul  # +1, +2, + 4...
-        mul += mul
-        div += div
+    while dividend >= origin_divisor:
+        dividend -= divisor
+        ans += multipler  # +1, +2, + 4...
+        multipler += multipler
+        divisor += divisor
         # start from the original divisor
-        if dividend < div:
-            div = divisor
-            mul = 1
+        if dividend < divisor:
+            divisor = origin_divisor
+            multipler = 1
     if is_negative:
         return max(-ans, -2147483648)  # - 2 ^ 31
     else:
