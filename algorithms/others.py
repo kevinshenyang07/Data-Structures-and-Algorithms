@@ -47,30 +47,3 @@ def max_prodcut_array(nums):
         res = max(res, pmax)
 
     return res
-
-
-# Divide Two Integers (return int)
-# keep subtracting div from the remaining dividend and then doubling div
-def divide(dividend, divisor):
-    is_negative = (dividend < 0) ^ (divisor < 0)
-    if dividend < 0: 
-        dividend = -dividend
-    if divisor < 0: 
-        divisor = -divisor
-    
-    div = divisor  # current divisor
-    mul = 1  # doubled div / divisor
-    ans = 0
-    while dividend >= divisor:
-        dividend -= div
-        ans += mul  # +1, +2, + 4...
-        mul += mul
-        div += div
-        # start from the original divisor
-        if dividend < div:
-            div = divisor
-            mul = 1
-    if is_negative:
-        return max(-ans, -2147483648)  # - 2 ^ 31
-    else:
-        return min(ans, 2147483647)  # (2 ^ 32 - 1) / 2
