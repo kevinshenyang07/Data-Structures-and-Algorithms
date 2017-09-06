@@ -97,3 +97,36 @@ def my_atoi(s):
     
     # return val in the range of [INT_MIN, INT_MAX]
     return max(-2 ** 31, min(sign * res, 2 ** 31 - 1))
+
+
+# Valid Number
+def is_numeric(s):
+    # define a DFA
+    # type of char => state
+    state = [{},
+            {'blank': 1, 'sign': 2, 'digit': 3, '.': 4},
+            {'digit': 3, '.': 4},
+            {'digit': 3, '.': 5, 'e': 6, 'blank': 9},
+            {'digit': 5},
+            {'digit': 5, 'e': 6, 'blank': 9},
+            {'sign': 7, 'digit': 8},
+            {'digit': 8},
+            {'digit': 8, 'blank': 9},
+            {'blank': 9}]
+    current_state = 1
+    # recognize the type of each char
+    for c in s:
+        if c >= '0' and c <= '9':
+            c = 'digit'
+        if c == ' ':
+            c = 'blank'
+        if c in ['+', '-']:
+            c = 'sign'
+        if c not in state[current_state].keys():
+            return False
+        # jump to a new state
+        current_state = state[current_state][c]
+    # is numeric only if the final state is in the following
+    if current_state not in [3, 5, 8, 9]:
+        return False
+    return True
