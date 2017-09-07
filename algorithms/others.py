@@ -152,3 +152,20 @@ def is_numeric(s):
     if current_state not in [3, 5, 8, 9]:
         return False
     return True
+
+
+# Gas Station
+# approach:
+# 1. prove that if total gas is more than total cost, there must be a solution.
+# 2. find the point where the balance is lowest, the next index must be solution.
+def can_complete_circuit(gas, cost):
+    if len(gas) != len(cost) or sum(gas) < sum(cost):
+        return -1
+    position = 0
+    balance = 0  # current tank balance
+    for i in range(len(gas)):
+        balance += gas[i] - cost[i]  # update balance
+        if balance < 0:  # balance drops to negative, reset the start position
+            balance = 0
+            position = i + 1
+    return position
