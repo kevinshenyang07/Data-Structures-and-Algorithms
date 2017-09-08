@@ -63,6 +63,7 @@ def permute_dfs(nums):
             return
         for i in range(len(candidates)):
             # construct dfs calls by level
+            # or use candidates.pop(i)
             dfs(depth + 1, candidates[:i] + candidates[i+1:], path + [candidates[i]])
     nums.sort()  # optional
     result = []

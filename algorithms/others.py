@@ -160,6 +160,8 @@ def is_numeric(s):
 # Gas Station
 # approach:
 # 1. prove that if total gas is more than total cost, there must be a solution.
+#    (for the station that has greatest negative diff, there must be one or more
+#    stations that have a total positive balance greater than that negative dff)
 # 2. find the point where the balance is lowest, the next index must be solution.
 def can_complete_circuit(gas, cost):
     if len(gas) != len(cost) or sum(gas) < sum(cost):
