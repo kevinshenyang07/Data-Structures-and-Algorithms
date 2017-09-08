@@ -21,24 +21,27 @@ def set_zeros(matrix):
 
 
 def longest_palindrome(s):
-    palindrome = ''
-    for i in range(len(s)):
-        # get a palindrome of odd length
-        palindrome_odd = expand_palindrome(s, i, i)
-        if len(palindrome_odd) > len(palindrome):
-            palindrome = palindrome_odd
-        # get a palindrome of even length
-        palindrome_even = expand_palindrome(s, i, i + 1)
-        if len(palindrome_even) > len(palindrome):
-            palindrome = palindrome_even
-    return palindrome
+    max_length = 0
+    l = r = 0
+    for i in range(len(s) - 1):
+        # get palindromes of odd or even length
+        l1, r1 = expand_palindrome(s, i, i)
+        l2, r2 = expand_palindrome(s, i, i + 1)
+        # update longest palindrome
+        if r1 - l1 + 1 > max_length:
+            max_length = r1 - l1 + 1
+            l, r = l1, r1
+        if r2 - l2 + 1 > max_length:
+            max_length = r2 - l2 + 1
+            l, r = l2, r2
+    return s[l:r+1]
 
 
 def expand_palindrome(s, l, r):
     while l >= 0 and r < len(s) and s[l] == s[r]:
         l -= 1
         r += 1
-    return s[l+1:r]
+    return l + 1, r - 1
 
 
 def max_sub_array(nums):
