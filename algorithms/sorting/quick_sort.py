@@ -28,8 +28,7 @@ def partition(nums, start, end):
             left += 1
         elif nums[right] >= pivot_val:
             right -= 1
-        # if two pointers haven't crossed yet and ready to swap
-        else:
+        else:  # if two pointers haven't crossed yet and ready to swap
             nums[left], nums[right] = nums[right], nums[left]
     # swap pivot with the rightmost element that is smaller than pivot
     nums[start], nums[right] = nums[right], nums[start]
