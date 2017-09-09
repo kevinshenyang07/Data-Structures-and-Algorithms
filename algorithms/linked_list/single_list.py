@@ -55,6 +55,27 @@ def delete_duplicates(head):
             head = head.next
     return dummy.next
 
+
+def add_two_numbers(l1, l2):
+    carry = 0
+    dummy = ListNode(0)
+    head = dummy
+    # until all nodes are visited and no new digit carried
+    while l1 or l2 or carry:
+        v1 = v2 = 0
+        if l1:
+            v1 = l1.val
+            l1 = l1.next
+        if l2:
+            v2 = l2.val
+            l2 = l2.next
+        sub_total = v1 + v2 + carry
+        carry, mod = sub_total // 10, sub_total % 10
+        head.next = ListNode(mod)
+        head = head.next
+    return dummy.next
+
+
 # Partition List
 # approach: maintain two queues, the first one stores all nodes with val
 # less than x, the second queue stores the rest nodes
