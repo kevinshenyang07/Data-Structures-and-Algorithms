@@ -76,7 +76,7 @@ def add_two_numbers(l1, l2):
         # update list
         head.next = ListNode(digit)
         head = head.next
-        
+
     return dummy.next
 
 
@@ -90,7 +90,7 @@ def add_binary(a, b):
         digit_a = a[-1 - idx] if idx < len(a) else '0'
         digit_b = b[-1 - idx] if idx < len(b) else '0'
         # calculate        
-        digit = int(digit_a) + int(digit_b) + carry
+        val = int(digit_a) + int(digit_b) + carry
         carry = 1 if val > 1 else 0
         # update result
         result = str(val % 2) + result
