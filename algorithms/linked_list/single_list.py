@@ -62,6 +62,7 @@ def add_two_numbers(l1, l2):
     head = dummy
     # until all nodes are visited and no new digit carried
     while l1 or l2 or carry:
+        # think 72 + 9 to be 72 + 09
         v1 = v2 = 0
         if l1:
             v1 = l1.val
@@ -69,12 +70,34 @@ def add_two_numbers(l1, l2):
         if l2:
             v2 = l2.val
             l2 = l2.next
+        # caculate
         sub_total = v1 + v2 + carry
-        carry, mod = sub_total // 10, sub_total % 10
-        head.next = ListNode(mod)
+        digit, carry = sub_total % 10, sub_total // 10
+        # update list
+        head.next = ListNode(digit)
         head = head.next
+        
     return dummy.next
 
+
+# a, b are binary in string format
+def add_binary(a, b):
+    carry = 0
+    idx = 0
+    result = ''
+    while idx < max(len(a), len(b)) or carry:
+        # think 101 + 11 to be 101 + 011
+        digit_a = a[-1 - idx] if idx < len(a) else '0'
+        digit_b = b[-1 - idx] if idx < len(b) else '0'
+        # calculate        
+        digit = int(digit_a) + int(digit_b) + carry
+        carry = 1 if val > 1 else 0
+        # update result
+        result = str(val % 2) + result
+        idx += 1
+    
+    return result
+        
 
 # Partition List
 # approach: maintain two queues, the first one stores all nodes with val
