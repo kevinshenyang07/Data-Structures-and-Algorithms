@@ -4,6 +4,7 @@ from __future__ import print_function
 def subsets(nums):
     result = [[]]
     for num in sorted(nums):
+        # copy the current subsets and add the new element
         result += [item + [num] for item in result]
     return result
 
@@ -17,7 +18,7 @@ def subsets_dfs(nums):
             return
         # construct dfs calls by level
         for i in range(start, len(nums)):
-            # later numbers get less options
+            # later numbers get less candidates
             dfs(depth + 1, i + 1, path + [nums[i]])
     nums.sort()  # optional
     result = []
@@ -25,25 +26,9 @@ def subsets_dfs(nums):
     return result
 
 
-def subsets_tmp(nums):
-    if not nums:
-        return []
-    result = [[]]
-    nums.sort()
-    subsets_helper(nums, 0, [], result)
-    return result
-
-
-def subsets_helper(nums, start, path, result):
-    result.append(path)
-    for i in range(start, len(nums)):
-        path.append(nums[i])
-        subsets_helper(nums, i + 1, path, result)
-        path.pop()
-
-
 def permute(nums):
     perms = [[]]
+    # add new element to current permutations on every position
     # [[]] => [[1]] => [[1,2],[2,1]] => ...
     for num in nums:
         new_perms = []
