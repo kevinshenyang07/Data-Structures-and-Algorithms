@@ -104,3 +104,30 @@ def move_zeros(nums):
             nums[i], nums[p0] = nums[p0], nums[i]
             # nums[p0+1] is guaranteed to be 0
             p0 += 1
+
+
+# Permutation in String
+# assumption: input strings only contain lower case letters
+def check_inclusion(s1, s2):
+    # permutation of s1 in s2 => same counts of different chars
+    # in a substring of s2 => sliding window
+    if len(s1) > len(s2):
+        return False
+    # map a-z to 0-25
+    A = [ord(char) - ord('a') for char in s1]
+    B = [ord(char) - ord('a') for char in s2]
+    # count for each letter, will be the diffences of counts 
+    # between two strings
+    counts = [0] * 26
+    for x in A:
+        counts[x] += 1
+
+    for i, x in enumerate(B):
+        # when a char moves in, update the count
+        counts[x] -= 1
+        if i >= len(A):
+            # when a char moves out of the window, add the count back
+            counts[B[i - len(A)]] += 1
+        if all(c == 0 for c in counts):
+            return True
+    return False
