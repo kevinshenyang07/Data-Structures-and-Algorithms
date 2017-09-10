@@ -18,7 +18,7 @@ def partition(nums, l, r, color):
 
 
 # one pass version
-def sort_colors(nums):
+def sort_colors_one_pass(nums):
     if not nums:
         return
     # p0: next position for 0, p2: next position for 2 (right to left)

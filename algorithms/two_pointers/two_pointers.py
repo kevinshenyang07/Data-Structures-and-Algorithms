@@ -40,6 +40,45 @@ def three_sum(nums):
 # O(n^2) time, O(1) space
 
 
+# Merge Sorted Array
+# assumption: nums1 has extra space to hold all the elements in nums
+# m and n are the number of elements in these two static arrays
+def merge(nums1, m, nums2, n):
+    while m > 0:
+        # starting from the right sides
+        # index after m+n-1 to be the merged part
+        if nums1[m - 1] < nums1[n - 1]:
+            nums1[m + n - 1] = nums2[n - 1]
+            n -= 1
+        else:
+            nums1[m + n - 1] = nums1[m - 1]
+            m -= 1
+    # if n == 0 then the pointer has moved n times
+    # else nums has n elements smaller than all nums1 elements
+    if n > 0:
+        for i in range(n):
+            nums1[i] = nums2[i]
+
+
+# Longest Substring Without Repeating Characters
+# the substring has to be continuous
+def length_of_longest_substring(s):
+    start = max_length = 0
+    char_idx = {}  # char: index that char last appeared
+
+    for i in range(len(s)):
+        # if there is a repeating char and it's within scope
+        if s[i] in char_idx and start <= char_idx[s[i]]:
+            # starting from the index after that repeating char
+            start = char_idx[s[i]] + 1
+        else:
+            max_length = max(max_length, i - start + 1)
+        # update the index anyway
+        char_idx[s[i]] = i
+
+    return max_length
+
+
 # Interleaving Positive and Negative Numbers
 # for example, [-1,-2,-3,4,5,6] => [-1,4,-2,5,-3,6]
 # do it in place without extra space
@@ -69,26 +108,6 @@ def rerange(nums):
             nums[pos], nums[neg] = nums[neg], nums[pos]
 # O(n) time, O(1) space    
 
-
-# Merge Sorted Array
-# assumption: nums1 has extra space to hold all the elements in nums
-# m and n are the number of elements in these two static arrays
-def merge(nums1, m, nums2, n):
-    while m > 0:
-        # starting from the right sides
-        # index after m+n-1 to be the merged part
-        if nums1[m - 1] < nums1[n - 1]:
-            nums1[m+n-1] = nums2[n-1]
-            n -= 1
-        else:
-            nums1[m+n-1] = nums1[m-1]
-            m -= 1
-    # if n == 0 then the pointer has moved n times
-    # else nums has n elements smaller than all nums1 elements
-    if n > 0:
-        for i in range(n):
-            nums1[i] = nums2[i]
-        
 
 # move zeros to the end of array, do it in-place
 def move_zeros(nums):
@@ -142,7 +161,7 @@ def check_inclusion(s1, s2):
         counts[x] -= 1
         if i >= len(A):
             # when a char moves out of the window, add the count back
-            counts[B[i - len(A)]] += 1
+            counts[B[i-len(A)]] += 1
         if all(c == 0 for c in counts):
             return True
     return False
