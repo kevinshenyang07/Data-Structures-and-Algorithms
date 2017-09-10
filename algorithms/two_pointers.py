@@ -146,3 +146,22 @@ def check_inclusion(s1, s2):
         if all(c == 0 for c in counts):
             return True
     return False
+
+
+# more than one pass, try to do it in one pass
+def sort_colors(nums):
+    # partition color 0 with color 1, 2
+    split1 = partition(nums, 0, len(nums) - 1, 0)
+    # partition color 1 with color 2
+    split2 = partition(nums, split1, len(nums) - 1, 1)
+
+
+def partition(nums, l, r, color):
+    while l <= r:
+        if nums[l] == color:
+            l += 1
+        elif nums[r] != color:
+            r -= 1
+        else:
+            nums[l], nums[r] = nums[r], nums[l]
+    return l  # starting index of another color
