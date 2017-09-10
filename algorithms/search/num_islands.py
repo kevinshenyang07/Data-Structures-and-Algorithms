@@ -27,7 +27,6 @@ def dfs(grid, i, j):
 # O(mn) time, O(max(m, n)) for recursive stacks
 
 
-
 # follow up: how to find the number of lakes?
 # a lake is an area of water surrounded horizonatally and vertically
 # by the same island
