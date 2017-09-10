@@ -105,25 +105,6 @@ def solve(board):
             row[i] = 'O' if c == 'T' else 'X'
 
 
-def cloneGraph(self, node):
-    if not node:
-        return node
-    root = UndirectedGraphNode(node.label)
-    stack = [node]
-    visit = {}
-    visit[root.label] = root
-
-    while stack:
-        top = stack.pop()
-        for n in top.neighbors:
-            if n.label not in visit:
-                stack.append(n)
-                visit[n.label] = UndirectedGraphNode(n.label)
-            visit[top.label].neighbors.append(visit[n.label])
-
-    return root
-
-
 # Graph Valid Tree: 
 # Give n nodes labeled from 0 to n-1, and a list of undirected edges
 # check if these edges make up a valid tree
