@@ -24,3 +24,15 @@ def dfs(grid, i, j):
         dfs(grid, i, j + 1)
         dfs(grid, i + 1, j)
         dfs(grid, i, j - 1)
+# O(mn) time, O(max(m, n)) for recursive stacks
+
+
+
+# follow up: how to find the number of lakes?
+# a lake is an area of water surrounded horizonatally and vertically
+# by the same island
+
+# solution:
+# 1. use num_islands() to mark islands with different ids
+# 2. iterate through the grid, if it's water then dfs to see if 
+#    it's surrounded by lands of the same id
