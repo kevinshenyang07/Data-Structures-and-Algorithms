@@ -106,6 +106,21 @@ def move_zeros(nums):
             p0 += 1
 
 
+# Remove Duplicates from Sorted Array
+# returns the length of deduplicated array
+def remove_duplicates(nums):
+    # 1 2 2 2 3
+    # 1 2 3 2 3
+    if not nums:
+        return 0
+    end = 0  # current end of deduplicated array
+    for i in range(len(nums)):
+        if nums[i] != nums[end]:
+            end += 1
+            nums[end] = nums[i]
+    return end + 1
+
+
 # Permutation in String
 # assumption: input strings only contain lower case letters
 def check_inclusion(s1, s2):
