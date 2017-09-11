@@ -152,16 +152,16 @@ def check_inclusion(s1, s2):
     B = [ord(char) - ord('a') for char in s2]
     # count for each letter, will be the diffences of counts 
     # between two strings
-    counts = [0] * 26
+    balance = [0] * 26
     for x in A:
-        counts[x] += 1
+        balance[x] += 1
 
     for i, x in enumerate(B):
         # when a char moves in, update the count
-        counts[x] -= 1
+        balance[x] -= 1
         if i >= len(A):
             # when a char moves out of the window, add the count back
-            counts[B[i-len(A)]] += 1
-        if all(c == 0 for c in counts):
+            balance[B[i-len(A)]] += 1
+        if all(b == 0 for b in balance):
             return True
     return False
