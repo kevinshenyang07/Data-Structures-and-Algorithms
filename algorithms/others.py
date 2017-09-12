@@ -179,6 +179,8 @@ def can_complete_circuit(gas, cost):
 # Roman Numeral
 # I: 1, V:5, X:10, L: 50, C: 100, D: 500, M: 1000
 # only one char is allowed to put on the left to represent subtration
+# only use subtracton between two digits or on the same digit
+# for example, 499 = 400 + 90 + 9 = CD + XC + IX != ID
 
 # Roman to Integer
 # the range of the value is [1, 4000)
