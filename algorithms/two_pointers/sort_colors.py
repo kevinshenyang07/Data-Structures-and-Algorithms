@@ -1,3 +1,6 @@
+# two pass version: count the number of each color, then set the colors
+# O(n) time, O(k) space (k colors)
+
 # more than one pass
 def sort_colors(nums):
     # partition color 0 with color 1, 2
