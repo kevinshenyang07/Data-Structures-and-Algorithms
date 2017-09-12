@@ -98,6 +98,37 @@ def merge_intervals(intervals):
     return merged
 
 
+# Majority Number
+# find the number that occurs more than half of the size of the array
+# follow up: find number(s) occurs more than 1/3 of the size of the array
+#         => have two candidates
+def majority_element(nums):
+    # if there is a majority number, that number is guaranteed to
+    # have a positive counter in the end
+    if not nums:
+        return None
+    # if counter is 0 or reduced to 0, update the candidate
+    candidate = nums[0]
+    counter = 0
+    for num in nums:
+        if counter == 0:
+            candidate = num
+        elif num == candidate:
+            counter += 1
+        else:
+            counter -= 1
+    # in [1,2,3,4], there will be no majority number
+    # thus 2nd pass to double check
+    counter = 0
+    for num in nums:
+        if num == candidate:
+            counter += 1
+    if counter <= (len(nums) + 1) // 2:
+        return None
+    else:
+        return candidate
+
+
 # things to handle:
 # surrounding whitespace chars
 # + or - sign
