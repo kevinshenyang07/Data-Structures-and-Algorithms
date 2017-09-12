@@ -174,3 +174,31 @@ def can_complete_circuit(gas, cost):
             balance = 0
             position = i + 1
     return position
+
+
+# Roman Numeral
+# I: 1, V:5, X:10, L: 50, C: 100, D: 500, M: 1000
+# only one char is allowed to put on the left to represent subtration
+
+# Roman to Integer
+# the range of the value is [1, 4000)
+def roman_to_int(s):
+    mapping = {"I": 1, "V": 5, "X": 10, "L": 50,
+               "C": 100, "D": 500, "M": 1000}
+    res = 0
+    for i, c in enumerate(s):
+        if i < len(s) - 1 and mapping[s[i]] < mapping[s[i + 1]]:
+            res -= mapping[s[i]]
+        else:
+            res += mapping[s[i]]
+    return res
+
+
+# Integer to Roman
+# the range of the value is [1, 4000)
+def int_to_roman(num):
+    M = ["", "M", "MM", "MMM"]
+    C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+    X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+    I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+    return M[num / 1000] + C[(num % 1000) / 100] + X[(num % 100) / 10] + I[num % 10]
