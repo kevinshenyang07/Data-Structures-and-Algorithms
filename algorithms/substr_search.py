@@ -48,3 +48,52 @@ def findAnagrams(self, s, t):
         if all([v == 0 for v in balance.values()]):
             result.append(i - len(t) + 1)
     return result
+# since the balance dict contains only a limited set of keys
+# the call of all() can be treated as O(1) operation
+# thus making it O(n) time and O(1) space
+
+
+# idea:
+# if s[left:right] has all chars in T, calculate distance and keep answer, then move left pointer.
+# if s[left:right] doesn't have all chars in T, move right pointer.
+# implmentation:
+# 1.if all window from left to right contains all chars in t
+#   calculate min window length, and keep answer
+#   then move left pointer
+# 2.else there are missing string in current answer
+#   move right pointer
+#   update counter
+# repeat 1, 2 steps until right is equal to len(s), then break it
+def minWindow(self, s, t):
+
+    if len(s) < len(t):
+        return ""
+
+    balance = {}
+    for c in t:
+        if c in balance:
+            balance[c] += 1
+        else:
+            balance[c] = 1
+
+    left = right = 0
+    min_length = len(s) + 1
+    answer = ""
+
+    while right <= len(s):
+        # check all chars in t that are in the current answer
+        if all([v <= 0 for v in balance.values()]):
+            if right - left < min_length:
+                min_length = right - left
+                answer = s[left:right]
+            if s[left] in balance:
+                balance[s[left]] += 1
+            left += 1
+        else:
+            if right == len(s):
+                break
+            if s[right] in balance:
+                balance[s[right]] -= 1
+            right += 1
+
+    return answer
