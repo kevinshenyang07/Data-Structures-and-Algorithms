@@ -18,9 +18,10 @@ def three_sum(nums):
     result = []
     nums.sort()
     for i in range(len(nums) - 2):
-        # if there are duplicates, move to the last one
+        # if a number is already tested, move to the next one
         if i > 0 and nums[i-1] == nums[i]:
             continue
+        # find possible combinations on the right
         l, r = i + 1, len(nums) - 1
         while l < r:
             sum_of_three = nums[i] + nums[l] + nums[r]
@@ -44,9 +45,10 @@ def three_sum(nums):
 # assumption: nums1 has extra space to hold all the elements in nums
 # m and n are the number of elements in these two static arrays
 def merge(nums1, m, nums2, n):
+    # starting from the right sides
+    # the index of a certain element can be determined, thus no swap
     while m > 0:
-        # starting from the right sides
-        # index after m+n-1 to be the merged part
+        # index after m-1 to be the merged part
         if nums1[m - 1] < nums1[n - 1]:
             nums1[m + n - 1] = nums2[n - 1]
             n -= 1
@@ -66,7 +68,7 @@ def merge(nums1, m, nums2, n):
 def rerange(nums):
     if len(nums) <= 1:
         return
-    # find number of positive integers to 
+    # count the postive numbers
     num_pos = 0
     for num in nums:
         if num >= 0:
