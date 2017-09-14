@@ -124,14 +124,16 @@ def majority_element(nums):
         return None
     # if counter is 0 or reduced to 0, update the candidate
     candidate = nums[0]
-    counter = 0
-    for num in nums:
-        if counter == 0:
-            candidate = num
-        elif num == candidate:
+    counter = 1
+    for i in range(1, len(nums)):
+        if nums[i] == candidate:
             counter += 1
         else:
             counter -= 1
+        # if count down to 0, assign current number as candidate
+        if counter == 0:
+            candidate = nums[i]
+            counter = 1
     # in [1,2,3,4], there will be no majority number
     # thus 2nd pass to double check
     counter = 0
