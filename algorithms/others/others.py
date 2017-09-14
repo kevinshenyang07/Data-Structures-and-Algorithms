@@ -164,3 +164,14 @@ def can_complete_circuit(gas, cost):
             position = i + 1
     return position
 
+
+def trailing_zeros(n):
+    # count the number of 5s
+    # all numbers contributing 5s are in a form of m * (5 ^ n)
+    # so the total number of 5s are n / 5 + n / 25 + n / 125 ...
+    # each 5 ^ 2 will provide an extra 5 for 5 ^ 1
+    zeros = 0
+    while n > 0:
+        n = n // 5
+        zeros += n
+    return zeros
