@@ -111,13 +111,15 @@ def move_zeros(nums):
 # Remove Duplicates from Sorted Array
 # returns the length of deduplicated array
 def remove_duplicates(nums):
+    # have a pointer to the end of deduplicated array
     # 1 2 2 2 3
     # 1 2 3 2 3
     if not nums:
         return 0
-    end = 0  # current end of deduplicated array
+    end = 0
     for i in range(len(nums)):
         if nums[i] != nums[end]:
+            # add length by one and put the new num at the end
             end += 1
             nums[end] = nums[i]
     return end + 1

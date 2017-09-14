@@ -48,6 +48,7 @@ def expand_palindrome(s, l, r):
 def longest_common_prefix(strs):
     if not strs:
         return ""
+    # after sorted, the first and last string has to be the most different ones
     strs.sort()
     first, last = strs[0], strs[-1]
     for i in range(len(first)):
