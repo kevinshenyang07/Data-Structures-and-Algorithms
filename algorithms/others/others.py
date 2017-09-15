@@ -197,3 +197,17 @@ def digit_square_sum(x):
         res += digit ** 2
         x = x // 10
     return res
+
+
+# Count the number of prime numbers less than a non-negative number, n.
+def count_primes(n):
+    if n <= 2:  # prime numbers start from 2
+        return 0
+    res = [True] * n
+    res[0] = res[1] = False
+    for i in range(2, n):
+        if res[i] is True:
+            # a multiplied prime number must not be prime
+            for j in range(2, (n - 1) // i + 1):
+                res[i * j] = False
+    return sum(res)
