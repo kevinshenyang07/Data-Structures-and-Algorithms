@@ -175,3 +175,25 @@ def trailing_zeros(n):
         n = n // 5
         zeros += n
     return zeros
+
+
+# Happy Numbers
+def is_happy(n):
+    # if it's not a happy number, the square sum will never
+    # be 1 => find loop
+    slow = digit_square_sum(n)
+    fast = digit_square_sum(slow)
+    while slow != fast:
+        slow = digit_square_sum(slow)
+        fast = digit_square_sum(fast)
+        fast = digit_square_sum(fast)
+    return slow == 1
+
+
+def digit_square_sum(x):
+    res = 0
+    while x > 0:
+        digit = x % 10
+        res += digit ** 2
+        x = x // 10
+    return res
