@@ -1,4 +1,5 @@
 from __future__ import print_function
+import collections
 import heapq
 
 
@@ -107,6 +108,21 @@ class MedianFinder:
         if len(max_pq) < len(min_pq):
             return float(min_pq[0])
         return (min_pq[0] - max_pq[0]) / 2.0
+
+
+# Implement Stack using Queues
+class QueueStack(object):
+    def __init__(self):
+        self._queue = collections.deque()
+
+    def push(self, x):
+        q = self._queue
+        q.append(x)
+        for _ in range(len(q) - 1):
+            q.append(q.popleft())
+
+    def pop(self):
+        return self._queue.popleft()
 
 
 if __name__ == '__main__':
