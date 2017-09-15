@@ -127,12 +127,11 @@ def partition(head, x):
 # build the reversed list from the end
 def reverse(head):
     prev = None
-    curr = head
-    while curr:
-        temp = curr.next
-        curr.next = prev
-        prev = curr
-        curr = temp
+    while head:
+        temp = head.next
+        head.next = prev
+        prev = head
+        head = temp
     return prev
 
 
