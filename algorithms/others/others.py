@@ -211,3 +211,14 @@ def count_primes(n):
             for j in range(2, (n - 1) // i + 1):
                 res[i * j] = False
     return sum(res)
+
+
+# Sum of Two Integers
+def get_sum(a, b):
+    if a == 0 or b == 0:
+        return a or b
+    while b != 0:
+        carry = a & b  # digits that add up to 2
+        a = a ^ b  # digits that add up to 1 or 0
+    return a
+        b = carry << 1
