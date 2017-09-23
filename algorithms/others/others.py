@@ -214,11 +214,41 @@ def count_primes(n):
 
 
 # Sum of Two Integers
+# 11 = 1011
+# 6  =  110
+# 11,6 => 13,4 => 9,8 => 1,16 => 17,0
 def get_sum(a, b):
     if a == 0 or b == 0:
         return a or b
     while b != 0:
         carry = a & b  # digits that add up to 2
         a = a ^ b  # digits that add up to 1 or 0
-    return a
         b = carry << 1
+    return a
+# recursive:
+# get_sum(a, b) = get_sum(a ^ b, (a & b) << 1)
+# base case: get_sum(a, 0) == a
+
+
+def rotate(self, nums, k):
+    """
+    :type nums: List[int]
+    :type k: int
+    :rtype: void Do not return anything, modify nums in-place instead.
+    """
+    if not nums:
+        return
+
+    k = k % len(nums)
+    if k == 0:
+        return
+
+    self.reverse(nums, 0, len(nums) - 1)
+    self.reverse(nums, 0, k - 1)
+    self.reverse(nums, k, len(nums) - 1)
+
+def reverse(self, nums, left, right):
+    while left < right:
+        nums[left], nums[right] = nums[right], nums[left]
+        left += 1
+        right -= 1
