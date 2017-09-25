@@ -65,10 +65,9 @@ def max_sub_array(nums):
     curr_sum = nums[0]
     max_sum = nums[0]
     for i in range(1, len(nums)):
-        num = nums[i]
         # if curr_sum < 0, have a new start, otherwise accumulate
-        curr_sum = max(num, curr_sum + num)
-        max_sum = max(curr_sum, max_sum)
+        curr_sum = max(nums[i], curr_sum + nums[i])
+        max_sum = max(max_sum, curr_sum)
     return max_sum
 
 
@@ -230,25 +229,18 @@ def get_sum(a, b):
 # base case: get_sum(a, 0) == a
 
 
-def rotate(self, nums, k):
-    """
-    :type nums: List[int]
-    :type k: int
-    :rtype: void Do not return anything, modify nums in-place instead.
-    """
-    if not nums:
-        return
-
-    k = k % len(nums)
-    if k == 0:
-        return
-
-    self.reverse(nums, 0, len(nums) - 1)
-    self.reverse(nums, 0, k - 1)
-    self.reverse(nums, k, len(nums) - 1)
-
-def reverse(self, nums, left, right):
-    while left < right:
-        nums[left], nums[right] = nums[right], nums[left]
-        left += 1
-        right -= 1
+# Valid Triangle Number
+# assumption: nums[i] > 0
+# sort and count the number of triplets at indices x < y < z
+# such that len_x + len_y > len_z
+def triangle_number(nums):
+    nums.sort()
+    result = 0
+    for x in range(len(nums)):
+        z = x + 2
+        for y in range(x + 1, len(nums)):
+            while z < len(nums) and nums[x] + nums[y] > nums[z]:
+                z += 1
+            result += z - y - 1
+    return result
+# O(n^2) time, O(1) space
