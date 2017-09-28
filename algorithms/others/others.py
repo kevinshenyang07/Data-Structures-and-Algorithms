@@ -244,3 +244,17 @@ def triangle_number(nums):
             result += z - y - 1
     return result
 # O(n^2) time, O(1) space
+
+
+# Repeated Substring Pattern
+def repeated_substring_pattern(self, s):
+    # pattern starting from half length
+    for i in range(len(s) // 2, 0, -1):
+        # pattern length must be a divisor of the string
+        if len(s) % i == 0:
+            repititions = len(s) // i
+            pattern = s[:i]
+            # check if pattern continues
+            if pattern * repititions == s:
+                return True
+    return False
