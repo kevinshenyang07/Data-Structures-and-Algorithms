@@ -6,3 +6,4 @@ TDDO:
 
 * Remaining Easy and Medium problems.
 * Revisit solved problems, the goal is to one time no bug.
+* Go implementation.
