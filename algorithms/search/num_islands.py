@@ -3,7 +3,6 @@ def num_islands(grid):
     :type grid: List[List[str]]
     :rtype: int
     """
-    # mark all adj islands as 0
     if not any(grid):
             return 0
     res = 0
@@ -19,12 +18,13 @@ def dfs(grid, i, j):
     if i < 0 or i >= len(grid) or j < 0 or j >= len(grid[0]):
         return
     if grid[i][j] == '1':
+        # mark itself and all adj islands as 0
         grid[i][j] = '0'
         dfs(grid, i - 1, j)
         dfs(grid, i, j + 1)
         dfs(grid, i + 1, j)
         dfs(grid, i, j - 1)
-# O(mn) time, O(max(m, n)) for recursive stacks
+# O(mn) time, O(max(m, n)) space for recursive stacks
 
 
 # follow up: how to find the number of lakes?
@@ -33,5 +33,5 @@ def dfs(grid, i, j):
 
 # solution:
 # 1. use num_islands() to mark islands with different ids
-# 2. iterate through the grid, if it's water then dfs to see if 
+# 2. iterate through the grid, if it's water then dfs to see if
 #    it's surrounded by lands of the same id
