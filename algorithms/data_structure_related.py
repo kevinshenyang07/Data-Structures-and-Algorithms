@@ -85,28 +85,23 @@ def max_sliding_window(nums, k):
     return result
 
 
-# trapping rain water
-def trap(height):
+# Largest Rectangle in Histogram
+def largest_rect_area(heights):
     """
-    :type height: List[int]
+    :type heights: List[int]
     :rtype: int
     """
-    if len(height) <= 2:
-        return 0
-    vol = 0
-    highest = [0] * len(height)
-    # max height looking left, both ends cannot contain water
-    for i in range(1, len(height) - 1):
-        highest[i] = max(highest[i - 1], height[i - 1])
-    # update if max height looking right is lower than max height looking left
-    for j in range(len(height) - 2, -1, -1):
-        highest[j] = min(highest[j], max(highest[j + 1], height[j + 1]))
-    # vol trapped on each slot
-    for k in range(1, len(height) - 1):
-        if highest[k] > height[k]:
-            vol += highest[k] - height[k]
-    return vol
-# O(n) time and space
+    heights.append(0)  # ensure the stack is cleared in the end
+    stack = [-1]  # monotonous stack
+    max_area = 0
+    for i in range(len(heights)):
+        while heights[stack[-1]] > heights[i]:
+            h = heights[stack.pop()]  # must be max height looking left
+            w = i - 1 - stack[-1]  # when look left on (i-1)th bar, the max width that has height h
+            max_area = max(max_area, h * w)
+        stack.append(i)
+    heights.pop()
+    return max_area
 
 
 # find median in a stream
