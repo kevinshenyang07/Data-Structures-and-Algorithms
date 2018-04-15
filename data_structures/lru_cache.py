@@ -1,53 +1,50 @@
 from __future__ import print_function
 import math
 from hash_map import HashMap
-from linked_list import LinkedList
+from linked_list import Node, LinkedList
 
 # a linked list to store k-v pair, append the most recent item at the end
 # a hash map to store k-ref pair for O(1) lookup
-# the value of each node is func(key)
 class LRUCache(object):
-    def __init__(self, capacity, func):
+    def __init__(self, capacity):
         self.map = HashMap()
-        self.store = LinkedList()
+        self.list = LinkedList()
         self.capacity = capacity
-        self.func = func
 
-    def __getitem__(self, key):
+    def get(self, key):
+        # assume values are positive
+        if key not in self.map:
+            return -1
         node = self.map[key]
-        self.update_node(node)
-        return node
+        self.list.remove(node)
+        self.list.append(node)
+        return node.val
 
-    def __len__(self):
-        return len(self.map)
-
-    def __repr__(self):
-        return "Map: {}\nStore:\n{}".format(self.map, self.store)
-
-    # insert an un-cached key
-    def append(self, key):
+    def put(self, key, value):
+        if key in self.map:
+            node = self.map[key]
+            node.val = value
+            self.list.remove(node)
+            self.list.append(node)
+            return
         if len(self.map) == self.capacity:
-            self.eject()
-        val = self.func(key)
-        self.store.append(key, val)
-        self.map[key] = self.store.last()
-
-    # move a node to the end fo the list
-    def update_node(self, node):
-        node = self.store.remove(node.key)
-        self.store.append(node.key, node.val)
+            node_first = self.list.remove(self.list.first())
+            del self.map[node_first.key]
+        node = Node(key, value)
+        self.list.append(node)
+        self.map[key] = node
 
     # remvove least recent node
     def eject(self):
-        node = self.store.first()
+        node = self.list.first()
+        self.list.remove(node)
         del self.map[node.key]
-        self.store.remove(node.key)
 
 
 if __name__ == '__main__':
-   cache = LRUCache(capacity=8, func=lambda x: pow(x, 2))
+   cache = LRUCache(capacity=8)
    for i in range(10):
-       cache.append(i)
+       cache.put(i, i)
    print(cache)
-   print(cache[5])  # 25
+   print(cache.get(5))  # 25
    print(cache)

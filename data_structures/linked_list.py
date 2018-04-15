@@ -1,7 +1,8 @@
 from __future__ import print_function
 
-
+#
 # doulbly linked list
+
 class Node(object):
     def __init__(self, key, val):
         self.key = key
@@ -53,33 +54,20 @@ class LinkedList(object):
     def last(self):
         return self.tail.prev
 
-    def append(self, key, val):
+    def append(self, node):
         last = self.tail.prev
-        node = Node(key, val)
         last.next = node
         node.prev = last
         node.next = self.tail
         self.tail.prev = node
 
-    def update(self, key, val):
-        for node in self:
-            if node.key == key:
-                node.val = val
-                return node
-        raise IndexError("key not found")
-
-    def remove(self, key):
-        for node in self:
-            if node.key == key:
-                node.remove()
-                return node
-        raise IndexError("key not found")
-
-    def has_key(self, key):
-        for node in self:
-            if node.key == key:
-                return True
-        return False
+    def remove(self, node):
+        node_prev = node.prev
+        node_next = node.next
+        node_prev.next = node_next
+        node_next.prev = node_prev
+        node.prev = None
+        node.next = None
 
     def is_empty(self):
         return (self.head.next == self.tail) and (self.tail.prev == self.head)
@@ -102,17 +90,10 @@ class LinkedList(object):
 
 if __name__ == '__main__':
     linked_list = LinkedList()
-    linked_list.append("first", 1)
-    linked_list.append("second", 2)
-    linked_list.append("third", 3)
+    linked_list.append(Node("first", 1))
+    linked_list.append(Node("second", 2))
+    linked_list.append(Node("third", 3))
     print(linked_list)
-    linked_list.update("first", 4)
-    print(linked_list)
-
-    print(linked_list["first"])  # 4
-    # print(linked_list.get("fourth"))  # error
-    linked_list.remove("first")
-
 
     print(linked_list.first().next.key)  # third
 
