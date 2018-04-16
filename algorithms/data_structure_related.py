@@ -37,7 +37,7 @@ def mergeKLists(lists):  # each list is sorted
     for head in lists:
         if head:  # .val as key to make item comparable
             heappush(heap, (head.val, head))
-    while heap:
+    while heap: # reference to next possibly smallest nodes
         node_min = heappop(heap)
         curr.next = node_min
         curr = node_min
