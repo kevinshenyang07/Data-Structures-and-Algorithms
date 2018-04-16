@@ -10,10 +10,21 @@ from __future__ import print_function
 # swap an element with its parent / smallest children is guaranteed to keep a valid heap
 # run sift_down() on half of the array is guraranteed to heapify that array
 
-# in heapq module, all methods are static (no class definition)
+#
+# heapq usage
+from heapq import heapify, heappush, heappop
+# initialize
+arr = [1, 3, 2]
+heapify(arr)  # in place, need to implement __cmp__ if other types
+# or
+heap = []
+heappush(heap, 1)
+heappop(heap)
 
+
+# in-house implementation
 class Heap(object):
-    
+
     def __init__(self, store=[], key=lambda x: x):
         self.store = store
         self.key = key
