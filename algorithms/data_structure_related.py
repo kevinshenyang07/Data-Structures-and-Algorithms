@@ -2,6 +2,7 @@ from __future__ import print_function
 from collections import deque
 from heapq import heappush, heappop
 
+
 class ListNode(object):
     def __init__(self, val):
         self.val = val
@@ -18,7 +19,7 @@ def nth_ugly_number_pq(n):
     if n == 1:
         return 1
     pq = [1]
-    for i in range(1, n):
+    for _ in range(1, n):
         minimum = heappop(pq)
         while pq and pq[0] == minimum:
             heappop(pq)
@@ -37,7 +38,7 @@ def mergeKLists(lists):  # each list is sorted
     for head in lists:
         if head:  # .val as key to make item comparable
             heappush(heap, (head.val, head))
-    while heap: # reference to next possibly smallest nodes
+    while heap:  # reference to next possibly smallest nodes
         node_min = heappop(heap)[1]
         curr.next = node_min
         curr = node_min

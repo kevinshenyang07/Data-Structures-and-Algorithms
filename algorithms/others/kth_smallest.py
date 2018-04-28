@@ -14,7 +14,8 @@ def kth_smallest_bisect(matrix, k):
         else:
             hi = mid
     return lo
-# O(nlogn) time, O(1) space
+# O(nlogn * log(max - min)) time, O(1) space
+# since log(max - min) is up to 32 for int, can be considered as O(nlogn) time
 
 # count of numbers <= target
 # => index of first number > target
@@ -42,8 +43,8 @@ def kth_smallest(matrix, k):
         else:
             hi = mid
     return lo
-# O(nlog(max_val - min_val)) time, O(1) space
-# since log(max_val - min_val) is up to 32 for int, can be considered as O(n) time
+# O(nlog(max - min)) time, O(1) space
+# since log(max - min) is up to 32 for int, can be considered as O(n) time
 
 # count of numbers <= target
 def count_nubmers_no_greater_than_mid(matrix, target):
