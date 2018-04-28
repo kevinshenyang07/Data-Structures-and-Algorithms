@@ -1,5 +1,5 @@
 from __future__ import print_function
-import collections
+from collections import deque
 from heapq import heappush, heappop
 
 class ListNode(object):
@@ -38,11 +38,11 @@ def mergeKLists(lists):  # each list is sorted
         if head:  # .val as key to make item comparable
             heappush(heap, (head.val, head))
     while heap: # reference to next possibly smallest nodes
-        node_min = heappop(heap)
+        node_min = heappop(heap)[1]
         curr.next = node_min
         curr = node_min
         if node_min.next:
-            heappush((node_min.next.val, node_min.next))
+            heappush(heap, (node_min.next.val, node_min.next))
     return dummy.next
 # O(nlogk) time, O(k) space
 
@@ -86,8 +86,7 @@ def longest_consecutive(nums):
 
 # assumption: array is not empty, 1 <= k <= len(nums)
 def max_sliding_window(nums, k):
-    # using monotonic deque of indices, of which elements
-    # order form large to small
+    # monotonic decreasing deque of elements's indices
     result = []
     dq = []
     for i in range(len(nums)):
@@ -153,7 +152,7 @@ class MedianFinder:
 # Implement Stack using Queues
 class QueueStack(object):
     def __init__(self):
-        self._queue = collections.deque()
+        self._queue = deque()
 
     def push(self, x):
         q = self._queue
