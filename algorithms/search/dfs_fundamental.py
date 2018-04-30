@@ -1,7 +1,8 @@
 from __future__ import print_function
 
 #
-# DFS is enumeration with pruning. Three elements:
+# DFS is enumeration with pruning.
+# Three elements (order of 1 and 2 interchangeable):
 # 1. valid result condition
 # 2. early stop condition
 # 3. recursion definition

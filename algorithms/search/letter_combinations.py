@@ -5,8 +5,7 @@ def letter_combinations(digits):
     :rtype: List[str]
     """
     # mapping from 0 to 9
-    mapping = ['', '', 'abc', 'def', 'ghi',
-               'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+    mapping = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
     result = [""]
     for digit in digits:
         chars = mapping[int(digit)]
@@ -19,19 +18,17 @@ def letter_combinations(digits):
 
 
 # backtracking version
-def letter_combinations_rec(digits):
-    mapping = ['', '', 'abc', 'def', 'ghi',
-               'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
-    # end cases
-    if len(digits) == 0:
+def letter_combinations_backtracking(digits):
+    def dfs(s, path):
+        if s == '':
+            result.append(path)
+            return
+        for char in mapping[int(s[0])]:
+            dfs(s[1:], path + [char])
+
+    if not digits:
         return []
-    # since recursion will not produce the correct result
-    if len(digits) == 1:
-        return list(mapping[int(digits)])
+    mapping = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
     result = []
-    sub_result = letter_combinations_rec(digits[:-1])
-    chars = mapping[int(digits[-1])]
-    for s in sub_result:
-        for c in chars:
-            result.append(s + c)
-    return result
+    dfs(digits, [])
+    return [''.join(chars) for chars in result]
