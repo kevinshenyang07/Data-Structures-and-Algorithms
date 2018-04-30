@@ -1,30 +1,14 @@
 # assumption: non-empty string and word list
-# O(n^3) time, O(n + w) space
-def word_break_n3(s, wordList):
-    wordSet = set(wordList)
-    dp = [False for i in range(len(s) + 1)]
-    dp[0] = True  # cushion
-
-    for i in range(1, len(s) + 1):  # end of slice
-        for j in range(i):  # start of slice
-            if dp[j] and s[j:i] in wordSet:
-                # f(s[:i]) is True
-                dp[i] = True
-
+def word_break(s, wordList):
+    dp = [False for i in range(n + 1)]
+    dp[0] = True  # makes the first matched word pass
+    for i in range(1, n + 1):
+        for w in wordList:
+            # if prev word is matching AND this word ends at index i
+            if dp[i-len(w)] and s[i-len(w):i] == w:
+                dp[i]=True
     return dp[-1]
-
-
 # O(w * n^2) time, O(n) space
-def word_break_nw(s, wordList):
-    dp = [False for i in range(len(s) + 1)]
-    dp[0] = True
-
-    for i in range(1, len(s) + 1):  # end of slice
-        for word in wordList:
-            j = i - len(word)  # start of slice
-            if dp[j] and s[j:i] == word:
-                dp[i] = True
-    return dp[-1]
 
 
 # Decode Ways
@@ -58,7 +42,7 @@ def unique_paths_with_obstacles(grid):
                     dp[i][j] = 1
                 else:
                     dp[i][j] = dp[i-1][j] + dp[i][j-1]
-    
+
     return dp[m][n]
 
 

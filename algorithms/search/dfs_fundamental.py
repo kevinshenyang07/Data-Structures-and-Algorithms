@@ -1,5 +1,10 @@
 from __future__ import print_function
 
+#
+# DFS is enumeration with pruning. Three elements:
+# 1. valid result condition
+# 2. early stop condition
+# 3. recursion definition
 
 def subsets(nums):
     result = [[]]
@@ -11,8 +16,7 @@ def subsets(nums):
 
 def subsets_dfs(nums):
     def dfs(depth, start, path):
-        # if nums contain duplicates, check if path in result
-        # before append
+        # if nums contain duplicates, check if path in result before append
         result.append(path)
         if depth == len(nums):
             return
@@ -49,8 +53,7 @@ def permute_dfs(nums):
         for i in range(len(candidates)):
             # construct dfs calls by level
             # or use candidates.pop(i)
-            dfs(depth + 1, candidates[:i] +
-                candidates[i + 1:], path + [candidates[i]])
+            dfs(depth + 1, candidates[:i] + candidates[i + 1:], path + [candidates[i]])
     nums.sort()  # optional
     result = []
     dfs(0, nums, [])
@@ -67,8 +70,7 @@ def permute_unique(nums):
             # jump to next iteration if the candiate element is the same as previous
             if i != 0 and candidates[i - 1] == candidates[i]:
                 continue
-            dfs(depth + 1, candidates[:i] +
-                candidates[i + 1:], path + [candidates[i]])
+            dfs(depth + 1, candidates[:i] + candidates[i + 1:], path + [candidates[i]])
     nums.sort()  # necessary
     result = []
     dfs(0, nums, [])
@@ -106,4 +108,4 @@ def reverse(nums, left, right):
 if __name__ == '__main__':
     nums = [3, 2, 1]
     print(subsets_dfs(nums))
-    print(permute(nums))
+    print(permute_dfs(nums))
