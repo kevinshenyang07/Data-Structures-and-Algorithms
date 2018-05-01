@@ -7,25 +7,20 @@ def word_search(board, word):
                 return True
     return False
 
-# helper function for word_search()
-
-
-def dfs(board, i, j, word):
-    # end on all chars are found
+def dfs(board, word, i, j):
+    # end condition
     if word == '':
         return True
-    # stop cases
-    if i < 0 or i > len(board) or j < 0 or j > len(board[0]):
+    # stop conditions
+    if i < 0 or i > len(board) or j < 0 or j > len(board[0]) or word[0] != board[i][j]:
         return False
-    if board[i][j] != word[0]:
-        return False
-    # prevent visiting one slot twice
+    # mark visited, save as tmp
     tmp = board[i][j]
     board[i][j] = "#"
     # search each direction
     result = False
     for x, y in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
-        if dfs(board, x, y, word[1:]):
+        if dfs(board, word[1:], x, y):
             result = True
             break
     # restore the value of the current slot
