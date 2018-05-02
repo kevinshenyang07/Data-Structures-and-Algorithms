@@ -1,51 +1,5 @@
 from __future__ import print_function
 from collections import deque
-from heapq import heappush, heappop
-
-
-class ListNode(object):
-    def __init__(self, val):
-        self.val = val
-        self.next = None
-
-# Java API
-# Queue<Integer> pq = new PriorityQueue<Integer>();
-# pq.add(1)  // push
-# pq.peek()
-# pq.poll()  // extract
-
-
-def nth_ugly_number_pq(n):
-    if n == 1:
-        return 1
-    pq = [1]
-    for _ in range(1, n):
-        minimum = heappop(pq)
-        while pq and pq[0] == minimum:
-            heappop(pq)
-        heappush(pq, minimum * 2)
-        heappush(pq, minimum * 3)
-        heappush(pq, minimum * 5)
-        # print(pq)
-    return pq[0]
-# O(nlogn) time, O(n) space
-
-
-def mergeKLists(lists):  # each list is sorted
-    dummy = ListNode(0)
-    curr = dummy
-    heap = []
-    for head in lists:
-        if head:  # .val as key to make item comparable
-            heappush(heap, (head.val, head))
-    while heap:  # reference to next possibly smallest nodes
-        node_min = heappop(heap)[1]
-        curr.next = node_min
-        curr = node_min
-        if node_min.next:
-            heappush(heap, (node_min.next.val, node_min.next))
-    return dummy.next
-# O(nlogk) time, O(k) space
 
 
 def nth_ugly_number(n):
@@ -108,10 +62,6 @@ def max_sliding_window(nums, k):
 
 # Largest Rectangle in Histogram
 def largest_rect_area(heights):
-    """
-    :type heights: List[int]
-    :rtype: int
-    """
     heights.append(0)  # ensure the stack is cleared in the end
     stack = [-1]  # monotonous stack
     max_area = 0
@@ -123,31 +73,6 @@ def largest_rect_area(heights):
         stack.append(i)
     heights.pop()
     return max_area
-
-
-# find median in a stream
-class MedianFinder:
-
-    def __init__(self):
-        self.heaps = [], []
-
-    def addNum(self, num):
-        max_pq, min_pq = self.heaps
-        # push to min_pq, get the minimum, then push to max_pq
-        heappush(min_pq, num)
-        ele = heappop(min_pq)
-        heappush(max_pq, -ele)
-        # keep the balance between max_pq and min_pq
-        if len(max_pq) > len(min_pq):
-            # move one ele from max_pq to min_pq
-            ele = heappop(max_pq)
-            heappush(min_pq, -ele)
-
-    def findMedian(self):
-        max_pq, min_pq = self.heaps
-        if len(max_pq) < len(min_pq):
-            return float(min_pq[0])
-        return (min_pq[0] - max_pq[0]) / 2.0
 
 
 # Implement Stack using Queues
