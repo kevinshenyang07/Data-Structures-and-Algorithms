@@ -29,17 +29,11 @@ def findAnagrams(self, s, t):
     # update the initial balance from t
     balance = {}
     for c in t:
-        if c in balance:
-            balance[c] += 1
-        else:
-            balance[c] = 1
+        balance[c] = balance.get(c, 0) + 1
 
     for i, c in enumerate(s):
         # when a char moves in, update the count
-        if c in balance:
-            balance[c] -= 1
-        else:
-            balance[c] = -1
+        balance[c] = balance.get(c, 0) - 1
         # when a char moves out of the window, add the count back
         if i >= len(t):
             char_out = s[i - len(t)]
@@ -71,10 +65,7 @@ def minWindow(self, s, t):
 
     balance = {}
     for c in t:
-        if c in balance:
-            balance[c] += 1
-        else:
-            balance[c] = 1
+        balance[c] = balance.get(c, 0) + 1
 
     left = right = 0
     min_length = len(s) + 1
