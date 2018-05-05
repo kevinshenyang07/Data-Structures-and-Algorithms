@@ -73,6 +73,7 @@ class Element(object):
         self.cnt = cnt
         self.word = word
 
+    # for descending count but ascending order word
     def __cmp__(self, other):
         if self.cnt == other.cnt:
             if self.word < other.word:

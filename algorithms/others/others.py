@@ -37,7 +37,6 @@ def longest_palindrome(s):
             l, r = l2, r2
     return s[l:r+1]
 
-
 def expand_palindrome(s, l, r):
     while l >= 0 and r < len(s) and s[l] == s[r]:
         l -= 1
@@ -45,6 +44,7 @@ def expand_palindrome(s, l, r):
     return l + 1, r - 1
 
 
+# Longest Common Prefix
 def longest_common_prefix(strs):
     if not strs:
         return ""
