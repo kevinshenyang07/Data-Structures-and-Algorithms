@@ -1,5 +1,8 @@
 from __future__ import print_function
+import string
 
+string.ascii_letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+string.ascii_lowercase
 
 # reverse string
 # strings are immutable in Python, so actually this solution
