@@ -4,7 +4,7 @@ class TreeNode(object):
         self.val = x
         self.left = None
         self.right = None
-        self.next = None  # only for the last problem
+        self.next = None  # only for Populating Next Right Pointers in Each Node
 
 # divide & conquer version
 def depth(root):
@@ -104,26 +104,6 @@ def has_path_sum(root, target):
         return True
     target -= root.val
     return has_path_sum(root.left, target) or has_path_sum(root.right, target)
-
-
-# Path Sum II
-# DFS + stack
-def path_sum(root, target):
-    if not root:
-        return []
-
-    paths = []
-    stack = [(root, [root.val])]
-    while stack:
-        curr, path = stack.pop()
-        if not curr.left and not curr.right and sum(path) == target:
-            paths.append(path)
-        if curr.right:
-            stack.append((curr.right, path + [curr.right.val]))
-        if curr.left:
-            stack.append((curr.left, path + [curr.left.val]))
-
-    return paths
 
 
 def LCA(root, node1, node2):

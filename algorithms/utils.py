@@ -1,13 +1,16 @@
 from __future__ import print_function
 import string
+import sys
 
 string.ascii_letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 string.ascii_lowercase
 
+sys.maxint  # max int value, only available on Python 2
+-sys.maxint - 1  # min int value
+
 # reverse string
-# strings are immutable in Python, so actually this solution
-# takes same space and actually slower than s[::-1],
-# since the slicing is optimzed by CPython
+# strings are immutable in Python, so this solution takes same space
+# and actually is slower than s[::-1], since the slicing is optimzed by CPython
 def reverse_str(s):
     # convert string to a char array
     chars = list(s)
