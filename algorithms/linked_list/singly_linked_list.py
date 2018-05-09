@@ -89,15 +89,15 @@ def add_binary(a, b):
         # think 101 + 11 to be 101 + 011
         digit_a = a[-1 - idx] if idx < len(a) else '0'
         digit_b = b[-1 - idx] if idx < len(b) else '0'
-        # calculate        
+        # calculate
         val = int(digit_a) + int(digit_b) + carry
         carry = 1 if val > 1 else 0
         # update result
         result = str(val % 2) + result
         idx += 1
-    
+
     return result
-        
+
 
 # Partition List
 # approach: maintain two queues, the first one stores all nodes with val
@@ -119,7 +119,7 @@ def partition(head, x):
     # splice two queues together
     curr1.next = dummy2.next
     # avoid cycle in linked list, since it might include nodes
-    # with val less than x 
+    # with val less than x
     curr2.next = None
     return dummy1.next
 
@@ -164,7 +164,7 @@ def reverse_between(head, m, n):
         curr.next = prev
         prev = curr
         curr = temp
-    # connect the start of the reversed list with 
+    # connect the start of the reversed list with
     left.next = prev
     # connect the end of the reversed list to the start of the rest of the list
     left.next.next = curr
@@ -220,27 +220,3 @@ def reverse_k_nodes(head, k):
     head.next = nk
     n1.next = nkplus
     return n1
-
-
-# similar to clone graph, can have duplicate labels
-# O(n) time and space
-def copy_random_list(head):
-    if not head:
-        return None
-    mapping = {}  # original node => copied node
-    mapping[head] = RandomListNode(head.label)
-    
-    curr = head
-    while curr:
-        if curr.next:
-            if curr.next not in mapping:
-                mapping[curr.next] = RandomListNode(curr.next.label)
-            mapping[curr].next = mapping[curr.next]
-        if curr.random:
-            if curr.random not in mapping:
-                mapping[curr.random] = RandomListNode(curr.random.label)
-            mapping[curr].random = mapping[curr.random]
-        curr = curr.next
-
-    return mapping[head]
-    
