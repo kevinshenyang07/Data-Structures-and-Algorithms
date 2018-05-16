@@ -1,14 +1,17 @@
 def min_distance(word1, word2):
     '''
-    definition:
+    1) definition:
 
     given word1 and word2, d[i][j] is the edit distance between word1[:i] and word2[:j]
 
-    state trasition function:
+    2) base case:
 
-    d[i][j] = j                                                   i = 0
-            = i                                                   j = 0
-            = min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1])      xi = yj
+    d[0][j] = j
+    d[i][0] = i
+
+    3) state trasition function:
+
+    d[i][j] = min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1])      xi = yj
             = min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + 1)  xi != yj
 
     d[i-1][j] + 1: insert a char to word1
