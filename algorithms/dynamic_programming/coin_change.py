@@ -9,14 +9,16 @@ def change(amount, coins):
              = dp[i-1][j] + dp[i][j-coins[i-1]]  j >= coins[i-1]
     '''
     dp = [[0 for _ in range(amount + 1)] for _ in range(len(coins) + 1)]
+    # key is here: assume amount 0 has one way to make change
+    # to make it easir for cases when j == coins[i-1]
     for i in range(len(coins) + 1):
         dp[i][0] = 1
 
     for i in range(1, len(coins) + 1):
         for j in range(1, amount + 1):
-            dp[i][j] = dp[i-1][j]
+            dp[i][j] = dp[i-1][j]  # ways not using the ith coin
             if j >= coins[i-1]:
-                dp[i][j] += dp[i][j-coins[i-1]]
+                dp[i][j] += dp[i][j-coins[i-1]]  # ways using the ith coin
 
     return dp[-1][-1]
 
