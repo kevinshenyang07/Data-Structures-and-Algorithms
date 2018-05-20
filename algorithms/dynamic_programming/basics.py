@@ -44,10 +44,3 @@ def unique_paths_with_obstacles(grid):
                     dp[i][j] = dp[i-1][j] + dp[i][j-1]
 
     return dp[m][n]
-
-
-# the numbers in matrix are non-negative
-# the point can only move either down or right
-def min_path_sum(matrix):
-    # f(i, j) = min(f(i-1, j), f(i, j-1)) + M[i][j]
-    pass
