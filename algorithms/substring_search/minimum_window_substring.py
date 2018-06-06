@@ -1,3 +1,10 @@
+'''
+general approach to substring search problems:
+1. have two pointers from the start, keep track of current state
+2. move right pointer as far as possible, update global maximum
+3. break the criteria by moving the left pointer, then repeat step 2
+'''
+
 # assumption1: the answer is guaranteed to be unique
 # assumption2: t can have repeating chars
 
