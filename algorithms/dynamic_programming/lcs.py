@@ -1,7 +1,5 @@
 # -*- coding:utf-8 -*-
-
 from __future__ import print_function
-# import numpy as np
 
 
 # Longest Common Subsequence
@@ -16,7 +14,6 @@ def lcs(lhs, rhs):
     '''
     l_len = len(lhs)
     r_len = len(rhs)
-    # c = np.zeros((l_len+1, r_len+1))
     c = [[0 for j in range(r_len + 1)] for i in range(l_len + 1)]
     for i in range(l_len):
         for j in range(r_len):
