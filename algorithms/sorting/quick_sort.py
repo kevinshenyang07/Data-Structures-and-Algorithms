@@ -1,5 +1,9 @@
 from __future__ import print_function
 
+'''
+O(nlogn) time, worst case O(n^2) when array is sorted (and reversed)
+O(logn) space average / best case, O(n) worst case (not stable)
+'''
 
 def quicksort(arr):
     quicksort_helper(arr, 0, len(arr) - 1)

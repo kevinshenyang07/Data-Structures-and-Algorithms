@@ -1,3 +1,7 @@
+'''
+O(nlogn) time / worst case, O(n) space (result is stable)
+'''
+
 def mergesort(arr):
     if len(arr) <= 1:
         return arr
