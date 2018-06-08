@@ -20,7 +20,7 @@ def set_zeros(matrix):
             matrix[0][j] = 0
 
 
-# Max SubArray
+# Maximum SubArray
 def max_sub_array(nums):
     if not nums:
         return 0

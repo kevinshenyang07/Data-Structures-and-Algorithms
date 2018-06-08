@@ -5,7 +5,7 @@ class Solution(object):
         :rtype: int
         """
         char_index = {}
-        i = res = 0
+        i = mex_length = 0
 
         for j, char in enumerate(s):
             # if repeating char is in range of the pointers
@@ -13,7 +13,7 @@ class Solution(object):
                 i = char_index[char] + 1
 
             char_index[char] = j
-            res = max(res, j - i + 1)
+            mex_length = max(mex_length, j - i + 1)
 
-        return res
+        return mex_length
 # O(n) time and space, one pass
