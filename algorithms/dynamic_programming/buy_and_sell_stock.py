@@ -12,14 +12,39 @@ def max_profit_1(prices):
         else:
             profit = max(profit, price - low)
     return profit
+# O(n) time and space
 
 
 # v3
 # can only buy then sell twice
+# brute force: find the max profit of prices[:i] then the max profit of prices[i:]
+# optimization: use an array to record the max profit of prices[:i] for each i
+# and another array to record the max profit of prices[i:] for each i (DP)
+def max_profit_3(prices):
+    if not prices:
+        return 0
+    profits = [0] * len(prices)
+    # max profit of prices[:i] for each i
+    max_profit_left = 0
+    min_price = prices[0]
+    for i in range(1, len(prices)):
+        min_price = min(min_price, prices[i])
+        max_profit_left = max(max_profit_left, prices[i] - min_price)
+        profits[i] = max_profit_left
+    # max profit of prices[i:] for each i
+    max_profit_right = 0
+    max_price = prices[-1]
+    for i in range(len(prices) - 1, 0, -1):
+        max_price = max(max_price, prices[i])
+        max_profit_right = max(max_profit_right, max_price - prices[i])
+        profits[i] += max_profit_right
+
+    return max(profits)
+# O(n) time and space
 
 # v4
 # can only buy then sell for k times
-
+#
 
 # with cooldown (cannot buy after the day sold)
 # assume all prices are non-negative
