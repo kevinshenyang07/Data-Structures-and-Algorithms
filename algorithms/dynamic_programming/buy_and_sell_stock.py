@@ -1,14 +1,29 @@
 # v1
+# can only buy then sell once
+def max_profit_1(prices):
+    if not prices or len(prices) < 2:
+        return 0
 
-# v2
+    low = prices[0]  # lowest price so far
+    profit = 0
+    for price in prices:
+        if low >= price:
+            low = price
+        else:
+            profit = max(profit, price - low)
+    return profit
+
 
 # v3
+# can only buy then sell twice
 
 # v4
+# can only buy then sell for k times
 
-# with Cooldown
+
+# with cooldown (cannot buy after the day sold)
 # assume all prices are non-negative
-def max_profit(prices):
+def max_profit_cooldown(prices):
     '''
     1) state definition
     hold[i]: max profit when holding a position on day i

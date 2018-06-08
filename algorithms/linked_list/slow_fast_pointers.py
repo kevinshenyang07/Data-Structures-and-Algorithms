@@ -17,6 +17,9 @@ def has_cycle(head):
 
 # Linked List Cycle II
 # return the node where the cycle begins, or null if no cycle
+# let distance from head to circle start be K, circle start to
+# meeting point be M, circle perimeter be L, then K + M + nL = 2(K + M)
+# => K = nL - M = (L - M) + (n - 1)L
 def detect_cycle(head):
     slow, fast = head, head
     # loop until fast == None
@@ -24,6 +27,7 @@ def detect_cycle(head):
         slow = slow.next
         fast = fast.next.next
         if slow == fast:
+            # move one point to head, then both move by one unit
             slow = head
             while slow != fast:
                 slow = slow.next
@@ -52,7 +56,7 @@ def get_intersection_node(head1, head2):
 
 # assumption: no cycles anywhere
 # do it in O(nlogn) time and O(1) space
-# recursive calls of mergesort actually takes O(logn) space 
+# recursive calls of mergesort actually takes O(logn) space
 def sort_list(head):
     if not head or not head.next:
         return head
@@ -104,7 +108,7 @@ def split(head):
     while fast.next and fast.next.next:
         slow = slow.next
         fast = fast.next.next
-    mid = slow.next  
+    mid = slow.next
     slow.next = None  # avoid cycle
     return head, mid
 
