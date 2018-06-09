@@ -38,8 +38,7 @@ def next_greater_element_2(nums):
     ans = [-1] * len(nums)
     stack = []
 
-    for i in range(len(nums) * 2):
-        i = i % len(nums)
+    for i in range(len(nums)) + range(len(nums)):
         while stack and nums[stack[-1]] < nums[i]:
             ans[stack.pop()] = nums[i]
         stack.append(i)
