@@ -1,12 +1,12 @@
 from __future__ import print_function
 import string
-import sys
 
 string.ascii_letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 string.ascii_lowercase
 
-sys.maxint  # max int value, only available on Python 2
--sys.maxint - 1  # min int value
+# for 32-bit signed integer (sys.maxint not the same on diffrent systems)
+INT_MAX = 2 ** 31 - 1
+INT_MIN = - 2 ** 31
 
 # reverse string
 # strings are immutable in Python, so this solution takes same space

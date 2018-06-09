@@ -25,7 +25,7 @@ def path_sum(root, target):
 # find a max path that does not cross from a left child to right child (直上直下)
 # => knows max path sum of that node
 def max_path_sum(root):
-    min_int = - sys.maxint - 1
+    min_int = - 2 ** 31
     if not root: return min_int
     global_max = [min_int]  # int var won't be updated in recursion
 
