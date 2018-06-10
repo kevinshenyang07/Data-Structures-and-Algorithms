@@ -14,6 +14,8 @@ def max_sliding_window(nums, k):
         dq.append(num)
 
         # move nums[i-k] out of window
+        # nums[i-k] < dq[0] not possible since it would have been poped out when dq[0] comes in
+        # nums[i-k] > dq[0] not possible since it would take the place of dq[0]
         if i >= k and nums[i-k] == dq[0]:
             dq.pop(0)
 
@@ -21,6 +23,7 @@ def max_sliding_window(nums, k):
         if i >= k - 1:
             result.append(dq[0])
     return result
+# O(n) time and space
 
 
 # Implement Stack using Queues

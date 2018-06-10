@@ -176,3 +176,22 @@ def triangle_number(nums):
             result += z - y - 1
     return result
 # O(n^2) time, O(1) space
+
+# Find Celebrity
+# celebrity: one that everybody knows but knows nobody
+# represent people from 0 to n - 1
+# offers api #knows(a, b), returns True if a knows b
+def find_celebrity:
+    candidate = 0
+    # if knows(a, b), a must not be a celebrity
+    # if not knows(a, b), b must not be a celebrity
+    for i in range(1, n):
+        if knows(candidate, i):
+            candidate = i
+    # check if candidate is valid
+    for i in range(n):
+        if i != candidate and (knows(candidate, i) or not knows(i, candidate)):
+            return -1
+    return candidate
+# O(n) time
+# O(n ^ 2) time for brute force
