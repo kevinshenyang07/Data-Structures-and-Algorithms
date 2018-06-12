@@ -1,0 +1,29 @@
+dynamic programming ~= divide & conquer + memoization
+有方向性，不回头，不绕圈，无循环依赖
+
+when to use DP? reduce a O(n!) or (O2^n) problem to O(n^2)
+1. 求最大最小
+2. 判断可不可行，存不存在
+3。 统计方案个数
+
+when not to use DP?
+1. 本来时间复杂度就在O(n^2)或者O(n^3)的问题
+2. 求每个具体方案而不是方案个数，99%不用DP而用DFS，N皇后除外
+3. 输入数据是一个集合而非序列，70~80%不用DP，除了背包问题
+
+实现方式：
+1. 多重循环（正规，大多数面试官可以接受，存在空间优化可能性，但比较难想）
+   top-down / bottom-up: 无优劣区别
+2. 记忆化搜索（容易从搜索算法转化过来，但是使用递归）
+
+动态规划三要素：
+1. state definition
+2. base case
+3. state transition function
+
+时间复杂度 = 子问题个数 * 子问题复杂度 * 子问题需要访问其他结果次数
+
+Triangle
+Unique Paths
+Minimum Path Sum
+Longest Increasing Subsequence: 不要用贪心法，面试也不会考

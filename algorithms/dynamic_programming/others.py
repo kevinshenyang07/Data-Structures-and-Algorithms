@@ -1,10 +1,3 @@
-'''
-elements of dp problems
-1. state definition
-2. base case
-3. state transition function
-'''
-
 # assumption: non-empty string and word list
 def word_break(s, wordList):
     dp = [False for i in range(n + 1)]
