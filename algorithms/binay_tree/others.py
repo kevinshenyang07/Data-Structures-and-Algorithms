@@ -1,10 +1,4 @@
-# Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-        self.next = None  # only for Populating Next Right Pointers in Each Node
+from tree_node import TreeNode
 
 # divide & conquer version
 def depth(root):
@@ -135,24 +129,3 @@ def connect(root):
             root.right.next = root.next and root.next.left
             root = root.next  # move right at the same level
         root = next
-
-
-class Codec(object):
-    def serialize(self, node):
-        if not node:
-            return 'null'
-        left = self.serialize(node.left)
-        right = self.serialize(node.right)
-        return ','.join(str(node.val), left, right)
-
-    def deserialize(self, data):
-        return self.build_tree(iter(data.split(',')))
-
-    def build_tree(self, val_iterator):
-        val = next(val_iterator)
-        if val == 'null':
-            return None
-        node = TreeNode(val)
-        node.left = self.build_tree(val_iterator)
-        node.right = self.build_tree(val_iterator)
-        return node
