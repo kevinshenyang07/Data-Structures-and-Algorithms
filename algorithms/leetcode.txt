@@ -1,0 +1,53 @@
+重点
+-------------------
+Binary Search
+Binary Tree & Divide Conquer
+BFS & DFS
+LinkedList & Array
+Two Pointers
+Data Structure
+
+高频：搜索，二叉树，链表
+低频：平衡二叉搜索树，动态规划
+不会考到：KMP，红黑树，AVL Tree，Segment Tree
+
+时间复杂度
+-------------------
+基本运算(%, /): O(1)
+字符串比较：接近O(1)，最坏O(n)
+哈希：O(key_size)
+二分法：O(logn)
+分解质因数：O(sqrt(n))
+排序：O(nlogn)较多
+数组，枚举，动态规划：O(n^2) / O(n^3)
+组合有关的搜索：O(n * 2^n)
+排列有关的搜索：O(n * n!)
+比较常见：O(n)
+
+时间复杂度计算通用公式
+搜索：O(答案总数 * 构造每个答案的时间)
+动态规划：O(状态总数 * 计算每个状态的时间复杂度)
+分治法(包括二叉树)：O(节点个数 * 每个节点的计算时间)
+
+Search
+-------------------
+BFS应用范围
+1. graph traversal (层级遍历，连通问题-灌水法，拓扑排序-选课、检查循环依赖)
+2. shortest path (仅限每条边长度相同且没有方向的graph)
+
+DFS应用范围：短，小，最问题，90%的题目属于排列组合
+subsets模板几乎适用于所有的搜索问题
+
+permutations: O(n * n!) time, O(n!) space
+subsets: O(2^n) time, O(n * 2^n) space since the avg length of a subset is n/2
+next_permutation: O(n) time, O(1) space
+
+Recursive
+-------------------
+三要素：state definition, inductive step, base case
+
+遍历法：result in parameter, top-down
+分治法：result in return value, bottom-up
+
+merge sort / quick sort
+90%的二叉树问题
