@@ -1,12 +1,17 @@
 from __future__ import print_function
 import string
 
-string.ascii_letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-string.ascii_lowercase
+# prefer list comprehension over map() and filter()
+
+string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+string.lowercase # a-z
+string.digits  # 0-9
 
 # for 32-bit signed integer (sys.maxint not the same on diffrent systems)
 INT_MAX = 2 ** 31 - 1
 INT_MIN = - 2 ** 31
+
+bin(num).count('1')  # for a positive integer return number of "1"s in its binary format
 
 # reverse string
 # strings are immutable in Python, so this solution takes same space
