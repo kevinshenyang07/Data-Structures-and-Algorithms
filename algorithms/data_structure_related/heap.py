@@ -25,6 +25,40 @@ def mergeKLists(lists):  # each list is sorted
 # O(nlogk) time, O(k) space
 
 
+# Smallest Range
+# nums = [[4,10,15,24,26], [0,9,12,20], [5,18,22,30]]
+# return the smallest range that includes at least one number from each of the array
+# approach: similar to Merge K Sorted Lists / Minimum Window Substring,
+#           maintain a window by removing the smallest element then adding the one next to it
+def smallest_range(self, nums):
+    pq = []
+    for i, num_arr in enumerate(nums):
+        heappush(pq, (num_arr[0], i, 0))  # value, i, j
+
+    values = [num_arr[0] for num_arr in nums]
+    left, right = min(values), max(values)  # current min/max
+    ans = left, right  # global range
+
+    while pq:
+        # get the number after current minimum and push it to heap
+        _, i, j = heappop(pq)
+
+        if j == len(nums[i]) - 1:
+            break
+
+        new_val = nums[i][j+1]
+        heappush(pq, (new_val, i, j + 1))
+        # update current and global min/max
+        left = pq[0][0]
+        right = max(right, new_val)
+
+        if right - left < ans[1] - ans[0]:
+            ans = left, right
+
+    return ans
+# O(nlogm) time, O(m) space
+
+
 # Nth Ugly Number
 def nth_ugly_number_pq(n):
     if n == 1:

@@ -17,9 +17,9 @@ from heapq import heapify, heappush, heappop
 arr = [1, 3, 2]
 heapify(arr)  # in place, need to implement __cmp__ if other types
 # or
-heap = []
-heappush(heap, 1)
-heappop(heap)
+pq = []
+heappush(pq, 1)
+heappop(pq)
 
 
 # in-house implementation
@@ -57,13 +57,13 @@ class Heap(object):
         if k > len(arr):
             return cls.heap_sort(arr, key=lambda x: -x)
         # start with an empty min-heap
-        heap = cls()
+        pq = cls()
         for i in range(k):
-            heap.push(arr[i])
+            pq.push(arr[i])
         for j in range(k, len(arr)) > 0:
-            heap.push(arr[j])
-            heap.extract()
-        return heap.store
+            pq.push(arr[j])
+            pq.extract()
+        return pq.store
     # O(klogk + (n-k)logk) = O(nlogk) time, O(k) space
     # same idea for k smallest elements
 
@@ -71,12 +71,12 @@ class Heap(object):
     def heapify(cls, arr, key=lambda x: x, end=None):
         if not end:
             end = len(arr)
-        heap = cls(arr, key)
+        pq = cls(arr, key)
         i = end // 2
         while i >= 0:
-            heap.sift_down(i, end)
+            pq.sift_down(i, end)
             i -= 1
-        return heap.store
+        return pq.store
     # time complexity O(nlogn)
 
     @classmethod
@@ -134,8 +134,8 @@ class Heap(object):
 
 
 if __name__ == '__main__':
-    heap = Heap.heapify([7, 5, 8, 2, 4, 3, 9, 1])
-    print(heap)
+    pq = Heap.heapify([7, 5, 8, 2, 4, 3, 9, 1])
+    print(pq)
 
     arr = Heap.heap_sort([7, 5, 8, 2, 4, 3, 9, 1])
     print(arr)
