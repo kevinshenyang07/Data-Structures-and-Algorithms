@@ -1,3 +1,20 @@
+# Contains Duplicate II
+# high freq
+def contains_duplicate(self, nums, k):
+    window = set([])
+
+    for i, num in enumerate(nums):
+        if i > k:
+            window.remove(nums[i-k-1])
+        if num in window:
+            return True
+        window.add(num)
+
+    return False
+# O(n) time, O(k) space
+# O(n) time and space if using hash table
+
+
 def nth_ugly_number(n):
     # ugly[i2] means the largest base to be multiplied by 2
     # for example, the ugly numbers are [1, 2, 3, 4...]
