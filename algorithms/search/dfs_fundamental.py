@@ -7,6 +7,9 @@ from __future__ import print_function
 # 2. early stop condition
 # 3. recursion definition
 
+# DFS method arguments order:
+# depth, candidates, sub result, result (by stability)
+
 def subsets(nums):
     result = [[]]
     for num in sorted(nums):

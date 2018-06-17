@@ -21,10 +21,10 @@ class Solution(object):
             mapping[arr] = mapping.get(arr, [])
             heappush(mapping[dep], arr)
 
-        self.dfs(res, mapping, 'JFK')
+        self.dfs('JFK', mapping, res)
         return res
 
-    def dfs(self, res, mapping, node):
+    def dfs(self, node, mapping, res):
         pq = mapping[node]
         while pq:
             self.dfs(res, mapping, heappop(pq))
