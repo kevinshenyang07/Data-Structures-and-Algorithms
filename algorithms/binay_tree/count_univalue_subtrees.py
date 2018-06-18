@@ -1,9 +1,11 @@
 # Count Univalue Subtrees
-# for each node, if its val is the same as its children's values, and both
-# left and right subtrees are valid, then the subtree on tha node is valid
+# to be the root node of a valid subtree:
+# 1. if its val is the same as its left/right child's value
+# 2. both left and right subtrees are valid
+
 # approach: bottom up with postorder since it can carry info from children
 class Solution(object):
-    def countUnivalSubtrees(self, root):
+    def count_unival_subtrees(self, root):
         """
         :type root: TreeNode
         :rtype: int

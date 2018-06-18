@@ -1,6 +1,7 @@
 # Accounts Merge
 
 # think Number of Islands
+# assumption: if two accounts shares one email, the account name is the same
 def accounts_merge(self, accounts):
     """
     :type accounts: List[List[str]]
@@ -10,6 +11,7 @@ def accounts_merge(self, accounts):
         # stop condition
         if visited[i]:
             return
+        # mark one connected account as visited
         visited[i] = True
         # search each email under one account
         for j in range(1, len(accounts[i])):
@@ -18,17 +20,16 @@ def accounts_merge(self, accounts):
             for k in mapping[email]:
                 dfs(k, emails)
 
-    visited = [False] * len(accounts)
-    mapping = {}
     res = []
-    # email => indices of accounts that contains that email
-    #          (connected accounts)
+    visited = [False] * len(accounts)
+    mapping = {}  # email => indices of connected accounts that contains that email
+
     for i, account in enumerate(accounts):
         for j in range(1, len(account)):
             email = account[j]
             mapping[email] = mapping.get(email, [])
             mapping[email].append(i)
-    #
+
     for i, account in enumerate(accounts):
         if visited[i]:
             continue
@@ -36,7 +37,6 @@ def accounts_merge(self, accounts):
         # collect emails in connected accounts
         # then mark those accounts as visited
         dfs(i, emails)
-
         res.append([name] + sorted(emails))
 
     return res
