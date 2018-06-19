@@ -1,12 +1,12 @@
 from __future__ import print_function
 
 class TreeNode(object):
-    
+
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
-    
+
     def insert(self, value):
         if self.val <= value:
             if self.right:
@@ -34,7 +34,7 @@ class TreeNode(object):
                 self.left.find(value)
             else:
                 return None
-    
+
     # node has no children, simply remove it
     # node has one child, the child take its place
     # node has two children, find the max on the left or the min on the right
@@ -60,11 +60,11 @@ class TreeNode(object):
                 else:
                     return self.right   # promote the right subtree or assign None
         else:
-            if self.val < value:          
+            if self.val < value:
                 if self.right:
                     self.right = self.right.delete(value)
                 # else the key is not in the tree
-            else:                   
+            else:
                 if self.left:
                     self.left = self.left.delete(value)
                 # else the key is not in the tree
@@ -76,10 +76,12 @@ class TreeNode(object):
             return self.left._find_min(self)  # self as the parent
         else:
             return [parent, self]
-    
+
     def __repr__(self):
         return str(self.val)
 
+# values of nodes in left subtree are smaller than root value
+# values of nodes in right subtree are greater than root value
 class BinarySearchTree(object):
 
     def __init__(self):
@@ -94,7 +96,7 @@ class BinarySearchTree(object):
     def find(self, value):
         if self.root:
             return self.root.find(value)
-        return None            
+        return None
 
     def delete(self, value):
         if self.root:

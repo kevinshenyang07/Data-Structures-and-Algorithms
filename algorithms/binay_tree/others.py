@@ -75,3 +75,22 @@ def connect(root):
             root.right.next = root.next and root.next.left
             root = root.next  # move right at the same level
         root = next
+
+
+# Inorder Successor in BST
+# iterative version is hard to think of
+def inorder_successor(root, p):
+    """
+    :type root: TreeNode
+    :type p: TreeNode
+    :rtype: TreeNode
+    """
+    if not root:
+        return None
+
+    if root.val <= p.val:
+        return inorder_successor(root.right, p)
+    else:
+        left = inorder_successor(root.left, p)
+        return left if left else root
+# O(logn) time and space
