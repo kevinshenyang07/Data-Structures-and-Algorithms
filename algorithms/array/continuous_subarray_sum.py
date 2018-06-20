@@ -27,7 +27,7 @@ class Solution(object):
             cum_sum_mod_k = (cum_sum_mod_k + num) % k
             if cum_sum_mod_k not in mods:
                 mods[cum_sum_mod_k] = i
-            elif i - mods[mod] >= 2:
+            elif i - mods[cum_sum_mod_k] >= 2:
                 # nums[mods[cum_sum_mod_k]+1:i+1] mush be a multiple of k
                 return True
 
