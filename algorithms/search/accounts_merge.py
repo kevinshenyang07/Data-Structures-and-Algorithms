@@ -24,6 +24,7 @@ def accounts_merge(self, accounts):
     visited = [False] * len(accounts)
     mapping = {}  # email => indices of connected accounts that contains that email
 
+    # generate edges from node (email) to sub-graph (account)
     for i, account in enumerate(accounts):
         for j in range(1, len(account)):
             email = account[j]
@@ -31,13 +32,12 @@ def accounts_merge(self, accounts):
             mapping[email].append(i)
 
     for i, account in enumerate(accounts):
-        if visited[i]:
-            continue
-        name, emails = account[0], set([])
-        # collect emails in connected accounts
-        # then mark those accounts as visited
-        dfs(i, emails)
-        res.append([name] + sorted(emails))
+        if not visited[i]:
+            name, emails = account[0], set([])
+            # collect emails in connected accounts
+            # then mark those accounts as visited
+            dfs(i, emails)
+            res.append([name] + sorted(emails))
 
     return res
 # O(n) time and space, given n email addresses in total

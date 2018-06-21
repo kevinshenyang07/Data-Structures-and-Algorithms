@@ -1,3 +1,4 @@
+# this is actually representing a graph problem with a matrix
 def num_islands(grid):
     """
     :type grid: List[List[str]]
