@@ -9,7 +9,7 @@ def binary_search(nums, target):
     if not nums:
         return -1
     start, end = 0, len(nums) - 1
-    while start + 1 < end:
+    while start + 1 < end:  # start < end could get into infinite loop
         mid = start + (end - start) // 2  # prevent int overflow
         if nums[mid] == target:
             return mid
