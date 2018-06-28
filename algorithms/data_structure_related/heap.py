@@ -80,25 +80,28 @@ def nth_ugly_number_pq(n):
 class MedianFinder:
 
     def __init__(self):
-        self.heaps = [], []
+        self.lower = []  # inverted max heap [-3, -2, -1]
+        self.upper = []  # min heap          [4, 5, 6]
 
     def addNum(self, num):
-        max_pq, min_pq = self.heaps
-        # push to min_pq, get the minimum, then push to max_pq
-        heappush(min_pq, num)
-        ele = heappop(min_pq)
-        heappush(max_pq, -ele)
-        # keep the balance between max_pq and min_pq
-        if len(max_pq) > len(min_pq):
-            # move one ele from max_pq to min_pq
-            ele = heappop(max_pq)
-            heappush(min_pq, -ele)
+        # len(self.lower) always smaller than or equal to len(self.upper)
+        if len(self.lower) == len(self.upper):
+            heappush(self.lower, -num)
+            ele = heappop(self.lower)
+            heappush(self.upper, -ele)
+        else:
+            heappush(self.upper, num)
+            ele = heappop(self.upper)
+            heappush(self.lower, -ele)
+    # O(logn) time
+
 
     def findMedian(self):
-        max_pq, min_pq = self.heaps
-        if len(max_pq) < len(min_pq):
-            return float(min_pq[0])
-        return (min_pq[0] - max_pq[0]) / 2.0
+        if len(self.lower) == len(self.upper):
+            return (self.upper[0] - self.lower[0]) / 2.0
+        else:
+            return float(self.upper[0])
+    # O(1) time
 
 
 # Top K Frequent Words
