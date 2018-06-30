@@ -13,7 +13,9 @@ INT_MIN = - 2 ** 31
 
 bin(num).count('1')  # for a positive integer return number of "1"s in its binary format
 
-# reverse string
+#
+# string utils
+
 # strings are immutable in Python, so this solution takes same space
 # and actually is slower than s[::-1], since the slicing is optimzed by CPython
 def reverse_str(s):
@@ -32,6 +34,30 @@ def is_palindrome(s):
         if s[i] != s[j]:
             return False
     return True
+
+#
+# linked list utils
+def reverse(head):
+    prev = None
+    while head:
+        temp = head.next
+        head.next = prev
+        prev = head
+        head = temp
+    return prev
+
+
+def split(head):
+    # assume at least one node
+    # zero node situation should be checked before calling
+    slow = fast = head
+    # while there are at least two more nodes
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+    mid = slow.next
+    slow.next = None  # avoid cycle
+    return head, mid
 
 
 if __name__ == '__main__':
