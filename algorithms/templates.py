@@ -1,57 +1,4 @@
 #
-# Binary Search
-# 二分法：保留有答案的那一半
-
-# sorted array, no duplicates
-# extra code so that it can also be used in finding leftmost target
-# when there are duplicates
-def binary_search(nums, target):
-    if not nums:
-        return -1
-    start, end = 0, len(nums) - 1
-    while start + 1 < end:  # start < end could get into infinite loop
-        mid = start + (end - start) // 2  # prevent int overflow
-        if nums[mid] == target:
-            return mid
-        if nums[mid] < target:
-            start = mid
-        else:
-            end = mid
-    if nums[start] == target:
-        return start
-    if nums[end] == target:
-        return end
-    return -1
-
-
-# rotated sorted array
-def binary_search_rotated(nums, target):
-    if not nums:  # empty list or None
-        return -1
-    start, end = 0, len(nums) - 1
-    while start + 1 < end:  # make sure start and mid don't meet
-        mid = start + (end - start) // 2  # prevent int overflow
-        if nums[mid] == target:
-            return mid
-        if nums[start] < nums[mid]:  # mid is on the left half
-            if nums[start] <= target <= nums[mid]:
-                end = mid
-            else:  # other wise cut from start to mid
-                start = mid
-        else:
-            if nums[mid] <= target <= nums[end]:
-                start = mid
-            else:
-                end = mid
-    # handle the cases when start = mid
-    if nums[start] == target:
-        return start
-    if nums[end] == target:
-        return end
-    return -1
-
-
-#
 # Binary Tree
 
 # preorder: root - left subtree - right subtree (root is pre-children)
@@ -111,24 +58,33 @@ def postorder(root):
 
 
 # Divide & Conquer
+# assume all nodes are unique, node1 and node2 are different
+# and both values exist in the tree
 def LCA(root, node1, node2):
-    # base case
+    ## base case
     # if the traversal has reached the end
-    # or one node is the root and another node is a child
-    # or two nodes are
-    if root is None or root == node1 or root = node2:
+    if not root:
+        return None
+
+    # if either node is root, that node must be LCA
+    # even if another node may not be in the subtree
+    if root == node1 or root = node2:
         return root
 
-    # divide
+    ## divide
+    # the subproblem becomes determining if node1 or node2
+    # is in left/right subtree
     left = LCA(root.left, node1, node2)
     right = LCA(root.right, node1, node2)
 
-    # conquer
+    ## conquer
     # if node1 and node2 are in different subtree
     if left and right:
         return root
+    # if none of the two nodes found in right subtree
     if left:
         return left
+    # if none of the two nodes found in the left subtree
     if right:
         return right
     return None
