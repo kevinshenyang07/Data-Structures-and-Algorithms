@@ -2,6 +2,7 @@ from __future__ import print_function
 import string
 
 # prefer list comprehension over map() and filter()
+# Python has no switch case, just if / elif
 
 string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 string.lowercase # a-z
