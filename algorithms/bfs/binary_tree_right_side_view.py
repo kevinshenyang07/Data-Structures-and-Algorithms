@@ -1,28 +1,4 @@
 # Binary Tree Right Side View
-
-class DfsSolution(object):
-    def right_side_view(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
-        res = []
-        self.dfs(res, root, 0)
-        return res
-
-    def dfs(self, res, node, level):
-        # stop condition
-        if not node:
-            return
-        # valid result condition
-        if level == len(res):
-            res.append(node.val)
-        # recursion
-        self.dfs(res, node.right, level + 1)
-        self.dfs(res, node.left, level + 1)
-# O(n) time and space
-
-
 class BfsSolution(object):
     def right_side_view(self, root):
         # level order
@@ -44,4 +20,27 @@ class BfsSolution(object):
             res.append(node.val)
 
         return res
+# O(n) time and space
+
+
+class DfsSolution(object):
+    def right_side_view(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        self.dfs(res, root, 0)
+        return res
+
+    def dfs(self, res, node, level):
+        # stop condition
+        if not node:
+            return
+        # valid result condition
+        if level == len(res):
+            res.append(node.val)
+        # recursion
+        self.dfs(res, node.right, level + 1)
+        self.dfs(res, node.left, level + 1)
 # O(n) time and space
