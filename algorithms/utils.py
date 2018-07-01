@@ -14,6 +14,8 @@ INT_MIN = - 2 ** 31
 
 bin(num).count('1')  # for a positive integer return number of "1"s in its binary format
 
+copied = [row[:] for row in matrix]  # copy a matrix
+
 #
 # string utils
 
