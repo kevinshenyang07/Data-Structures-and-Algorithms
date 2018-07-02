@@ -1,6 +1,6 @@
 # Walls and Gates
 class Solution(object):
-    def wallsAndGates(self, rooms):
+    def walls_and_gates(self, rooms):
         """
         :type rooms: List[List[int]]
         :rtype: void Do not return anything, modify rooms in-place instead.
@@ -18,22 +18,10 @@ class Solution(object):
         # each gate guaranteed to increase radius by 1 (like level order)
         while queue:
             i, j = queue.pop(0)
-
-            if self.should_update(rooms, i - 1, j):
-                rooms[i-1][j] = rooms[i][j] + 1
-                queue.append((i - 1, j))
-
-            if self.should_update(rooms, i, j - 1):
-                rooms[i][j-1] = rooms[i][j] + 1
-                queue.append((i, j - 1))
-
-            if self.should_update(rooms, i + 1, j):
-                rooms[i+1][j] = rooms[i][j] + 1
-                queue.append((i + 1, j))
-
-            if self.should_update(rooms, i, j + 1):
-                rooms[i][j+1] = rooms[i][j] + 1
-                queue.append((i, j + 1))
+            for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
+                if self.should_update(rooms, x, y):
+                    rooms[x][y] = rooms[i][j] + 1
+                    queue.append((x, y))
 
     # values can be -1, 0 ~ INF
     def should_update(self, rooms, i, j):

@@ -21,10 +21,8 @@ def dfs(grid, i, j):
     if grid[i][j] == '1':
         # mark itself and all adj islands as 0
         grid[i][j] = '0'
-        dfs(grid, i - 1, j)
-        dfs(grid, i, j + 1)
-        dfs(grid, i + 1, j)
-        dfs(grid, i, j - 1)
+        for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
+            dfs(grid, x, y)
 # O(mn) time, O(max(m, n)) space for recursive stacks
 
 
