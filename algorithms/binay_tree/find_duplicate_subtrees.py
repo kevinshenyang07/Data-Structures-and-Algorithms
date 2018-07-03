@@ -1,4 +1,5 @@
-# to compare any two subtrees, create an id (signature) for each subtree
+# Find Duplicate Subtrees
+# to compare any two subtrees, create an id for each subtree (called numbering method)
 # => fingerprint of each subtree is (root.val, left_id, right_id)
 # => in post order if a subtree has a new fingerprint, give it a new id
 class Solution(object):
@@ -11,7 +12,7 @@ class Solution(object):
             return []
 
         dup_nodes = {}  # id => nodes
-        subtree_ids = {}  # (node, sig_left, sig_right) => id
+        subtree_ids = {}  # (node, left_id, right_id) => id
         self.postorder(root, dup_nodes, subtree_ids)
 
         return [nodes[0] for nodes in dup_nodes.values() if len(nodes) > 1]

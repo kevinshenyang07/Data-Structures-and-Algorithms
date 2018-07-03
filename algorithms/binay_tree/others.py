@@ -1,6 +1,5 @@
 from tree_node import TreeNode
 
-# NOTE: 许多题见模板templates.py
 
 # divide & conquer version
 def depth(root):
