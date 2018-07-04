@@ -33,24 +33,17 @@ class Solution(object):
 
         return has_number and number_after_e
 
-'''
-Thought Process
-
-1. find out all possible chars
-   " .+-e0123456789"
-
-2. list examples
-   valid: "0", "1.2", "-1", "2e10", "0.2", "2e-10"
-   not valid: "1. 2", "2e.10", "2-e10", "2e10e10"
-
-3. find out rules
-   " " can only be at beginning or end
-   ".0123456789" can be anywhere
-   "+-" can only be at beginning or after "e"
-
-   "e" must have number before and after
-   "e" can not have more than one occurrence
-
-   "." can not be after "e"
-   "." can not have more than one occurrence
-'''
+# Thought Process
+# 1. find out all possible chars
+#    " .+-e0123456789"
+# 2. list examples
+#    valid: "0", "1.2", "-1", "2e10", "0.2", "2e-10"
+#    not valid: "1. 2", "2e.10", "2-e10", "2e10e10"
+# 3. find out rules
+#    " " can only be at beginning or end
+#    ".0123456789" can be anywhere
+#    "+-" can only be at beginning or after "e"
+#    "e" must have number before and after
+#    "e" can not have more than one occurrence
+#    "." can not be after "e"
+#    "." can not have more than one occurrence
