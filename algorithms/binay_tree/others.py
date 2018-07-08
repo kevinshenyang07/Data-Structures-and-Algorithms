@@ -27,6 +27,7 @@ def depth_iter(root):
     return max_depth
 
 
+# Balanced Binary Tree
 # the depth of the two subtrees of every node never differ by more than 1
 def is_balanced(root):
     if not root:
@@ -54,6 +55,7 @@ def build_tree(preorder, inorder):
         return None
 
 
+# Path Sum
 def has_path_sum(root, target):
     if not root:
         return False
@@ -93,3 +95,23 @@ def inorder_successor(root, p):
         left = inorder_successor(root.left, p)
         return left if left else root
 # O(logn) time and space
+
+
+# Verify Preorder Sequence in Binary Search Tree
+# f([5,2,6,1,3]) => False; f([5,2,1,3,6]) => True
+# assume each number in the sequence is unique.
+def verify_preorder(preorder):
+    """
+    :type preorder: List[int]
+    :rtype: bool
+    """
+    low = - 2 ** 31  # lower bound of next right child's value
+    stack = []  # top element being current root
+    for val in preorder:
+        if val < low:
+            return False
+        while stack and stack[-1] < val:
+            low = stack.pop()  # go up and update lower bound
+        stack.append(val)
+
+    return True
