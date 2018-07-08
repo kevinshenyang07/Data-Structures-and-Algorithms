@@ -1,12 +1,12 @@
 def solve_n_queens(n):
     def dfs(queens, xy_dif, xy_sum):
         p = len(queens)
-        # end case
+        # end condition
         if p == n:
             solutions.append(queens)
             return
         for q in range(n):
-            # continue case
+            # continue condition
             # when a location (x, y) is occupied, other locations (p, q) where
             # p + q == x + y or p - q == x - y would be invalid
             if q not in queens and (p - q not in xy_dif) and (p + q not in xy_sum):
