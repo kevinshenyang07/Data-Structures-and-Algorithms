@@ -12,10 +12,12 @@ def can_finish(num_courses, prerequisites):
     :rtype: boolean
     """
     graph = { i: set() for i in range(num_courses) }  # course: corresponding post courses
-    in_degrees = { i: 0 for i in range(num_courses) }  # course: in-degree
+    in_degrees = { i: 0 for i in range(num_courses) }  # course: number of prerequisite courses
+
     for post_course, pre_course in prerequisites:
         graph[pre_course].add(post_course)
         in_degrees[post_course] += 1
+
     # vertices that have no in edges
     queue = [i for i in range(num_courses) if in_degrees[i] == 0]
     num_can_finish = 0
@@ -31,3 +33,59 @@ def can_finish(num_courses, prerequisites):
     # if there's cycle some of the vertices will never get into the queue
     return num_can_finish == num_courses
 # O(V+E) time and space
+
+
+# Alien Dictionary
+# There is a new alien language which uses the latin alphabet. However, the order among letters
+# are unknown to you. You receive a list of non-empty words from the dictionary, where words
+# are sorted lexicographically by the rules of this new language.
+# Derive the order of letters in this language.
+
+# example:
+# f(["wrt", "wrf", "er", "ett", "rftt"]) => "wertf"
+# f(["z", "x", "z"]) => ""  (invalid order)
+
+# assumptions:
+# all letters are in lowercase
+# there may be multiple valid order of letters, return any one of them is fine
+def alien_order(words):
+    """
+    :type words: List[str]
+    :rtype: str
+    """
+    # 1. set up graph
+    chars = set()
+    for word in words:
+        for char in word:
+            chars.add(char)
+
+    graph = { char: set() for char in chars }  # char: chars after
+    in_degrees = { char: 0 for char in chars }  # char: number of chars before it
+
+    # 2. build up dependency
+    for i in range(len(words) - 1):
+        w1, w2 = words[i], words[i + 1]
+        min_length = min(len(w1), len(w2))
+
+        j = 0  # find first different char pair
+        while j < min_length and w1[j] == w2[j]:
+            j += 1
+
+        if j < min_length:
+            if w2[j] not in graph[w1[j]]:  # avoid counting duplicate edges
+                in_degrees[w2[j]] += 1
+            graph[w1[j]].add(w2[j])
+
+    # 3. start topological sort
+    # vertices that have no in edges
+    queue = [char for char in chars if in_degrees[char] ==0]
+    order = []
+    while queue:
+        char = queue.pop(0)
+        order.append(char)
+        for char_next in graph[char]:
+            in_degrees[char_next] -= 1
+            if in_degrees[char_next] == 0:
+                queue.append(char_next)
+
+    return ''.join(order) if len(order) == len(chars) else ''
