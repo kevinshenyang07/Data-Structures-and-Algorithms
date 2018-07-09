@@ -1,5 +1,5 @@
 # topological ordering: starting from vertices with no in-edge, to the vertices with no out-edge
-# cannot have cycles
+# the vertices in the cycle won't be added to queue, which can be used to determine if valid
 
 # Course Schedule
 # an in-edge from vertex a to b => a is the prerequisite to b
@@ -62,7 +62,7 @@ def alien_order(words):
     graph = { char: set() for char in chars }  # char: chars after
     in_degrees = { char: 0 for char in chars }  # char: number of chars before it
 
-    # 2. build up dependency
+    # 2. map edges to node => set of nodes
     for i in range(len(words) - 1):
         w1, w2 = words[i], words[i + 1]
         min_length = min(len(w1), len(w2))
@@ -89,3 +89,47 @@ def alien_order(words):
                 queue.append(char_next)
 
     return ''.join(order) if len(order) == len(chars) else ''
+
+
+# Graph Valid Tree
+# Given n nodes labeled from 0 to n-1 and a list of undirected edges (each edge is a pair of nodes),
+# check whether these edges make up a valid tree (note: not necessarily a binary tree!)
+# f(5, [[0,1], [0,2], [0,3], [1,4]]) => True
+# f(5, [[0,1], [1,2], [2,3], [1,3], [1,4]]) => False
+def valid_tree(self, n, edges):
+    """
+    :type n: int
+    :type edges: List[List[int]]
+    :rtype: bool
+    """
+    if n == 1 and not edges:
+        return True
+    # 1. set up graph
+    graph = { i: set() for i in range(n) }
+    in_degrees = { i: 0 for i in range(n) }
+
+    # 2. map edges to node => set of nodes
+    for i, j in edges:
+        graph[i].add(j)
+        graph[j].add(i)
+        in_degrees[i] += 1
+        in_degrees[j] += 1
+
+    # 3. start topological sort
+    queue = [i for i in range(n) if in_degrees[i] == 1]
+    num_valid_nodes = 0
+    while queue:
+        i = queue.pop(0)
+        num_valid_nodes += 1
+        for j in graph[i]:
+            # key diff below, avoid reducing in-degree twice
+            # the node(s) with in-degree 0 will be root(s)
+            graph[j].remove(i)
+            in_degrees[j] -= 1
+            if in_degrees[j] == 1:
+                queue.append(j)
+    # if there're two or more trees
+    if len([d for d in in_degrees.values() if d == 0]) > 1:
+        return False
+    return num_valid_nodes == n
+# thought process: to be a valid tree => all nodes connected but no cycles
