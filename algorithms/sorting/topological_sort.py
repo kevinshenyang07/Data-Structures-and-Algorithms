@@ -20,18 +20,16 @@ def can_finish(num_courses, prerequisites):
 
     # vertices that have no in edges
     queue = [i for i in range(num_courses) if in_degrees[i] == 0]
-    num_can_finish = 0
     while queue:
         course = queue.pop(0)
-        num_can_finish += 1
         for post_course in graph[course]:
             in_degrees[post_course] -= 1
             # each time an in-edge is removed, if a vertex no longer has in-edges,
             # add that vertex to check list
             if in_degrees[post_course] == 0:
                 queue.append(post_course)
-    # if there's cycle some of the vertices will never get into the queue
-    return num_can_finish == num_courses
+
+    return all([d == 0 for d in in_degrees.values()])
 # O(V+E) time and space
 
 
@@ -88,6 +86,7 @@ def alien_order(words):
             if in_degrees[char_next] == 0:
                 queue.append(char_next)
 
+    # 4. validate result
     return ''.join(order) if len(order) == len(chars) else ''
 
 
@@ -102,8 +101,6 @@ def valid_tree(self, n, edges):
     :type edges: List[List[int]]
     :rtype: bool
     """
-    if n == 1 and not edges:
-        return True
     # 1. set up graph
     graph = { i: set() for i in range(n) }
     in_degrees = { i: 0 for i in range(n) }
@@ -128,8 +125,15 @@ def valid_tree(self, n, edges):
             in_degrees[j] -= 1
             if in_degrees[j] == 1:
                 queue.append(j)
-    # if there're two or more trees
-    if len([d for d in in_degrees.values() if d == 0]) > 1:
-        return False
-    return num_valid_nodes == n
+
+    # 4. validate result
+    root_found = False
+    for degree in in_degrees.values():
+        if degree == 0:
+            if root_found:
+                return False  # should only has one tree
+            root_found = True
+        if degree > 1:
+            return False  # should not have cycles
+    return root_found
 # thought process: to be a valid tree => all nodes connected but no cycles
