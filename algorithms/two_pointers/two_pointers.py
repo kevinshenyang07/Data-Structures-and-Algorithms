@@ -12,34 +12,6 @@ def two_sum2(nums, target):
     return []
 # O(n) time, O(1) space
 
-    
-# find element a, b, c that sum to 0, return unique combinations
-def three_sum(nums):
-    result = []
-    nums.sort()
-    for i in range(len(nums) - 2):
-        # if a number is already tested, move to the next one
-        if i > 0 and nums[i-1] == nums[i]:
-            continue
-        # find possible combinations on the right
-        l, r = i + 1, len(nums) - 1
-        while l < r:
-            sum_of_three = nums[i] + nums[l] + nums[r]
-            if sum_of_three < 0:
-                l += 1
-            elif sum_of_three > 0:
-                r -= 1
-            else:
-                result.append([nums[i], nums[l], nums[r]])
-                # skip the duplicates
-                while l < r and nums[l] == nums[l+1]:
-                    l += 1
-                while l < r and nums[r-1] == nums[r]:
-                    r -= 1
-                l += 1; r -= 1
-    return result
-# O(n^2) time, O(1) space
-
 
 # Merge Sorted Array
 # assumption: nums1 has extra space to hold all the elements in nums
@@ -89,7 +61,7 @@ def rerange(nums):
             neg += 2
         else:
             nums[pos], nums[neg] = nums[neg], nums[pos]
-# O(n) time, O(1) space    
+# O(n) time, O(1) space
 
 
 # move zeros to the end of array, do it in-place
