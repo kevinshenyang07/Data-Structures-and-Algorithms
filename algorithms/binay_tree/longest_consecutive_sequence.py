@@ -8,27 +8,23 @@ class SolutionQ1(object):
         :type root: TreeNode
         :rtype: int
         """
-        # consecutive here means increasing by 1 each time
-        return self.dfs(root, 0)
+        return self.preorder(root, root, 0)
 
-    def dfs(self, root, length):
-        # look at current node
-        if not root: return length
-        # current seq length
-        length += 1
-        left = right = length
-        # look at left / right child
-        if root.left:
-            if root.val + 1 == root.left.val:
-                left = self.dfs(root.left, length)
-            else:
-                left = self.dfs(root.left, 0)
-        if root.right:
-            if root.val + 1 == root.right.val:
-                right = self.dfs(root.right, length)
-            else:
-                right = self.dfs(root.right, 0)
-        return max(left, right, length)
+    def preorder(self, node, parent, max_length):
+        """
+        returns longest consecutive path starting from node
+        """
+        if not node: return max_length
+
+        if node.val == parent.val + 1:
+            max_length += 1
+        else:
+            max_length = 1
+
+        left_length = self.preorder(node.left, node, max_length)
+        right_length = self.preorder(node.right, node, max_length)
+
+        return max(max_length, left_length, right_length)
 
 
 # Binary Tree Longest Consecutive Sequence II
