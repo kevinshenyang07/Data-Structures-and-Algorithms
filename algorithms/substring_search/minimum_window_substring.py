@@ -4,10 +4,9 @@ general approach to substring search problems:
 2. move right pointer as far as possible, update global maximum
 3. break the criteria by moving the left pointer, then repeat step 2
 '''
-
+# Minimum Window Substring
 # assumption1: the answer is guaranteed to be unique
 # assumption2: t can have repeating chars
-
 class Solution(object):
     def min_window(self, s, t):
         """

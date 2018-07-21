@@ -1,28 +1,23 @@
+# Longest Substring with At Most K Distinct Characters
 class Solution(object):
-    def lengthOfLongestSubstringTwoDistinct(self, s):
+    def lengthOfLongestSubstringKDistinct(self, s, k):
         """
         :type s: str
+        :type k: int
         :rtype: int
         """
-        if len(s) <= 2:
-            return len(s)
-
-        chars = set([])
-        i = I = J = 0
+        max_length = 0
+        i = 0
+        char_index = {}  # char => largest index of this char appears so far
 
         for j, char in enumerate(s):
-            if char not in chars:
-                if len(chars) < 2:
-                    chars.add(char)
-                else:
-                    # use s[j-1] and s[j] as the base new possible ans
-                    chars = set([s[j-1], char])
-                    # and expand left as far as possible
-                    i = j - 1
-                    while i >= 0 and s[i-1] == s[j-1]:
-                        i -= 1
+            char_index[char] = j
 
-            if j - i > J - I:
-                I, J = i, j
+            if len(char_index) > k:
+                i = min(char_index.values())  # earliset removable char
+                del char_index[s[i]]
+                i += 1
 
-        return J - I + 1
+            max_length = max(max_length, j - i + 1)
+
+        return max_length
