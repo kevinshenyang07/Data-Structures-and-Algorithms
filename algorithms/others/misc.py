@@ -1,3 +1,4 @@
+# Set Matrix Zeros
 # if an element is 0, set its entire row and col to 0
 def set_zeros(matrix):
     m, n = len(matrix), len(matrix[0])
@@ -18,6 +19,22 @@ def set_zeros(matrix):
     if first_row_has_zero:
         for j in range(n):
             matrix[0][j] = 0
+
+
+# Sparse Matrix Multiplication
+# assume A and B are valid matrix
+def multiply(A, B):
+    mA, nA, nB = len(A), len(A[0]), len(B[0])
+
+    res = [[0] * nB for _ in range(mA)]
+
+    for i in range(mA):
+        for j in range(nA):
+            if A[i][j]:
+                # for row j in B, accumulate value of res[i][k]
+                for k in range(nB):
+                    res[i][k] += A[i][j] * B[j][k]
+    return res
 
 
 # Merge Intervals
