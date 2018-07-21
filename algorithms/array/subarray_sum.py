@@ -60,7 +60,7 @@ def check_subarray_sum(nums, k):
 # f([1, -1, 5, -2, 3], 3) => 4
 # valid subarray is: [1, -1, 5, -2]
 def max_subarray_size(nums, k):
-    ans, acc = 0, 0  # answer and the accumulative value of nums
+    max_size, acc = 0, 0  # answer and the accumulative value of nums
     mp = { 0: -1 }  # key is acc value, and value is the index
 
     for i in xrange(len(nums)):
@@ -68,6 +68,6 @@ def max_subarray_size(nums, k):
         if acc not in mp:
             mp[acc] = i
         if acc - k in mp:
-            ans = max(ans, i - mp[acc - k])
-    return ans
+            max_size = max(max_size, i - mp[acc - k])
+    return max_size
 # O(n) time and space
