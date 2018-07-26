@@ -23,6 +23,7 @@ class Logger(object):
         :type message: str
         :rtype: bool
         """
+        # use .keys() to avoid deleting keys during dict iteration
         for ts in self.logged.keys():
             if timestamp - ts >= 10:
                 del self.logged[ts]
