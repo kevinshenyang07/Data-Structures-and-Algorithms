@@ -33,3 +33,21 @@ class Logger(object):
         self.logged[timestamp] = self.logged.get(timestamp, set())
         self.logged[timestamp].add(message)
         return True
+
+
+# Design Hit Counter
+# Design a hit counter which counts the number of hits received in the past 5 minutes.
+# Each function accepts a timestamp parameter (in seconds) and you may assume that calls are being made
+# to the system in chronological order (ie, the timestamp is monotonically increasing).
+# It is possible that several hits arrive roughly at the same time.
+# Example:
+# HitCounter counter = new HitCounter();
+# counter.hit(1);
+# counter.hit(2);
+# counter.hit(3);
+# counter.getHits(4); returns 3
+# counter.hit(300);
+# counter.getHits(300); returns 4
+# counter.getHits(301); returns 3
+# Approach: similar to problem above
+# Followup: What if the number of hits per second could be very large? Does your design scale?
