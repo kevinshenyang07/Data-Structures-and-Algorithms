@@ -1,0 +1,55 @@
+Notations
+-------------------
+- hyphen
+[] square bracket
+<> angle bracket
+() parenthesis
+{} braces / curly bracket
+: colon
+; semicolon
+
+a ** b: a to the b / bth power of a / a raised to the power b
+a // b: floor division
+a % b: a modulo b
+c(n, k): combinations of n choose k
+arr[i]: array at i
+
+During Interview
+===================
+最重要的是让考官清楚的理解你的思路
+1. 跟考官沟通明确限制条件 (assumptions, edge cases)
+2. 提供brute force思路/复杂度，并进一步提供优化后解法思路
+3. 代码实现
+4. 肉眼检查一遍
+5. 分析时间/空间复杂度
+6. 提供全面的测试用例，用其中一个过一遍
+
+答题习惯：
+1. 异常检测/边界处理，不要在写完以后再加，不是行数越少越好
+2. 先把每个情况分别列出并判断，之后再去想怎样合并不同条件
+3. 面试时不要过分关注corner case，注意空值检查即可
+4. 尽量避免递归，用DFS递归不如用BFS迭代，跟面试官讨论是否是要考你递归
+
+细节：
+1. 判断两个浮点数是否相等时，不应使用 a == b，而是判断两者之差是否小于某个阈值，如1e-9
+2. 判断一个整数是否为奇数，应使用 x % 2 != 0，因为x有可能是负数
+3. 整数求平均，应使用 a + (b - a) / 2
+
+class Solution(object):
+    def my_algo(self, s1):
+        """
+        :type s1: String
+        :rtype: List[int]
+        """
+        pass
+
+    def test(self):
+        test_str = 'test'
+        assert self.my_algo(test_str) == ans
+        return 0
+
+备注:
+1. 有无经验，公司大小对算法问题难度影响不大，重点在于bug free和解题速度
+2. 主要考实现不太容易，而不是很难想的算法
+3. 会问时间空间复杂度，O(n)经常要求优化到O(logn)
+4. onsite时可指出转专业以示弱
