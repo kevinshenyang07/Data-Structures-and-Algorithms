@@ -1,0 +1,52 @@
+Build Something Small
+===================
+1. create a template folder
+
+
+System Design
+===================
+- Design URL shortening service
+- How would you implement the Google Search?
+- Design a client-server app which allows people to play chess
+- How would you store the relations in a social network like Facebook and implement a feature where one user receives notifications when their friends like the same things as they do?
+
+steps
+1. use cases (features)
+2. constraints (scale, assumptions)
+3. abstract design
+
+Database
+-------------------
+when doing a table join, always ask if they want to include all records in left table or right table
+(more material in SomeSQLEXL.txt)
+
+
+How to Design a Web Application
+===================
+Prep
+-------------------
+1. determine the core use cases
+2. draw out data flow
+3. spot constraints
+4. pick tools
+5. set up timeline of use cases
+
+Backend
+-------------------
+1. design database schema
+2. define API endpoints
+3. implement controller logic
+4. test APIs
+
+Frontend (w/ React)
+-------------------
+1. draw wireframes / how one page jumps to another
+2. determine component hierachy
+3. write down sample Redux state
+4. implement utils -> actions -> reducers -> container -> component
+5. test each component
+
+Design
+-------------------
+1. choose a primary color, secondary color and a background color
+2. choose a interactive form for each component
