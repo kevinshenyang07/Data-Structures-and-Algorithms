@@ -21,23 +21,23 @@ class Solution(object):
         for char in s:
             counter[char] = counter.get(char, 0) + 1
 
-        heap = []
+        pq = []
         for char, count in counter.iteritems():
-            heappush(heap, (-count, char))
+            heappush(pq, (-count, char))
 
         res = []
         while len(res) < len(s):
             group = []
             for _ in range(min(len(s) - len(res), k)):
-                if not heap:
+                if not pq:
                     return ''
-                neg_count, char = heappop(heap)
+                neg_count, char = heappop(pq)
                 res.append(char)
                 if neg_count < -1:
                     group.append((neg_count + 1, char))
 
             for pair in group:
-                heappush(heap, pair)
+                heappush(pq, pair)
 
         return ''.join(res)
 # O(nlog(c)) time, O(c) space, given c to be possible types of chars
