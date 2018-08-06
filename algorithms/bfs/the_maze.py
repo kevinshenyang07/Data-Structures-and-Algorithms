@@ -3,7 +3,7 @@ from heapq import heappush, heappop
 
 # The Maze
 # DFS is easier to get to destination
-class SolutionI(object):
+class SolutionQ1(object):
     def hasPath(self, maze, start, destination):
         """
         :type maze: List[List[int]]
@@ -44,7 +44,7 @@ class SolutionI(object):
 
 # The Maze II
 # BFS with priority queue
-class SolutionII(object):
+class SolutionQ2(object):
     def shortestDistance(self, maze, start, destination):
         """
         :type maze: List[List[int]]
@@ -92,7 +92,7 @@ class SolutionII(object):
 
 # The Maze III
 # BFS with prioritiy queue, ball will fall into hole if rolled to that position
-class SolutionIII(object):
+class SolutionQ3(object):
     def findShortestWay(self, maze, ball, hole):
         """
         :type maze: List[List[int]]

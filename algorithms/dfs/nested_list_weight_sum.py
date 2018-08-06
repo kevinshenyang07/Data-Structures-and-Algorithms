@@ -2,7 +2,7 @@
 # Given a nested list of integers, return the sum of all integers in the list weighted by their depth.
 # Each element is either an integer, or a list -- whose elements may also be integers or other lists.
 # f([1,[4,[6]]]) => 27 = 1 + 4 * 2 + 6 * 3
-class SolutionI(object):
+class SolutionQ1(object):
     def depthSum(self, nested_list):
         """
         :type nestedList: List[NestedInteger]
@@ -24,7 +24,7 @@ class SolutionI(object):
 # This time the weight is defined from bottom up, which means root has largest weight.
 # f([1,[4,[6]]]) => 17 = 1 * 3 + 4 * 2 + 6 * 1
 # approach:            = (1 + 4 + 6) * 4 - (1 * 1 + 4 * 2 + 6 * 3)
-class SolutionII(object):
+class SolutionQ2(object):
     def depthSumInverse(self, nested_list):
         """
         :type nestedList: List[NestedInteger]

@@ -16,13 +16,13 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        length = len(s)
-        dp = [[''] * length for _ in range(length)]
+        n = len(s)
+        dp = [[''] * n for _ in range(n)]
 
         # starting from substr with length == 1, 2, 3...
-        for dist in range(length):
-            for i in range(length - dist):
-                j = i + dist
+        for length in range(1, n + 1):
+            for i in range(n - length + 1):
+                j = i + length - 1
                 substr = s[i:j+1]  # inclusive range
                 dp[i][j] = substr  # initialize with original substring
 
@@ -44,5 +44,5 @@ class Solution(object):
                             if len(encoded) < len(dp[i][j]):
                                 dp[i][j] = encoded
 
-        return dp[0][length-1]
+        return dp[0][n-1]
 # O(n^3) time and space
