@@ -1,10 +1,3 @@
-class RandomListNode(object):
-    def __init__(self, x):
-        self.label = x
-        self.next = None
-        self.random = None
-
-
 # optimal performance
 def copy_random_list(head):
     if not head: return head

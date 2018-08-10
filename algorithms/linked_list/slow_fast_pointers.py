@@ -1,9 +1,3 @@
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-
 # Linked List Cycle, return true or false
 def has_cycle(head):
     slow, fast = head, head
@@ -73,58 +67,3 @@ def sort_list(head):
     right = sort_list(mid)
 
     return merge(left, right)
-
-
-def merge(left, right):
-    if not left:
-        return right
-    if not right:
-        return left
-    # create a new head
-    dummy = ListNode(0)
-    head = dummy
-    while left and right:
-        # no need to cut the node than append to new list
-        if left.val <= right.val:
-            head.next = left
-            left = left.next
-        else:
-            head.next = right
-            right = right.next
-        head = head.next
-    # splice the remaining list
-    head.next = left or right
-
-    return dummy.next
-
-
-# used in Reorder List
-# left half size >= right half size
-def split(head):
-    # assume at least one node
-    # zero node situation should be checked before calling
-    slow = fast = head
-    # while there are at least two more nodes
-    while fast.next and fast.next.next:
-        slow = slow.next
-        fast = fast.next.next
-    mid = slow.next
-    slow.next = None  # avoid cycle
-    return head, mid
-
-
-# used in Convert Sorted List to Binary Search Tree
-# altered the stucture of linkd list, might not be ideal
-# left half size < right half size
-def split2(head):
-    prev = None
-    slow = fast = head
-    while fast.next and fast.next.next:
-        prev = slow
-        slow = slow.next
-        fast = fast.next.next
-    if prev:  # pointers moved at least once
-        prev.next = None
-    else:
-        head = None
-    return head, slow  # slow to be the root of subtree

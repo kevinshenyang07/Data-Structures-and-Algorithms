@@ -1,17 +1,3 @@
-# Definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-
-class RandomListNode(object):
-    def __init__(self, x):
-        self.label = x
-        self.next = None
-        self.random = None
-
-
 def swap_pairs(head):
     # set up dummy node, which covers corner cases
     # where head is None or head.next is None
@@ -121,25 +107,6 @@ def partition(head, x):
     # with val less than x
     curr2.next = None
     return dummy1.next
-
-
-# build the reversed list from the end
-def reverse(head):
-    prev = None
-    while head:
-        temp = head.next
-        head.next = prev
-        prev = head
-        head = temp
-    return prev
-
-
-def reverse_rec(head, prev=None):
-    if not head:
-        return prev
-    node = head.next
-    head.next = prev
-    return reverse_rec(node, head)
 
 
 # reverse the list from mth to nth node, do it in-place and in one-pass
