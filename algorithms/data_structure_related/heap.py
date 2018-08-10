@@ -75,7 +75,7 @@ def min_meeting_rooms(self, intervals):
         heappush(heap, (intervals[i].end, intervals[i]))
 
     return len(heap)
-# thought process:
+# Thought process:
 # => minimum number of rooms requires meetings in each room has minimal idle time
 # => keep track of each room's current end time
 # => if the earliest end time is later than candidate meeting's start time, add a new room

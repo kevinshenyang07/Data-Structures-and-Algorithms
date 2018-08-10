@@ -40,7 +40,7 @@ class Solution(object):
 # O(nk) time, O(k) space
 # to optimize space, use previous row in costs to store dp
 
-# thought process
+# Thought process:
 # since current state only depends on previous state
 # => dp: lowest acc cost until house i with color j
 #      = minimum of acc costs until house i-1 with last house not using color j

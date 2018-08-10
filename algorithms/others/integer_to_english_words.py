@@ -41,7 +41,7 @@ class Solution(object):
 # f(1234567) => "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
 # f(1234567891) => "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"
 
-# Thought process
+# Thought process:
 # 1. get boundary: 2147483647 (~ 2 billion), so the maximum scale is Billion
 # 2. base cases: <20, < 100
 # 3. determine rule: f(n) = f(n / scale) + ' Scale ' + f(n % scale)

@@ -23,7 +23,7 @@ class Solution(object):
         return dp[N]
 # O(n ^ 2) time, O(n) space
 
-# thought process:
+# Thought process:
 # 1. All 'A's must be in the beginning of the inputs.
 # 2. The 'A's must be followed by a combination of Ctrl-A, Ctrl-C, Ctrl-V.
 # 3. Assuming we know the answer of maxA(j), and do Ctrl-A, Ctrl-C, Ctrl-V, Ctrl-V...

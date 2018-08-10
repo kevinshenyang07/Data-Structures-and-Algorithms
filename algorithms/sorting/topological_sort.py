@@ -136,4 +136,4 @@ def valid_tree(self, n, edges):
         if degree > 1:
             return False  # should not have cycles
     return root_found
-# thought process: to be a valid tree => all nodes connected but no cycles
+# Thought process: to be a valid tree => all nodes connected but no cycles

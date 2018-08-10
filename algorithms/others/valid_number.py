@@ -33,7 +33,7 @@ class Solution(object):
 
         return has_number and number_after_e
 
-# Thought Process
+# Thought process:
 # 1. find out all possible chars
 #    " .+-e0123456789"
 # 2. list examples
