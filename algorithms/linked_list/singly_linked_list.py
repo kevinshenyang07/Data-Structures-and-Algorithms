@@ -36,23 +36,22 @@ def swap_pairs(head):
 # Remove Duplicates from Sorted List II
 # example: 1->1->2->3 returns 2->3
 def delete_duplicates(head):
-    # set up dummy node
     dummy = ListNode(0)
     dummy.next = head
-    head = dummy
-    # while there is at least 2 nodes to handle
-    # head and tail are nodes outside
-    while head.next and head.next.next:
-        curr_val = head.next.val
-        tail = head.next.next
-        # if there is duplicates, move tail forward
-        while tail and tail.val == curr_val:
-            tail = tail.next
-        # if tail has been moved
-        if head.next.next != tail:
-            head.next = tail
-        else:
-            head = head.next
+    left = dummy
+    right = head
+
+    while right:
+        while right.next and right.val == right.next.val:
+            right = right.next
+
+        if left.next == right:  # no duplicates in between
+            left = left.next
+            right = right.next
+        else:  # splice left with right.next
+            left.next = right.next
+            right = left.next
+
     return dummy.next
 
 
