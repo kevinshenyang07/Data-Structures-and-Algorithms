@@ -5,10 +5,12 @@ def search_rotated(nums, target):
         return -1
     start, end = 0, len(nums) - 1
     while start + 1 < end:  # make sure start and mid don't meet
-        mid = start + (end - start) // 2  # prevent int overflow
+        mid = start + (end - start) // 2
+        # two cases * two conditions
         if nums[mid] == target:
             return mid
         if nums[start] < nums[mid]:  # mid is on the left half
+            # find the condition that divide possible solution range
             if nums[start] <= target <= nums[mid]:
                 end = mid
             else:  # other wise cut from start to mid
