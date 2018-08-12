@@ -1,5 +1,7 @@
-# Sentence Similarity II
+from collections import defaultdict
 
+
+# Sentence Similarity II
 # assume if a word does not appear in pairs, it would be not
 # be similar to any other words
 class Solution(object):
@@ -13,13 +15,11 @@ class Solution(object):
         if len(words1) != len(words2):
             return False
 
-        mapping = {}
+        mapping = defaultdict(set)
 
         # generate edges between nodes (words)
         for w1, w2 in pairs:
-            mapping[w1] = mapping.get(w1, set())
             mapping[w1].add(w2)
-            mapping[w2] = mapping.get(w2, set())
             mapping[w2].add(w1)
 
         for i in range(len(words1)):

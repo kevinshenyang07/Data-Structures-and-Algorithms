@@ -1,4 +1,6 @@
 from heapq import heappush, heappop
+from collections import defaultdict
+
 
 # Reconstruct Itinerary
 # the tickets belong to a man who departs from JFK
@@ -14,11 +16,9 @@ class Solution(object):
         :rtype: List[str]
         """
         res = []
-        mapping = {}
+        mapping = defaultdict(list)
 
         for dep, arr in tickets:
-            mapping[dep] = mapping.get(dep, [])
-            mapping[arr] = mapping.get(arr, [])
             heappush(mapping[dep], arr)
 
         self.dfs('JFK', mapping, res)

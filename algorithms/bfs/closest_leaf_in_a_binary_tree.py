@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 # Closest Leaf in a Binary Tree
 # Given a binary tree where every node has a unique value, and a target key k,
 # find the value of the nearest leaf node to target k in the tree.
@@ -39,7 +41,7 @@ class Solution(object):
         return -1
 
     def to_graph_and_leaves(self, root):
-        graph = {}
+        graph = defaultdict(list)
         leaves = set()
         # need to keep track of leaves since there are cases that root having one child
         # len(graph[n]) does not necessarily mean n is a leaf
@@ -47,7 +49,6 @@ class Solution(object):
         queue = [root]
         while queue:
             node = queue.pop(0)
-            graph[node.val] = graph.get(node.val, [])
 
             if not node.left and not node.right:
                 leaves.add(node.val)
@@ -56,13 +57,11 @@ class Solution(object):
             if node.left:
                 queue.append(node.left)
                 graph[node.val].append(node.left.val)
-                graph[node.left.val] = graph.get(node.left.val, [])
                 graph[node.left.val].append(node.val)
 
             if node.right:
                 queue.append(node.right)
                 graph[node.val].append(node.right.val)
-                graph[node.right.val] = graph.get(node.right.val, [])
                 graph[node.right.val].append(node.val)
 
         return graph, leaves
