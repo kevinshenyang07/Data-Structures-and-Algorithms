@@ -17,7 +17,7 @@ def sieve(n):
 
 
 # factorization
-# step 1: for every crossed number, record the 
+# step 1: for every crossed number, record the
 # smallest prime that divides this number
 def smallest_prime_divisors(n):
     divisors = [0] * (n + 1)
@@ -32,7 +32,7 @@ def smallest_prime_divisors(n):
         i += 1
     return divisors
 # f(10) returns [0,0,0,0,2,0,2,0,2,3,2 ]
-#                   [2,3,4,5,6,7,8,9,10]        
+#                   [2,3,4,5,6,7,8,9,10]
 
 # step 2: divide the number from right to left
 def factorize(n):
@@ -51,6 +51,28 @@ def gcd(a, b):
         return b
     return gcd(b, a % b)
 # O(log(a+b)) time
+
+
+# Find the Derangement of An Array
+# a derangement is a permutation of the elements of a set,
+# such that no element appears in its original position
+# f(3) = 2
+# the original array is [1,2,3], the two derangements are [2,3,1] and [3,1,2]
+def find_derangement(n):
+    if n == 1: return 0
+
+    mod = 10 ** 9 + 7
+    x, y = 1, 0  # D(2) = D(n-1), D(1) = D(n-2)
+    for i in range(3, n + 1):
+        z = (i - 1) * (x + y) % mod
+        x, y = z, x
+    return x
+# Explanation:
+# The first person has N-1 choices to put on a hat, say he wears hat X.
+# Now consider what hat person X is wearing. Either he takes hat 1, and we have D(N-2) ways to
+# arrange the remaining hats among people; or he doesn't take hat 1, which if we relabelled it as hat X,
+# would have D(N-1) ways to arrange the remaining hats.
+# D(n) = (n - 1) * (D(n - 1) + D(n - 2))
 
 
 if __name__ == '__main__':
