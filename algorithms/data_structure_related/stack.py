@@ -1,3 +1,6 @@
+# increasing stack to find the next smaller element (for each element)
+# decreasing stack to find the next greater element
+
 # Largest Rectangle in Histogram
 def largest_rect_area(heights):
     heights.append(0)  # ensure the stack is cleared in the end

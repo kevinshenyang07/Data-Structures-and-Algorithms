@@ -6,17 +6,17 @@
 def binary_search(nums, target):
     if not nums:
         return -1
-    start, end = 0, len(nums) - 1
-    while start + 1 < end:  # start < end could get into infinite loop
-        mid = start + (end - start) // 2  # prevent int overflow
+    left, right = 0, len(nums) - 1
+    while left + 1 < right:  # left < right could get into infinite loop
+        mid = left + (right - left) // 2  # prevent int overflow
         if nums[mid] == target:
             return mid
         if nums[mid] < target:
-            start = mid
+            left = mid
         else:
-            end = mid
-    if nums[start] == target:
-        return start
-    if nums[end] == target:
-        return end
+            right = mid
+    if nums[left] == target:
+        return left
+    if nums[right] == target:
+        return right
     return -1
