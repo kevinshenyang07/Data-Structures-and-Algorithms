@@ -1,3 +1,5 @@
+from collections import deque
+
 # Walls and Gates
 class Solution(object):
     def walls_and_gates(self, rooms):
@@ -7,7 +9,7 @@ class Solution(object):
         """
         if not any(rooms): return
 
-        queue = []
+        queue = deque()
 
         for i in range(len(rooms)):
             for j in range(len(rooms[0])):
@@ -17,7 +19,7 @@ class Solution(object):
         # each time, increment distnace of surrounding rooms by 1
         # each gate guaranteed to increase radius by 1 (like level order)
         while queue:
-            i, j = queue.pop(0)
+            i, j = queue.popleft()
             for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
                 if self.should_update(rooms, x, y):
                     rooms[x][y] = rooms[i][j] + 1

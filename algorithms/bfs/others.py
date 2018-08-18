@@ -1,5 +1,5 @@
 import string
-
+from collections import deque
 
 # Word Ladder
 def ladder_length(begin_word, end_word, word_list):
@@ -67,10 +67,10 @@ def valid_tree(n, edges):
         return False
     if len(edges) != n - 1:
         return False
-    queue = [0]
+    queue = deque([0])
     node_set = set([0])
     while queue:
-        curr = queue.pop(0)
+        curr = queue.popleft()
         for i in range(len(edges)):
             # since edges are undirected, need to check both
             if edges[i][0] == curr and edges[i][1] not in node_set:

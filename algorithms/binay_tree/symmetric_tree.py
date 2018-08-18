@@ -1,3 +1,5 @@
+from collections import deque
+
 # Symmetric Tree
 # recursive
 def is_symmetric(root):
@@ -17,9 +19,9 @@ def is_mirror(self, p, q):
 def is_symmetric_iter(root):
     if not root: return True
     # process in pairs
-    queue = [(root.left, root.right)]
+    queue = deque([(root.left, root.right)])
     while queue:
-        p, q = queue.pop(0)
+        p, q = queue.popleft()
 
         if not p and not q: continue
         if not p or not q: return False

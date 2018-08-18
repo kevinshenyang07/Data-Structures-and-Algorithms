@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 
 # Closest Leaf in a Binary Tree
 # Given a binary tree where every node has a unique value, and a target key k,
@@ -28,9 +28,9 @@ class Solution(object):
 
         graph, leaves = self.to_graph_and_leaves(root)
 
-        queue = [k]
+        queue = deque([k])
         while queue:
-            val = queue.pop(0)
+            val = queue.popleft()
             if val in leaves:
                 return val
             for nbr in graph[val]:
@@ -46,9 +46,9 @@ class Solution(object):
         # need to keep track of leaves since there are cases that root having one child
         # len(graph[n]) does not necessarily mean n is a leaf
 
-        queue = [root]
+        queue = deque([root])
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
 
             if not node.left and not node.right:
                 leaves.add(node.val)

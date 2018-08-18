@@ -1,3 +1,5 @@
+from collections import deque
+
 # Read N Characters Given Read4 II - Call multiple times
 # API: int read4(char *buf) reads 4 characters at a time from a file.
 # The return value is the actual number of characters read. For example, it returns 3 if there is only 3 characters left in the file.
@@ -11,7 +13,7 @@
 class Solution(object):
     def __init__(self):
         # to cache the extra chars read from last call of read4()
-        self.queue = []
+        self.queue = deque()
 
     def read(self, buf, n):
         """
@@ -34,7 +36,7 @@ class Solution(object):
             length = min(n - total_read, len(self.queue))
 
             for i in range(length):
-                buf[total_read] = self.queue.pop(0)
+                buf[total_read] = self.queue.popleft()
                 total_read += 1
 
         return total_read

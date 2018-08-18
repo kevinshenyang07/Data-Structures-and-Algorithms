@@ -1,3 +1,5 @@
+from collections import deque
+
 # topological ordering: starting from vertices with no in-edge, to the vertices with no out-edge
 # the vertices in the cycle won't be added to queue, which can be used to determine if valid
 
@@ -19,9 +21,9 @@ def can_finish(num_courses, prerequisites):
         in_degrees[post_course] += 1
 
     # vertices that have no in edges
-    queue = [i for i in range(num_courses) if in_degrees[i] == 0]
+    queue = deque(i for i in range(num_courses) if in_degrees[i] == 0)
     while queue:
-        course = queue.pop(0)
+        course = queue.popleft()
         for post_course in graph[course]:
             in_degrees[post_course] -= 1
             # each time an in-edge is removed, if a vertex no longer has in-edges,
@@ -76,10 +78,10 @@ def alien_order(words):
 
     # 3. start topological sort
     # vertices that have no in edges
-    queue = [char for char in chars if in_degrees[char] ==0]
+    queue = deque(char for char in chars if in_degrees[char] ==0)
     order = []
     while queue:
-        char = queue.pop(0)
+        char = queue.popleft()
         order.append(char)
         for char_next in graph[char]:
             in_degrees[char_next] -= 1
@@ -113,10 +115,10 @@ def valid_tree(self, n, edges):
         in_degrees[j] += 1
 
     # 3. start topological sort
-    queue = [i for i in range(n) if in_degrees[i] == 1]
+    queue = deque(i for i in range(n) if in_degrees[i] == 1)
     num_valid_nodes = 0
     while queue:
-        i = queue.pop(0)
+        i = queue.popleft()
         num_valid_nodes += 1
         for j in graph[i]:
             # key diff below, avoid reducing in-degree twice

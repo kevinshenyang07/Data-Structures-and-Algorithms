@@ -1,3 +1,5 @@
+from collections import deque
+
 # Binary Tree Zigzag Level Order Traversal
 class Solution(object):
     def zigzagLevelOrder(self, root):
@@ -8,14 +10,14 @@ class Solution(object):
         if not root: return []
 
         levels = []
-        queue = [root]
+        queue = deque([root])
         reverse = False
 
         while queue:
             level = []
             # traverse by level as usual
             for _ in range(len(queue)):
-                node = queue.pop(0)
+                node = queue.popleft()
                 # add visited node differently
                 if reverse:
                     level.insert(0, node.val)

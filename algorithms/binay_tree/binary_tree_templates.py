@@ -1,3 +1,5 @@
+from collections import deque
+
 # preorder: root - left subtree - right subtree (root is pre-children)
 # inorder: left subtree - root - right subtree (root is in-children)
 
@@ -75,13 +77,13 @@ def is_valid_bst(root):
 def level_order(root):
     if not root:
         return []
-    queue = [root]
+    queue = deque([root])
     visited = []
     while queue:
         level = []
         size = len(queue)  # queue size changes within the loop
         for i in range(size):
-            node = queue.pop(0)
+            node = queue.popleft()
             level.append(node.val)
             if node.left:
                 queue.append(node.left)

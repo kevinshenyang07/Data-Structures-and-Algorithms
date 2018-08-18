@@ -1,3 +1,5 @@
+from collections import deque
+
 # Definition for a undirected graph node
 class UndirectedGraphNode:
     def __init__(self, x):
@@ -17,9 +19,9 @@ def clone_graph(node):
         return None
     mapping = {}  # original node => copied node
     mapping[node] = UndirectedGraphNode(node.label)
-    queue = [node]  # original nodes
+    queue = deque([node])  # original nodes
     while queue:
-        curr = queue.pop(0)
+        curr = queue.popleft()
         # creating a new node here will cause neighbor not to be added
         # in the queue since it's already in the mapping
         for neighbor in curr.neighbors:
@@ -46,10 +48,10 @@ def search_node(graph, values, node, target):
         return None
     if values[node] == target:
         return node
-    queue = [node]
+    queue = deque([node])
     visited = set([node])
     while queue:
-        curr = queue.pop(0)
+        curr = queue.popleft()
         for neighbor in curr.neighbors:
             if values[neighbor] == target:
                 return neighbor

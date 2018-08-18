@@ -1,10 +1,11 @@
 from __future__ import print_function
+from collections import deque
 
 class QueueWithMax(object):
 
     def __init__(self):
-        self.queue = []
-        self.max_queue = []
+        self.queue = deque()
+        self.max_queue = deque()
 
     def enqueue(self, ele):
         self.queue.append(ele)
@@ -14,12 +15,11 @@ class QueueWithMax(object):
         self.max_queue.append(ele)
 
     def dequeue(self):
-        # no .shift() and .unshift(), use .pop(0) and .insert(0, ele) instead
         if self.queue == []:
             raise ValueError('dequeue from empty queue')
-        ele = self.queue.pop(0)
+        ele = self.queue.popleft()
         if self.max_queue[0] == ele:
-            self.max_queue.pop(0)
+            self.max_queue.popleft()
         return ele
 
     # O(1) amortized

@@ -1,3 +1,5 @@
+from collections import deque
+
 # Binary Tree Vertical Order Traversal
 #      3
 #     /\
@@ -20,10 +22,10 @@ class Solution(object):
         if not root: return []
 
         columns = {}
-        queue = [(root, 0)]
+        queue = deque([(root, 0)])
 
         while queue:
-            root, col = queue.pop(0)
+            root, col = queue.popleft()
 
             columns[col] = columns.get(col, [])
             columns[col].append(root.val)

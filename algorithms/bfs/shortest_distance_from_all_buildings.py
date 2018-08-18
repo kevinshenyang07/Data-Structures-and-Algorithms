@@ -1,3 +1,5 @@
+from collections import deque
+
 # Shortest Distance from All Buildings
 # 0: empty land, 1: building, 2: obstacle
 # can only move four directions
@@ -42,13 +44,13 @@ class Solution(object):
         return min_dist if min_dist < INT_MAX else -1
 
     def bfs(self, i, j, grid, distances, updated_times):
-        queue = [(i, j, 0)]
+        queue = deque([(i, j, 0)])
         visited = [[False for _ in range(len(grid[0]))] for _ in range(len(grid))]
         visited[i][j] = True
         connected = 0  # number of other buildings connected
 
         while queue:
-            i, j, dist = queue.pop(0)
+            i, j, dist = queue.popleft()
             # four directions
             for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
                 if self.can_visit(x, y, grid) and not visited[x][y]:
