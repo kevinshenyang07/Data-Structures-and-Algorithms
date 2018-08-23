@@ -4,7 +4,7 @@ from collections import deque
 # the vertices in the cycle won't be added to queue, which can be used to determine if valid
 
 # Course Schedule
-# an in-edge from vertex a to b => a is the prerequisite to b
+# an in-edge from vertex v1 to v2 => v1 is a prerequisite to v2
 # determine if one can finish all the courses
 # assumption: no duplicate edges
 def can_finish(num_courses, prerequisites):
@@ -13,23 +13,23 @@ def can_finish(num_courses, prerequisites):
     :type prerequisites: array of [post, pre] course pairs
     :rtype: boolean
     """
-    graph = { i: set() for i in range(num_courses) }  # course: corresponding post courses
+    graph = { i: set() for i in range(num_courses) }  # course: corresponding prerequisite courses
     in_degrees = { i: 0 for i in range(num_courses) }  # course: number of prerequisite courses
 
-    for post_course, pre_course in prerequisites:
-        graph[pre_course].add(post_course)
-        in_degrees[post_course] += 1
+    for post, pre in prerequisites:
+        graph[post].add(pre)
+        in_degrees[pre] += 1
 
     # vertices that have no in edges
     queue = deque(i for i in range(num_courses) if in_degrees[i] == 0)
     while queue:
         course = queue.popleft()
-        for post_course in graph[course]:
-            in_degrees[post_course] -= 1
+        for pre in graph[course]:
+            in_degrees[pre] -= 1
             # each time an in-edge is removed, if a vertex no longer has in-edges,
             # add that vertex to check list
-            if in_degrees[post_course] == 0:
-                queue.append(post_course)
+            if in_degrees[pre] == 0:
+                queue.append(pre)
 
     return all([d == 0 for d in in_degrees.values()])
 # O(V+E) time and space
