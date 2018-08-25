@@ -1,8 +1,7 @@
 # v1
 # can only buy then sell once
 def max_profit_1(prices):
-    if not prices or len(prices) < 2:
-        return 0
+    if not prices: return 0
 
     low = prices[0]  # lowest price so far
     profit = 0
