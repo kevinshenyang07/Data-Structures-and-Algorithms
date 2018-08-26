@@ -1,3 +1,4 @@
+from collections import defaultdict
 
 class ListNode(object):
     def __init__(self, key, val):
@@ -30,6 +31,9 @@ class LinkedList(object):
         first = self.head.next
         self.remove(first)
         return first
+
+    def is_empty(self):
+        return self.head.next == self.tail
 
 
 class LRUCache(object):
@@ -72,3 +76,64 @@ class LRUCache(object):
         node = ListNode(key, value)
         self.list.append(node)
         self.node_map[key] = node
+
+
+class LFUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity = capacity
+        self.node_map = {}  # key => node
+        self.counter = {}  # key => count
+        self.cnt_map = defaultdict(LinkedList)  # count => list
+        self.min = 0
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if key not in self.node_map: return -1
+
+        node = self.node_map[key]
+        cnt = self.counter[key]
+        self.cnt_map[cnt].remove(node)
+        self.cnt_map[cnt + 1].append(node)
+        # handle count and min
+        self.counter[key] += 1
+        if self.min == cnt and self.cnt_map[cnt].is_empty():
+            self.min += 1
+        return node.val
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: void
+        """
+        if key in self.node_map:
+            self.get(key)
+            self.node_map[key].val = value
+            return
+        if self.capacity == 0:
+            return
+        if len(self.node_map) == self.capacity:
+            evicted = self.evict_least_freq()
+            del self.node_map[evicted.key]
+        node = ListNode(key, value)
+        self.node_map[key] = node
+        self.cnt_map[1].append(node)
+        self.counter[key] = 1
+        self.min = 1
+
+    def evict_least_freq(self):
+        """
+        :rtype: ListNode
+        """
+        curr_list = self.cnt_map[self.min]
+        node = curr_list.popleft()
+        if curr_list.is_empty():
+            self.min += 1
+        return node
