@@ -9,12 +9,12 @@ def binary_search(nums, target):
     left, right = 0, len(nums) - 1
     while left + 1 < right:  # left < right could get into infinite loop
         mid = left + (right - left) // 2  # prevent int overflow
-        if nums[mid] == target:
-            return mid
         if nums[mid] < target:
             left = mid
-        else:
+        elif nums[mid] > target:
             right = mid
+        else:
+            return mid
     if nums[left] == target:
         return left
     if nums[right] == target:
