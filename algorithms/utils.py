@@ -40,15 +40,16 @@ def is_palindrome(s):
 
 #
 # linked list utils
-def reverse(head):
-    prev = None
-    while head:
-        temp = head.next
-        head.next = prev
-        prev = head
-        head = temp
-    return prev
 
+# prepend current head to the new list, the current head then becomes new head
+def reverse(head):
+    new_head = None
+    while head:
+        curr = head
+        head = curr.next
+        curr.next = new_head
+        new_head = curr
+    return new_head
 
 def split(head):
     # assume at least one node
