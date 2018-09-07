@@ -13,17 +13,17 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        max_size = [0]
-        self.postorder(root, max_size)
-        return max_size[0]
+        self.max_size = 0
+        self.postorder(root)
+        return self.max_size
 
-    def postorder(self, root, max_size):
+    def postorder(self, root):
         if not root:
             # to qualify a node without left / right child
             return 2 ** 31 - 1, - 2 ** 31, 0
 
-        left_min, left_max, left_cnt = self.postorder(root.left, max_size)
-        right_min, right_max, right_cnt = self.postorder(root.right, max_size)
+        left_min, left_max, left_cnt = self.postorder(root.left)
+        right_min, right_max, right_cnt = self.postorder(root.right)
 
         # if left / right / current subtree is invalid
         # in this question there're no duplicates
@@ -31,7 +31,7 @@ class Solution(object):
             return 0, 0, -1  # min/max doesn't matter
 
         curr_size = left_cnt + right_cnt + 1
-        max_size[0] = max(max_size[0], curr_size)
+        self.max_size = max(self.max_size, curr_size)
 
         return min(left_min, root.val), max(right_max, root.val), curr_size
 # O(n) time, O(h) space

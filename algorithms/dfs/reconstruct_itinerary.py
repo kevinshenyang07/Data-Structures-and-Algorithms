@@ -1,7 +1,6 @@
 from heapq import heappush, heappop
 from collections import defaultdict
 
-
 # Reconstruct Itinerary
 # the tickets belong to a man who departs from JFK
 # each ticket is an array of [from, to]
@@ -15,18 +14,20 @@ class Solution(object):
         :type tickets: List[List[str]]
         :rtype: List[str]
         """
-        res = []
-        mapping = defaultdict(list)
+        self.result = []
+        self.mapping = defaultdict(list)
 
         for dep, arr in tickets:
-            heappush(mapping[dep], arr)
+            heappush(self.mapping[dep], arr)
 
-        self.dfs('JFK', mapping, res)
-        return res
+        self.dfs('JFK')
+        return self.result
 
-    def dfs(self, node, mapping, res):
-        pq = mapping[node]
+    # a valid path must be a line with 0 or some cycles on certain nodes
+    # => add none-cycle partial path to result first
+    def dfs(self, dep):
+        pq = self.mapping[dep]  # arrivals
         while pq:
-            self.dfs(res, mapping, heappop(pq))
-        res.insert(0, node)
+            self.dfs(heappop(pq))
+        self.result.insert(0, dep)
 # O(n) time and space

@@ -30,21 +30,21 @@ class SolutionQ2(object):
         :type nestedList: List[NestedInteger]
         :rtype: int
         """
-        max_depth = [0]
-        flat_sum = [0]
-        acc_sum = self.dfs(nested_list, 1, max_depth, flat_sum)
-        return flat_sum[0] * (max_depth[0] + 1) - acc_sum
+        self.max_depth = 0
+        self.flat_sum = 0
+        acc_sum = self.dfs(nested_list, 1)
+        return self.flat_sum * (self.max_depth + 1) - acc_sum
 
     # still accumulate by original weights
-    def dfs(self, nested_list, depth, max_depth, flat_sum):
+    def dfs(self, nested_list, depth):
         acc = 0
         for nested in nested_list:
             if nested.isInteger():
-                max_depth[0] = max(max_depth[0], depth)
-                flat_sum[0] += nested.getInteger()
+                self.max_depth = max(self.max_depth, depth)
+                self.flat_sum += nested.getInteger()
                 acc += nested.getInteger() * depth
             else:
-                acc += self.dfs(nested.getList(), depth + 1, max_depth, flat_sum)
+                acc += self.dfs(nested.getList(), depth + 1)
         return acc
 
 

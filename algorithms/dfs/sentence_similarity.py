@@ -5,7 +5,7 @@ from collections import defaultdict
 # assume if a word does not appear in pairs, it would be not
 # be similar to any other words
 class Solution(object):
-    def are_sentences_similar_2(self, words1, words2, pairs):
+    def areSentencesSimilarTwo(self, words1, words2, pairs):
         """
         :type words1: List[str]
         :type words2: List[str]
@@ -15,35 +15,34 @@ class Solution(object):
         if len(words1) != len(words2):
             return False
 
-        mapping = defaultdict(set)
-
+        self.mapping = defaultdict(set)
         # generate edges between nodes (words)
         for w1, w2 in pairs:
-            mapping[w1].add(w2)
-            mapping[w2].add(w1)
+            self.mapping[w1].add(w2)
+            self.mapping[w2].add(w1)
 
         for i in range(len(words1)):
             w1, w2 = words1[i], words2[i]
             if w1 == w2:
                 continue
-            if w1 not in mapping or w2 not in mapping:
+            if w1 not in self.mapping or w2 not in self.mapping:
                 return False
-            if not self.dfs(w1, w2, mapping, set()):
+            if not self.dfs(w1, w2, set()):
                 return False
 
         return True
 
-    def dfs(self, source, target, mapping, visited):
+    def dfs(self, source, target, visited):
         # valid result condition
-        if target in mapping[source]:
+        if target in self.mapping[source]:
             return True
         # early stop condition
         if source in visited:
             return False
         # recursion definition
         visited.add(source)
-        for adj_word in mapping[source]:
-            if self.dfs(adj_word, target, mapping, visited):
+        for adj_word in self.mapping[source]:
+            if self.dfs(adj_word, target, visited):
                 return True
 
         return False

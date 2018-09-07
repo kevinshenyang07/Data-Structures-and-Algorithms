@@ -1,13 +1,26 @@
 # Generate Parenthesis
-def generate_parenthesis(n):
-    def dfs(opens, closes, path):
-        if opens == n:
-            result.append(path + ')' * (n - closes))
-            return
-        dfs(opens + 1, closes, path + '(')
-        if opens > closes:
-            dfs(opens, closes + 1, path + ')')
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        self.n = n
+        self.result = []
+        self.dfs("", 0, 0)
+        return self.result
 
-    result = []
-    dfs(0, 0, '')
-    return result
+    def dfs(self, string, open_parens, close_parens):
+        n = self.n
+        # stop on invalid cases
+        if open_parens < close_parens:
+            return
+        # end on full length
+        if open_parens == n and close_parens == n:
+            self.result.append(string)
+            return
+
+        if open_parens <= n:
+            self.dfs(string + "(", open_parens + 1, close_parens)
+        if close_parens <= n:
+            self.dfs(string + ")", open_parens, close_parens + 1)

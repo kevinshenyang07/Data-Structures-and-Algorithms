@@ -1,5 +1,3 @@
-import sys
-
 # Path Sum II
 # DFS + stack
 def path_sum(root, target):
@@ -24,20 +22,21 @@ def path_sum(root, target):
 # on every parent node, for left subtree and right subtree respectively
 # find a max path that does not cross from a left child to right child (直上直下)
 # => knows max path sum of that node
-def max_path_sum(root):
-    min_int = - 2 ** 31
-    if not root: return min_int
-    global_max = [min_int]  # int var won't be updated in recursion
+class Solution(object):
+    def maxPathSum(self, root):
+        min_int = - 2 ** 31
+        if not root: return min_int
+        self.global_max = min_int  # int var won't be updated in recursion
 
-    dfs(root, global_max)
-    return global_max[0]
+        self.dfs(root)
+        return self.global_max
 
-def dfs(root, global_max):
-    if not root: return 0
-    # max of non-crossing path
-    left_max = max(dfs(root.left, global_max), 0)
-    right_max = max(dfs(root.right), 0)
-    # update with max of possibly crossing path
-    global_max[0] = max(global_max[0], root.val + left_max + right_max)
-    # pick either left or right max
-    return root.val + max(left_max, right_max)
+    def dfs(self, root):
+        if not root: return 0
+        # max of non-crossing path
+        left_max = max(self.dfs(root.left), 0)
+        right_max = max(self.dfs(root.right), 0)
+        # update with max of possibly crossing path
+        self.global_max = max(self.global_max, root.val + left_max + right_max)
+        # pick either left or right max
+        return root.val + max(left_max, right_max)

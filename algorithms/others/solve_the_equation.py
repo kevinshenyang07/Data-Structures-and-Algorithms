@@ -30,6 +30,7 @@ class Solution(object):
             if char == 'x':
                 if i == 0 or s[i - 1] in '+-':
                     num = 1
+                # and "0x" works by default
                 is_x = True
             elif char in '0123456789':
                 num = 10 * num + int(char)

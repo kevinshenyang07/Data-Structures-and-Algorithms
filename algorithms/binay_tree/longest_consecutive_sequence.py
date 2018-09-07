@@ -40,20 +40,20 @@ class SolutionQ2(object):
         :type root: TreeNode
         :rtype: int
         """
-        max_length = [0]
-        self.postorder(root, root, max_length)
-        return max_length[0]
+        self.max_length = 0
+        self.postorder(root, root)
+        return self.max_length
 
-    def postorder(self, node, parent, max_length):
+    def postorder(self, node, parent):
         """
         returns longest increasing / decreasing path length starting from node
         """
         if not node: return 0, 0
 
-        li, ld = self.postorder(node.left, node, max_length)
-        ri, rd = self.postorder(node.right, node, max_length)
+        li, ld = self.postorder(node.left, node)
+        ri, rd = self.postorder(node.right, node)
 
-        max_length[0] = max(max_length[0], li + rd + 1, ld + ri + 1)
+        self.max_length = max(self.max_length, li + rd + 1, ld + ri + 1)
 
         if node.val == parent.val + 1:  # increasing from parent
             return max(li, ri) + 1, 0

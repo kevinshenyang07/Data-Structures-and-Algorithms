@@ -5,7 +5,7 @@
 # Write a function to determine if the starting player can guarantee a win.
 # f('++++) => true
 class Solution(object):
-    def can_win(self, s):
+    def canWin(self, s):
         """
         :type s: str
         :rtype: bool
