@@ -1,5 +1,6 @@
 # House Robber II
-class Solution(object):
+# all houses are arranged in a circle
+class SolutionQ2(object):
     def rob(self, nums):
         """
         :type nums: List[int]
@@ -10,15 +11,15 @@ class Solution(object):
         return max(self.rob_from(nums, 0, len(nums) - 1), self.rob_from(nums, 1, len(nums)))
 
     def rob_from(self, nums, i, j):
-        rob_curr = pass_curr = 0
+        rob_curr = skip_curr = 0
 
         for k in range(i, j):
-            new_rob_curr = pass_curr + nums[k]
+            rob_prev, skip_prev = rob_curr, skip_curr
 
-            pass_curr = max(pass_curr, rob_curr)
-            rob_curr = new_rob_curr
+            rob_curr = skip_prev + nums[k]
+            skip_curr = max(skip_curr, rob_prev)
 
-        return max(rob_curr, pass_curr)
+        return max(rob_curr, skip_curr)
 
 # to make sure the first or the last house is not robbed, simply exclude it
 #    [5, 2, 3, 4]
