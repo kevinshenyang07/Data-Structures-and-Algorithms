@@ -27,6 +27,22 @@ def repeated_substring_pattern(self, s):
     return False
 
 
+# Repeated String Match
+import math
+def repeatedStringMatch(self, A, B):
+    # repeat x times, lower bound
+    x = int(math.ceil(float(len(B)) / len(A)))
+    # to have a valid answer, B must be repeating A
+    # even if starting char might not be the first chat of A
+    if B in A * x:
+        return x
+    # for case A=abc, B=cbacba, need to repeat an extra time
+    elif B in A * (x + 1):
+        return x + 1
+    else:
+        return -1
+
+
 # Longest Palindrome Substring
 def longest_palindrome(s):
     max_length = 0
