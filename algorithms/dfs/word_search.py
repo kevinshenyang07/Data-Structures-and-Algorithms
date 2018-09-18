@@ -1,5 +1,5 @@
 # Word Search
-class Solution(object):
+class SolutionQ1(object):
     def exist(self, board, word):
         if not any(board):
             return False
@@ -30,3 +30,57 @@ class Solution(object):
         # restore the value of the current slot
         board[i][j] = tmp
         return result
+
+
+# Word Search II
+class TrieNode(object):
+    def __init__(self):
+        self.children = {}  # char => TrieNode
+        self.is_word = False
+
+class SolutionQ2(object):
+    def findWords(self, board, words):
+        """
+        :type board: List[List[str]]
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        root = TrieNode()
+
+        for word in words:
+            curr = root
+            for char in word:
+                curr.children[char] = curr.children.get(char, TrieNode())
+                curr = curr.children[char]
+            curr.is_word = True
+
+        found = []
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                self.dfs(i, j, board, root, '', found)
+
+        return found
+
+    def dfs(self, i, j, board, node, path, found):
+        char = board[i][j]
+
+        if char == '#' or char not in node.children:
+            return
+
+        # add char after validation
+        path += char
+        # find a valid word, but keep searching down
+        node_next = node.children[char]
+        if node_next.is_word:
+            found.append(path)
+            node_next.is_word = False  # avoid adding the same word twice
+
+        board[i][j] = '#'  # mark as visited
+
+        for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
+                if x < 0 or x >= len(board) or y < 0 or y >= len(board[0]):
+                    continue
+                self.dfs(x, y, board, node_next, path, found)
+
+        board[i][j] = char  # reset as original value
+
