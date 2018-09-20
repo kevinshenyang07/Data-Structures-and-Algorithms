@@ -19,19 +19,19 @@ class Solution(object):
         # if any one of moves current player can perform
         # can guarantee the other player won't win, return true
         for i in range(len(state) - 1):
-            if state[i] == '+' and state[i+1] == '+':
+            if state[i] == state[i+1] == '+':
+                # search next state
+                state[i] = state[i+1] = '-'
+                can_other_win = self.dfs(state)
+                # roll back to previous state
+                state[i] = state[i+1] = '+'
 
-                state[i] = '-'
-                state[i+1] = '-'
-
-                can_next_win = self.dfs(state)
-
-                state[i] = '+'
-                state[i+1] = '+'
-
-                if not can_next_win:
+                if not can_other_win:
                     return True
-        # impplies the base case that if no moves can be performed
-        # current player can't win
+
         return False
-# follow-up: time complexity
+# improvement: use memo
+# O(n!!) time (double factorial)
+# first action: at most n - 1 ways to repace '++' to '--,
+# second action: at most (n - 2) - 1 ways
+# (n/2)th action: (n - 1) * (n - 3) * (n - 5) * ... ~ O(n!!)
