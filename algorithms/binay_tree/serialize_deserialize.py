@@ -1,6 +1,5 @@
 from tree_node import TreeNode
 
-
 # Serialize and Deserialize Binary Tree
 class Codec(object):
     def serialize(self, node):
