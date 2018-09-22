@@ -66,15 +66,15 @@ def permute_dfs(nums):
 
 # nums can have duplicates, only return unique permutations
 def permute_unique(nums):
-    def dfs(depth, candidates, path):
-        if depth == len(nums):
+    def dfs(candidates, path):
+        if len(candidates) == 0:
             result.append(path)
             return
         for i in range(len(candidates)):
             # jump to next iteration if the candiate element is the same as previous
-            if i != 0 and candidates[i - 1] == candidates[i]:
+            if i > 0 and candidates[i - 1] == candidates[i]:
                 continue
-            dfs(depth + 1, candidates[:i] + candidates[i + 1:], path + [candidates[i]])
+            dfs(candidates[:i] + candidates[i + 1:], path + [candidates[i]])
     nums.sort()  # necessary
     result = []
     dfs(0, nums, [])
