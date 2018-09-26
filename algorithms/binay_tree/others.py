@@ -40,19 +40,18 @@ def is_balanced(root):
 
 
 # Construct Binary Tree from Preorder and Inorder Traversal
+# preorder and inorder are lists of node values
+# return the root of built tree
+# assume no duplicates
 def build_tree(preorder, inorder):
-    # preorder and inorder are lists of node values
-    # return the root of built tree
-    # assumption: no duplicates
-    if inorder:
-        root_val = preorder.pop(0)
-        root_idx = inorder.index(root_val)
-        root = TreeNode(root_val)
-        root.left = build_tree(preorder, inorder[:root_idx])
-        root.right = build_tree(preorder, inorder[root_idx+1:])
-        return root
-    else:
+    if not inorder:
         return None
+    root_val = preorder.pop(0)
+    idx = inorder.index(root_val)
+    root = TreeNode(root_val)
+    root.left = build_tree(preorder, inorder[:idx])
+    root.right = build_tree(preorder, inorder[idx+1:])
+    return root
 
 
 # Path Sum
