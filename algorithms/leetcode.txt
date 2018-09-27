@@ -38,8 +38,8 @@ BFS应用范围
 DFS应用范围：短，小，最问题，90%的题目属于排列组合
 subsets模板几乎适用于所有的搜索问题
 
-permutations: O(n * n!) time, O(n!) space
-subsets: O(2^n) time, O(n * 2^n) space since the avg length of a subset is n/2
+permutations: O(n!) time and space
+subsets: O(2^n) time, O(n * 2^n) space since the avg length of a subset is n / 2
 next_permutation: O(n) time, O(1) space
 
 Recursive

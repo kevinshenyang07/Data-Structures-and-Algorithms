@@ -59,30 +59,6 @@ def smallest_range(self, nums):
 # O(nlogm) time, O(m) space
 
 
-# Meeting Rooms II
-# given an array of intervals, find the minimum number of conference rooms required
-# each interval object has .start and .end attributes
-def min_meeting_rooms(self, intervals):
-    if not intervals:
-        return 0
-
-    intervals.sort(key=lambda i: i.start)
-    heap = [(intervals[0].end, intervals[0])]
-
-    for i in range(1, len(intervals)):
-        if heap[0][0] <= intervals[i].start:
-            heappop(heap)
-        heappush(heap, (intervals[i].end, intervals[i]))
-
-    return len(heap)
-# Thought process:
-# => minimum number of rooms requires meetings in each room has minimal idle time
-# => keep track of each room's current end time
-# => if the earliest end time is later than candidate meeting's start time, add a new room
-# => if not, update the room with earliset end time with candidate meeting's end time
-# O(nlogn) time, O(n) space
-
-
 # Nth Ugly Number
 def nth_ugly_number_pq(n):
     if n == 1:
