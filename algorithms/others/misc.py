@@ -37,30 +37,6 @@ def multiply(A, B):
     return res
 
 
-# Merge Intervals
-class Interval(object):
-    def __init__(self, s=0, e=0):
-        self.start = s
-        self.end = e
-
-
-def merge_intervals(intervals):
-    if len(intervals) <= 1:
-        return intervals
-    intervals.sort(key=lambda inter: inter.start)
-    merged = []
-    for inter in intervals:
-        # list out three situations:
-        # 1. merged is empty => append interval
-        # 2. merged is not empty, last.end < inter.start => append interval
-        # 3. merged is not empty, last.end >= inter.start => update last.end
-        if merged and merged[-1].end >= inter.start:
-            merged[-1].end = max(merged[-1].end, inter.end)
-        else:
-            merged.append(inter)
-    return merged
-
-
 # Majority Number
 # find the number that occurs more than half of the size of the array
 # follow up: find number(s) occurs more than 1/3 of the size of the array
