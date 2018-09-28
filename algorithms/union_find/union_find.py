@@ -21,12 +21,13 @@ class UnionFind(object):
         if parent_p == parent_q:  # p and q in one group
             return
 
-        if self.sizes[parent_p] < self.sizes[parent_q]:
+        if self.sizes[parent_p] >= self.sizes[parent_q]:
+            # merge tree parent_q to tree parent_p
             self.parents[parent_q] = parent_p
-            self.sizes[parent_q] += self.sizes[parent_p]
+            self.sizes[parent_p] += self.sizes[parent_q]
         else:
             self.parents[parent_p] = parent_q
-            self.sizes[parent_p] += self.sizes[parent_q]
+            self.sizes[parent_q] += self.sizes[parent_p]
 
         self.num_trees -= 1
 
