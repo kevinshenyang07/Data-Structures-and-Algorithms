@@ -26,7 +26,7 @@ class UnionFind(object):
             self.sizes[parent_q] += self.sizes[parent_p]
         else:
             self.parents[parent_p] = parent_q
-            self.sizes[parent_p] ++ self.sizes[parent_q]
+            self.sizes[parent_p] += self.sizes[parent_q]
 
         self.num_trees -= 1
 
