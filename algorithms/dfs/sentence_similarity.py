@@ -1,6 +1,5 @@
 from collections import defaultdict
 
-
 # Sentence Similarity II
 # assume if a word does not appear in pairs, it would be not
 # be similar to any other words

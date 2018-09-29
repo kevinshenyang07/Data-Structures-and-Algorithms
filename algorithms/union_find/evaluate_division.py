@@ -3,7 +3,6 @@ class UnionFind(object):
     def __init__(self, n):
         self.num_trees = n
         self.parents = range(n)
-        self.sizes = [1] * n
         self.values = [1.0] * n  # initial value for each node
 
     # amortized O(1) time:
@@ -25,8 +24,7 @@ class UnionFind(object):
 
         if parent_p == parent_q:  # p and q in one group
             return
-
-        # for simplicity, always merge q to p
+        # adjust q's value system
         # p = 1, q = 2, ratio = 4 => x = 1 / (2 * 4)
         adj_mul = self.values[p] / (self.values[q] * ratio)
         for i in range(len(self.parents)):
@@ -34,8 +32,6 @@ class UnionFind(object):
                 self.values[i] *= adj_mul
         # merge tree parent_q to tree parent_p
         self.parents[parent_q] = parent_p
-        self.sizes[parent_p] += self.sizes[parent_q]
-
         self.num_trees -= 1
 
 
