@@ -66,7 +66,7 @@ class Solution(object):
         return res
 
     def create_mapping(self, equations):
-        mapping = {}
+        mapping = {}  # str => id
         n = 0
 
         for i in range(len(equations)):
