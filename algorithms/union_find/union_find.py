@@ -2,7 +2,6 @@ class UnionFind(object):
     def __init__(self, n):
         self.num_trees = n
         self.parents = range(n)
-        self.sizes = [1] * n
 
     # amortized O(1) time:
     def find(self, p):
@@ -18,17 +17,10 @@ class UnionFind(object):
         parent_p = self.find(p)
         parent_q = self.find(q)
 
-        if parent_p == parent_q:  # p and q in one group
+        if parent_p == parent_q:  # p and q in one tree
             return
-
-        if self.sizes[parent_p] >= self.sizes[parent_q]:
-            # merge tree parent_q to tree parent_p
-            self.parents[parent_q] = parent_p
-            self.sizes[parent_p] += self.sizes[parent_q]
-        else:
-            self.parents[parent_p] = parent_q
-            self.sizes[parent_q] += self.sizes[parent_p]
-
+        # enough for interview, can optimize by merging small to big tree
+        self.parents[parent_q] = parent_p
         self.num_trees -= 1
 
 # proof of time complexity of #find

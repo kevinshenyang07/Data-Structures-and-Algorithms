@@ -14,7 +14,6 @@ def num_islands(grid):
                 dfs(grid, i, j)
     return res
 
-
 def dfs(grid, i, j):
     if i < 0 or i >= len(grid) or j < 0 or j >= len(grid[0]):
         return
