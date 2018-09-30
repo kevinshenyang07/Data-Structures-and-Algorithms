@@ -1,4 +1,3 @@
-# Note: can only be used for undirected graphs
 class UnionFind(object):
     def __init__(self, n):
         self.num_trees = n
