@@ -28,6 +28,7 @@ class Solution(object):
             while x >= pq[0][1]:
                 heapq.heappop(pq)
             # add height for a starting event
+            # a smaller height added later won't change max height
             if R > 0:
                 heapq.heappush(pq, (-H, R))
             # add the new critical point if max height changes (goal 3)

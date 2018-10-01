@@ -15,8 +15,8 @@ class UnionFind(object):
         # the length of the previous path is now halfed
         return p
 
-    # when merging tree b to tree a, adjust all the values
-    # in tree b by the ratio provided
+    # when merging tree b to tree a, calculate the adjustment multiple
+    # by the ratio provided, then propagate it to every node in tree b
     # O(n) time because of that for loop
     def union(self, p, q, ratio):
         parent_p = self.find(p)
@@ -24,7 +24,6 @@ class UnionFind(object):
 
         if parent_p == parent_q:  # p and q in one group
             return
-        # adjust q's value system
         # p = 1, q = 2, ratio = 4 => x = 1 / (2 * 4)
         adj_mul = self.values[p] / (self.values[q] * ratio)
         for i in range(len(self.parents)):
