@@ -19,7 +19,9 @@ class Solution(object):
 
         for i in range(len(gas)):
             balance += gas[i] - cost[i]
-            if balance < 0:  # => that position should be visited last during the journey
+            if balance < 0:
+                # journey from last position to i is not possible
+                # should be visited during the later part of the entire journey
                 balance = 0
                 position = i + 1
 
@@ -28,4 +30,5 @@ class Solution(object):
 # 1. prove that if total gas is more than total cost, there must be a solution.
 #    (for the station that has greatest negative diff, there must be one or more
 #    stations that have a total positive balance greater than that negative dff)
-# 2. find the point where the balance is lowest, the next index must be solution.
+# 2. if the answer is unique, find the last range of journey that has a negative
+#    balance, the next index must be solution
