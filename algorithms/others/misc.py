@@ -70,25 +70,6 @@ def majority_element(nums):
         return candidate
 
 
-# Gas Station
-# approach:
-# 1. prove that if total gas is more than total cost, there must be a solution.
-#    (for the station that has greatest negative diff, there must be one or more
-#    stations that have a total positive balance greater than that negative dff)
-# 2. find the point where the balance is lowest, the next index must be solution.
-def can_complete_circuit(gas, cost):
-    if len(gas) != len(cost) or sum(gas) < sum(cost):
-        return -1
-    position = 0
-    balance = 0  # current tank balance
-    for i in range(len(gas)):
-        balance += gas[i] - cost[i]  # update balance
-        if balance < 0:  # balance drops to negative, reset the start position
-            balance = 0
-            position = i + 1
-    return position
-
-
 def trailing_zeros(n):
     # count the number of 5s
     # all numbers contributing 5s are in a form of m * (5 ^ n)
