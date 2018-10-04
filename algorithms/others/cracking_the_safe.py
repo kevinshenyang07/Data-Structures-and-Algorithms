@@ -25,7 +25,8 @@ class Solution(object):
 # approach:
 # 1. start from all zeros
 # 2. to make a shortest string, reuse last n - 1 digits each time for new combination
-# 3. start from largest digit to make sure each time there's a qualified candidate
+# 3. start from largest digit so that candidates with larger distance from zeros
+#    are visited first, then the ones in the middle
 
 # example:
 # n = 2, k = 3
@@ -39,3 +40,7 @@ class Solution(object):
 #       01
 #        11
 #         10
+# can be also considered as path from column to column:
+# 0 - 0
+# 1 - 1
+# 2 - 2
