@@ -18,7 +18,6 @@ class NumArray(object):
 
     def sumRange(self, i, j):
         return self.tree.query(j) - self.tree.query(i - 1)
-# O(logn) time, O(n) space
 
 
 # Range Sum Query 2D - Mutable
@@ -44,4 +43,3 @@ class NumMatrix(object):
         area_left = self.tree.query(i2, j1- 1)
         area_total = self.tree.query(i2, j2)
         return area_total - area_upper - area_left + area_upper_left
-# O(logm * logn) time, O(m * n) space

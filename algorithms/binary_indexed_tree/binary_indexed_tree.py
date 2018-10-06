@@ -20,8 +20,7 @@ class BIT(object):
             prefix_sum += self.sums[i]
             i -= (i & -i)
         return prefix_sum
-
-# O(logn) for #update and #query
+# O(logn) for #accumulate and #query
 #
 # sums[i] = sum of the original values of the whole subtree on i
 # sums[4] = nums[1-1] + nums[2-1] + nums[3-1] + nums[4-1]
@@ -61,3 +60,4 @@ class BIT2D(object):
             r -= (r & -r)
             c = j + 1
         return area_sum
+# O(logm * logn) for #accumulate and #query
