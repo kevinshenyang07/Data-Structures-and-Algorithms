@@ -53,7 +53,7 @@ class SolutionQ2(object):
         :rtype: int
         """
         m, n = len(maze), len(maze[0])
-        distances = [[2 ** 31 - 1] * n for _ in range(m)]
+        distances = [[float('inf')] * n for _ in range(m)]
 
         pq = [(0, start[0], start[1])]
         while pq:
@@ -102,7 +102,7 @@ class SolutionQ3(object):
         """
         m, n = len(maze), len(maze[0])
         hole = tuple(hole)
-        distances = [[2 ** 31 - 1] * n for _ in range(m)]
+        distances = [[float('inf')] * n for _ in range(m)]
 
         pq = [(0, '', ball[0], ball[1])]
         while pq:

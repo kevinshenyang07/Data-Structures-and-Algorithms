@@ -34,14 +34,13 @@ class Solution(object):
             if connected != len(buildings) - 1:
                 return -1
 
-        INT_MAX = 2 ** 31 - 1
-        min_dist = INT_MAX
+        min_dist = float('inf')
         for i in range(m):
             for j in range(n):
                 if 0 < distances[i][j] < min_dist and updated_times[i][j] == len(buildings):
                     min_dist = distances[i][j]
 
-        return min_dist if min_dist < INT_MAX else -1
+        return min_dist if min_dist < float('inf') else -1
 
     def bfs(self, i, j, grid, distances, updated_times):
         queue = deque([(i, j, 0)])

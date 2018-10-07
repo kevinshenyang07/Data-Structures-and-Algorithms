@@ -21,7 +21,7 @@ def my_atoi(s):
         i += 1
 
     # return val in the range of [INT_MIN, INT_MAX]
-    return max(-2 ** 31, min(sign * res, 2 ** 31 - 1))
+    return max(float('-inf'), min(sign * res, float('inf')))
 
 
 # Valid Number

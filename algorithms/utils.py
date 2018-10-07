@@ -6,10 +6,12 @@ string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 string.lowercase # a-z
 string.digits  # 0-9
 
-# for 32-bit signed integer (sys.maxint not the same on diffrent systems)
-INT_MAX = 2 ** 31 - 1
-INT_MIN = - 2 ** 31
+# range of 32-bit signed integer is [- 2 ** 31, 2 ** 31 - 1]
+# sys.maxint not the same on diffrent systems, and is deprecated in py3
+float('-inf')
 
+3.bit_length() == 2
+1 << (x-1).bit_length()  # smallest power of 2 greater than x
 bin(num).count('1')  # for a positive integer return number of "1"s in its binary format
 
 copied = [row[:] for row in matrix]  # copy a matrix

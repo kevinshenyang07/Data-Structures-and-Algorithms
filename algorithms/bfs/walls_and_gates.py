@@ -29,5 +29,5 @@ class Solution(object):
     def should_update(self, rooms, i, j):
         if i < 0 or i >= len(rooms) or j < 0 or j >= len(rooms[0]):
             return False
-        return rooms[i][j] == 2 ** 31 - 1
+        return rooms[i][j] == float('inf')
 # O(m * n) time

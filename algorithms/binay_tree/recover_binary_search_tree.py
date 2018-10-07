@@ -7,7 +7,7 @@ class Solution(object):
         """
         self.first = None
         self.second = None
-        self.prev = TreeNode(- 2 ** 31)  # dummy node
+        self.prev = TreeNode(float('-inf'))  # dummy node
         self.traverse(root)
         self.first.val, self.second.val = self.second.val, self.first.val
 

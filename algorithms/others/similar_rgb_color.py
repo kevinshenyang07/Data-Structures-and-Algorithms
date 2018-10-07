@@ -23,7 +23,7 @@ class Solution(object):
         lower = max(idx - 1, 0)
         upper = min(idx + 1, 15)
 
-        min_diff = 2 ** 31 - 1
+        min_diff = float('inf')
         res = None
 
         for i in range(lower, upper + 1):

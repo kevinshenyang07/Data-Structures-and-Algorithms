@@ -14,7 +14,7 @@ class Solution(object):
         :rtype: int
         """
         adj_map = defaultdict(dict)
-        dist = { i: 2 ** 31 - 1 for i in range(1, N + 1) }
+        dist = { i: float('inf') for i in range(1, N + 1) }
         dist[K] = 0  # make sure BFS starts with K
 
         for u, v, w in times:
@@ -36,4 +36,4 @@ class Solution(object):
                 dist[v] = min(dist[v], dist[u] + adj_map[u][v])
 
         max_dist = max(dist.values())
-        return max_dist if max_dist < 2 ** 31 - 1 else - 1
+        return max_dist if max_dist < float('inf') else - 1

@@ -91,7 +91,7 @@ def verify_preorder(preorder):
     :type preorder: List[int]
     :rtype: bool
     """
-    low = - 2 ** 31  # lower bound of next right child's value
+    low = float('-inf')  # lower bound of next right child's value
     stack = []  # top element being current root
     for val in preorder:
         if val < low:

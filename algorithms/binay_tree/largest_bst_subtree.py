@@ -20,7 +20,7 @@ class Solution(object):
     def postorder(self, root):
         if not root:
             # to qualify a node without left / right child
-            return 2 ** 31 - 1, - 2 ** 31, 0
+            return float('inf'), float('-inf'), 0
 
         left_min, left_max, left_cnt = self.postorder(root.left)
         right_min, right_max, right_cnt = self.postorder(root.right)

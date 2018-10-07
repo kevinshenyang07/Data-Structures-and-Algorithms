@@ -24,7 +24,7 @@ def path_sum(root, target):
 # => knows max path sum of that node
 class Solution(object):
     def maxPathSum(self, root):
-        min_int = - 2 ** 31
+        min_int = float('-inf')
         if not root: return min_int
         self.global_max = min_int  # int var won't be updated in recursion
 

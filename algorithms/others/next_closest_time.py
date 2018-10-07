@@ -23,7 +23,7 @@ class Solution(object):
                         if 0 <= int(new_time[:2]) < 24 and 0 <= int(new_time[3:]) < 60:
                             new_times.append(new_time)
 
-        min_diff = 2 ** 31 - 1
+        min_diff = float('inf')
         min_time = time
 
         for new_time in new_times:

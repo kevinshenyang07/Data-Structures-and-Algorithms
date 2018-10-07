@@ -67,4 +67,4 @@ class Solution(object):
             j -= 1
 
         val = int(''.join(digits))
-        return val if val <= 2 ** 31 - 1 else -1
+        return val if val <= float('inf') else -1
