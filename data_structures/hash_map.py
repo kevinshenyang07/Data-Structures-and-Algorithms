@@ -1,4 +1,3 @@
-from __future__ import print_function
 import string
 from linked_list import LinkedList
 
@@ -77,10 +76,10 @@ if __name__ == '__main__':
     keys = string.lowercase[:10]
     for i in range(len(keys)):
         hash_map[keys[i]] = i
-    print(hash_map)
-    print("a" in hash_map)  # True
+    print hash_map
+    print "a" in hash_map  # True
     del hash_map["a"]
     del hash_map["b"]
-    print(hash_map)
+    print hash_map
     # it should call resize() when enough items are inserted
     # it should rehash existing values

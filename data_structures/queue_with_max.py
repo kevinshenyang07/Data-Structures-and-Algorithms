@@ -1,4 +1,3 @@
-from __future__ import print_function
 from collections import deque
 
 class QueueWithMax(object):
@@ -33,23 +32,23 @@ class QueueWithMax(object):
 if __name__ == '__main__':
     qwm = QueueWithMax()
     qwm.enqueue(5)
-    print('queue: ', qwm.queue)
-    print('max value: ', qwm.max())
+    print 'queue: ', qwm.queue
+    print 'max value: ', qwm.max()
     qwm.enqueue(1)
     qwm.enqueue(3)
     qwm.enqueue(4)
     qwm.enqueue(2)
-    print('queue: ', qwm.queue)
-    print('max value: ', qwm.max())
+    print 'queue: ', qwm.queue
+    print 'max value: ', qwm.max()
     qwm.dequeue()
-    print('queue: ', qwm.queue)
-    print('max value: ', qwm.max())
+    print 'queue: ', qwm.queue
+    print 'max value: ', qwm.max()
     qwm.dequeue()
-    print('queue: ', qwm.queue)
-    print('max value: ', qwm.max())
+    print 'queue: ', qwm.queue
+    print 'max value: ', qwm.max()
     qwm.dequeue()
-    print('queue: ', qwm.queue)
-    print('max value: ', qwm.max())
+    print 'queue: ', qwm.queue
+    print 'max value: ', qwm.max()
     qwm.dequeue()
-    print('queue: ', qwm.queue)
-    print('max value: ', qwm.max())
+    print 'queue: ', qwm.queue
+    print 'max value: ', qwm.max()

@@ -1,9 +1,6 @@
-from __future__ import print_function
-
-'''
-O(nlogn) time, worst case O(n^2) when array is sorted (and reversed)
-O(logn) space average / best case, O(n) worst case (not stable)
-'''
+# Quick Sort
+# O(nlogn) time, worst case O(n^2) when array is sorted and reversed
+# O(logn) space average / best case, O(n) worst case (not stable)
 
 def quicksort(arr):
     quicksort_helper(arr, 0, len(arr) - 1)
@@ -42,8 +39,8 @@ def partition(nums, start, end):
 if __name__ == '__main__':
     arr = [7, 5, 8, 2, 4, 3, 9, 1]
     quicksort(arr)
-    print(arr)
+    print arr
 
     arr_with_dup = [3, 4, 2, 7, 3, 6, 8, 2]
     quicksort(arr_with_dup)
-    print(arr_with_dup)
+    print arr_with_dup

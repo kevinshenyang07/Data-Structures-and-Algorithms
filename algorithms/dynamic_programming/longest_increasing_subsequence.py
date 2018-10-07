@@ -1,6 +1,3 @@
-# -*- coding:utf-8 -*-
-from __future__ import print_function
-
 # Longest Increasing Subsequence
 class Solution(object):
     def lengthOfLIS(self, nums):
@@ -33,4 +30,4 @@ class Solution(object):
 
 if __name__ == '__main__':
     seq = [2, 1, 5, 3, 6, 4, 8, 9, 7]
-    print(Solution().lengthOfLIS(seq))
+    print Solution().lengthOfLIS(seq)

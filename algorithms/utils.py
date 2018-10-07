@@ -1,9 +1,7 @@
-from __future__ import print_function
-import string
-
 # prefer list comprehension over map() and filter()
 # Python has no switch case, just if / elif
 
+import string
 string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 string.lowercase # a-z
 string.digits  # 0-9
@@ -67,6 +65,6 @@ def split(head):
 if __name__ == '__main__':
     s1 = 'abcdef'
     s2 = 'abba'
-    print(reverse_str(s1))
-    print(is_palindrome(s1))
-    print(is_palindrome(s2))
+    print reverse_str(s1)
+    print is_palindrome(s1)
+    print is_palindrome(s2)

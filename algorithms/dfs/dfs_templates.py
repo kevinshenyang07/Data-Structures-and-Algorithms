@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 #
 # DFS is enumeration with pruning.
 # Three elements (order of 1 and 2 interchangeable):
@@ -9,6 +7,11 @@ from __future__ import print_function
 
 # DFS method arguments order:
 # depth, candidates, sub result, result (by stability)
+
+# combination time complexity: O(2 ^ n)
+# => 2 options for each element (although we need to keep track of picked ones)
+# permutation time complexity: O(n!)
+# => n options picking first element, n - 1 options for second, and so on
 
 def subsets(nums):
     result = [[]]
@@ -83,5 +86,5 @@ def permute_unique(nums):
 
 if __name__ == '__main__':
     nums = [3, 2, 1]
-    print(subsets_dfs(nums))
-    print(permute_dfs(nums))
+    print subsets_dfs(nums)
+    print permute_dfs(nums)

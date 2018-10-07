@@ -1,7 +1,3 @@
-# -*- coding:utf-8 -*-
-from __future__ import print_function
-
-
 # Longest Common Subsequence
 def lcs(lhs, rhs):
     '''
@@ -52,4 +48,4 @@ if __name__ == '__main__':
     y = "BDCABA"
 
     res = get_lcs(x, y)
-    print(res)
+    print res

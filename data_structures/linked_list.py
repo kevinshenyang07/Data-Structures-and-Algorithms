@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 #
 # doulbly linked list
 
@@ -93,15 +91,15 @@ if __name__ == '__main__':
     linked_list.append(Node("first", 1))
     linked_list.append(Node("second", 2))
     linked_list.append(Node("third", 3))
-    print(linked_list)
+    print linked_list
 
-    print(linked_list.first().next.key)  # third
+    print linked_list.first().next.key  # third
 
-    print("iterating through linked list:")
+    print "iterating through linked list:"
     for node in linked_list:
-        print(node)
+        print node
 
-    print("reversing linked list")
+    print "reversing linked list"
     linked_list.reverse()
-    print(linked_list)
-    print(linked_list.head)
+    print linked_list
+    print linked_list.head

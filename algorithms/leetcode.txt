@@ -14,20 +14,25 @@ Data Structure
 时间复杂度
 -------------------
 基本运算(%, /): O(1)
-字符串比较：接近O(1)，最坏O(n)
-哈希：O(key_size)
-二分法：O(logn)
-分解质因数：O(sqrt(n))
-排序：O(nlogn)较多
-数组，枚举，动态规划：O(n^2) / O(n^3)
-组合有关的搜索：O(n * 2^n)
-排列有关的搜索：O(n * n!)
 集合求交集: O(min(m, n))
+字符串比较：接近O(1)，最坏O(n)
+排序：O(nlogn)较多
+分解质因数：O(sqrt(n))
+hash function：O(key_size)
+binary search：O(logn)
+combination：O(2^n)
+permutation: O(n!)
 
 时间复杂度计算通用公式
 搜索：O(答案总数 * 构造每个答案的时间)
 动态规划：O(状态总数 * 计算每个状态的时间复杂度)
 分治法(包括二叉树)：O(节点个数 * 每个节点的计算时间)
+
+时间推算
+CPU: 2GHz, ~ 2G ops ~ 2 * 10 ^ 9 per sec (单核单线程)
+- overhead of memory access / branching (if/else)
+- large const factor (hashset O(100) is slower than O(log100))
+~ 10 ^ 7 ops per sec
 
 Search
 -------------------

@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 class TreeNode(object):
 
     def __init__(self, val):
@@ -123,11 +121,11 @@ if __name__ == '__main__':
         bst.insert(val)
     bst.print_tree()
 
-    print("deleting 3")
+    print "deleting 3"
     bst.delete(3)
     bst.print_tree()
-    print("deleting 2")
+    print "deleting 2"
     bst.delete(2)
     bst.print_tree()
 
-    print(inorder(bst.root))
+    print inorder(bst.root)
