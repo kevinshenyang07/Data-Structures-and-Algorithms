@@ -38,8 +38,29 @@ class NumMatrix(object):
         self.tree.accumulate(i, j, diff)
 
     def sumRegion(self, i1, j1, i2, j2):
-        area_upper_left = self.tree.query(i1 - 1, j1 - 1)
-        area_upper = self.tree.query(i1 - 1, j2)
-        area_left = self.tree.query(i2, j1- 1)
-        area_total = self.tree.query(i2, j2)
-        return area_total - area_upper - area_left + area_upper_left
+        return self.tree.query(i2, j2) \
+             - self.tree.query(i2, j1- 1) \
+             - self.tree.query(i1 - 1, j2) \
+             + self.tree.query(i1 - 1, j1 - 1)
+
+
+# Range Sum Query 2D - Immutable
+# assume #sumRegion args are valid
+class NumMatrix(object):
+    def __init__(self, matrix):
+        if not any(matrix):
+            self.sums = [[]]
+        else:
+            m, n = len(matrix), len(matrix[0])
+            # extra row and col to simplify setup and query
+            sums = [[0] * (n + 1) for _ in range(m + 1)]
+            for i in range(m):
+                for j in range(n):
+                    sums[i + 1][j + 1] = sums[i + 1][j] + sums[i][j + 1] - sums[i][j] + matrix[i][j]
+            self.sums = sums
+
+    def sumRegion(self, row1, col1, row2, col2):
+        return self.sums[row2 + 1][col2 + 1] \
+             - self.sums[row2 + 1][col1] \
+             - self.sums[row1][col2 + 1] \
+             + self.sums[row1][col1]
