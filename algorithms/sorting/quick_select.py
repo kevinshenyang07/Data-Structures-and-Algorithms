@@ -1,16 +1,15 @@
-# find kth largest = find element at n-k from sorted array
+# find kth largest = find (n-k)th smallest
 def find_kth_largest(nums, k):
     if not nums or k <= 0 or k > len(nums):
         return 0
     return select(nums, 0, len(nums) - 1, len(nums) - k)
 
-
+# find kth smallest in range
 def select(nums, start, end ,k):
     if start == end:
         return nums[start]
 
     pivot = partition(nums, start, end)
-    
     # only partition the range that contains k
     if pivot == k:
         return nums[pivot]
@@ -19,8 +18,9 @@ def select(nums, start, end ,k):
     else:
         return select(nums, start, pivot - 1, k)
 
-
-# partition with two pointers, returns a partition index
+# partition with two pointers, returns a partition index where
+# every element on the left is <= nums[i]
+# every element on the right is >= nums[i]
 def partition(nums, start, end):
     # if using random init pivot, swap to the left anyway
     pivot_val = nums[start]
@@ -37,7 +37,7 @@ def partition(nums, start, end):
         else:
             nums[left], nums[right] = nums[right], nums[left]
     # swap pivot with the rightmost element that is smaller than pivot
-    nums[start], nums[right] = nums[right], nums[start] 
+    nums[start], nums[right] = nums[right], nums[start]
     return right
 
 
