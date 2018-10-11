@@ -1,8 +1,7 @@
 from heapq import heappush, heappop
 
-
 # The Maze
-# DFS is easier to get to destination
+# DFS is faster to get to destination
 class SolutionQ1(object):
     def hasPath(self, maze, start, destination):
         """
@@ -11,39 +10,42 @@ class SolutionQ1(object):
         :type destination: List[int]
         :rtype: bool
         """
-        return self.dfs(start[0], start[1], maze, destination)
+        visited = set()
+        return self.dfs(maze, tuple(start), tuple(destination), visited)
 
-    def dfs(self, i, j, maze, dest):
-        if i == dest[0] and j == dest[1]:
+    def dfs(self, maze, curr, dest, visited):
+        # early stop condition
+        if curr in visited:
+            return False
+        # valid result condition
+        if curr == dest:
             return True
 
-        maze[i][j] = 2  # mark as visited
-
-        for x, y in self.next_coors(i, j, maze):
-            if self.dfs(x, y, maze, dest):
+        visited.add(curr)
+        # recursion definition
+        for coor in self.next_coors(curr[0], curr[1], maze):
+            if self.dfs(maze, coor, dest, visited):
                 return True
+
         return False
 
     def next_coors(self, i, j, maze):
         m, n = len(maze), len(maze[0])
-        directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
         coors = []
 
-        for dx, dy in directions:
-            x, y = i + dx, j + dy
-            while 0 <= x < len(maze) and 0 <= y < len(maze[0]) and maze[x][y] != 1:
+        for dx, dy in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+            x, y = i, j
+            while 0 <= x + dx < m and 0 <= y + dy < n and maze[x + dx][y + dy] == 0:
                 x += dx
                 y += dy
-            x -= dx  # take one step back
-            y -= dy
-            if maze[x][y] == 0:
+            if not (i == x and j == y):
                 coors.append((x, y))
 
         return coors
 
 
 # The Maze II
-# BFS with priority queue
+# BFS with priority queue is faster in this case
 class SolutionQ2(object):
     def shortestDistance(self, maze, start, destination):
         """
@@ -52,39 +54,39 @@ class SolutionQ2(object):
         :type destination: List[int]
         :rtype: int
         """
-        m, n = len(maze), len(maze[0])
-        distances = [[float('inf')] * n for _ in range(m)]
-
+        visited = set()
         pq = [(0, start[0], start[1])]
+
         while pq:
+            # means every coordinate starts the search with shortest distance
+            # and the same coordinate with longer distance will be deduplicated
+            # thus overall forming a shortest path
             dist, i, j = heappop(pq)
-            # elements on destination will be pushed to heap only if elements
-            # on prev positions have been popped out
+
+            if (i, j) in visited:
+                continue
             if [i, j] == destination:
-                # when entering this statement, there's only elements on
-                # destination in the heap
                 return dist
-            if distances[i][j] > dist:
-                distances[i][j] = dist
-                for x, y in self.next_coors(i, j, maze):
-                    new_dist = dist + abs(x - i) + abs(y - j)
-                    heappush(pq, (new_dist, x, y))
+
+            visited.add((i, j))
+
+            for coor in self.next_coors(i, j, maze):
+                new_dist = dist + abs(coor[0] - i) + abs(coor[1] - j)
+                heappush(pq, (new_dist, coor[0], coor[1]))
 
         return -1
 
+    # same as Q1
     def next_coors(self, i, j, maze):
         m, n = len(maze), len(maze[0])
-        directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
         coors = []
 
-        for dx, dy in directions:
-            x, y = i + dx, j + dy
-            while 0 <= x < len(maze) and 0 <= y < len(maze[0]) and maze[x][y] != 1:
+        for dx, dy in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+            x, y = i, j
+            while 0 <= x + dx < m and 0 <= y + dy < n and maze[x + dx][y + dy] == 0:
                 x += dx
                 y += dy
-            x -= dx  # take one step back
-            y -= dy
-            if x != i or y != j:
+            if not (i == x and j == y):
                 coors.append((x, y))
 
         return coors
@@ -92,6 +94,7 @@ class SolutionQ2(object):
 
 # The Maze III
 # BFS with prioritiy queue, ball will fall into hole if rolled to that position
+# similar approach as Q2
 class SolutionQ3(object):
     def findShortestWay(self, maze, ball, hole):
         """
@@ -101,45 +104,46 @@ class SolutionQ3(object):
         :rtype: str
         """
         m, n = len(maze), len(maze[0])
-        hole = tuple(hole)
-        distances = [[float('inf')] * n for _ in range(m)]
-
+        visited = set()
         pq = [(0, '', ball[0], ball[1])]
+
         while pq:
             dist, path, i, j = heappop(pq)
-            # see explanation in question II
-            if (i, j) == hole:
+
+            if (i, j) in visited:
+                continue
+            if [i, j] == hole:
                 return path
-            if distances[i][j] > dist:
-                distances[i][j] = dist
-                for x, y, direction in self.next_coors(maze, i, j, hole):
-                    new_dist = dist + abs(x - i) + abs(y - j)
-                    new_path = path + direction
-                    heappush(pq, (new_dist, new_path, x, y))
+
+            visited.add((i, j))
+
+            for x, y, direction in self.next_coors(maze, i, j, hole):
+                new_dist = dist + abs(x - i) + abs(y - j)
+                new_path = path + direction
+                heappush(pq, (new_dist, new_path, x, y))
 
         return 'impossible'
 
     def next_coors(self, maze, i, j, hole):
+        m, n = len(maze), len(maze[0])
         directions = {
             'r': (0, 1),
             'l': (0, -1),
             'd': (1, 0),
             'u': (-1, 0)
         }
-        m, n = len(maze), len(maze[0])
         coors = []
 
         for d in directions:
             dx, dy = directions[d]
-            x, y = i + dx, j + dy
-            # stop if falling into the hole
-            while 0 <= x < len(maze) and 0 <= y < len(maze[0]) and maze[x][y] != 1 and (x, y) != hole:
+            x, y = i, j
+            while 0 <= x + dx < m and 0 <= y + dy < n and maze[x + dx][y + dy] == 0:
                 x += dx
                 y += dy
-            if (x, y) != hole:
-                x -= dx  # take one step back
-                y -= dy
-            if x != i or y != j:
+                # stop when reaching the hole
+                if [x, y] == hole:
+                    break
+            if not (x == i and y == j)
                 coors.append((x, y, d))
 
         return coors
