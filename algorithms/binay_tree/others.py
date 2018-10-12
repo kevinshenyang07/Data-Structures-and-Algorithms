@@ -30,13 +30,19 @@ def depth_iter(root):
 # Balanced Binary Tree
 # the depth of the two subtrees of every node never differ by more than 1
 def is_balanced(root):
+    return postorder(root) != -1
+
+def postorder(self, root):
     if not root:
-        return True
-    if (not root.left) and (not root.right):
-        return True
-    if abs(depth(root.left) - depth(root.right)) > 1:
-        return False
-    return is_balanced(root.left) and is_balanced(root.right)
+        return 0
+
+    left_depth = postorder(root.left)
+    right_depth = postorder(root.right)
+
+    if left_depth >= 0 and right_depth >= 0 and abs(left_depth - right_depth) <= 1:
+        return max(left_depth, right_depth) + 1
+    else:
+        return -1
 
 
 # Construct Binary Tree from Preorder and Inorder Traversal
