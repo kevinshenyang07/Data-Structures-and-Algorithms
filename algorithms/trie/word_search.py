@@ -1,3 +1,5 @@
+from prefix_tree import TrieNode
+
 # Word Search
 class SolutionQ1(object):
     def exist(self, board, word):
@@ -33,11 +35,6 @@ class SolutionQ1(object):
 
 
 # Word Search II
-class TrieNode(object):
-    def __init__(self):
-        self.children = {}  # char => TrieNode
-        self.is_word = False
-
 class SolutionQ2(object):
     def findWords(self, board, words):
         """

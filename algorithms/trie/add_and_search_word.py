@@ -1,15 +1,11 @@
+from prefix_tree import TrieNode
+
 # Add and Search Word
 # Design a data structure that supports the following two operations:
 # void addWord(word)
 # bool search(word)
 # search(word) can search a literal word or a regular expression string containing only letters a-z or '.'.
 # A '.' means it can represent any one letter.
-class TrieNode(object):
-    def __init__(self):
-        self.children = {}
-        self.is_word = False
-
-
 class WordDictionary(object):
 
     def __init__(self):
