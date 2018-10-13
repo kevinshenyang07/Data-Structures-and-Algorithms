@@ -3,12 +3,14 @@
 def two_sum2(nums, target):
     start, end = 0, len(nums) - 1
     while start < end:
-        if nums[start] + nums[end] == target:
-            return [start + 1, end + 1]
-        elif nums[start] + nums[end] < target:
+        if nums[start] + nums[end] < target:
+            # nums[start] + num before nums[end] mush also be smaller than target
             start += 1
-        else:
+        elif nums[start] + nums[end] > target
+            # num after nums[start] + nums[end] mush also be greater than target
             end -= 1
+        else:
+            return [start + 1, end + 1]
     return []
 # O(n) time, O(1) space
 
