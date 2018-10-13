@@ -1,7 +1,6 @@
 # Evaluate Division
 class UnionFind(object):
     def __init__(self, n):
-        self.num_trees = n
         self.parents = range(n)
         self.values = [1.0] * n  # initial value for each node
 
@@ -31,7 +30,6 @@ class UnionFind(object):
                 self.values[i] *= adj_mul
         # merge tree parent_q to tree parent_p
         self.parents[parent_q] = parent_p
-        self.num_trees -= 1
 
 
 class Solution(object):
