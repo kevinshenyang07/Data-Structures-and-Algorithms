@@ -1,3 +1,4 @@
+from collections import Counter
 from heapq import heappush, heappop
 
 
@@ -21,10 +22,7 @@ class SolutionV1(object):
         :type n: int
         :rtype: int
         """
-        counter = {}
-        for task in tasks:
-            counter[task] = counter.get(task, 0) + 1
-
+        counter = Counter(tasks)
         pq = []
         for k, v in counter.iteritems():
             heappush(pq, (-v, k))
@@ -51,9 +49,7 @@ class SolutionV1(object):
 # greedy solution, hard to prove, not recommended
 class SolutionV2(object):
     def leastInterval(self, tasks, n):
-        counter = {}
-        for task in tasks:
-            counter[task] = counter.get(task, 0) + 1
+        counter = Counter(tasks)
         # count number of tasks with largest occurrence
         counts = counter.values()
         max_cnt = max(counts)

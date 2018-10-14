@@ -1,5 +1,5 @@
+from collections import Counter
 from heapq import heappush, heappop
-
 
 # Rearrange String k Distance Apart
 # Given a non-empty string s and an integer k, rearrange the string such that
@@ -17,10 +17,7 @@ class Solution(object):
         """
         if k == 0: return s
 
-        counter = {}
-        for char in s:
-            counter[char] = counter.get(char, 0) + 1
-
+        counter = Counter(s)
         pq = []
         for char, count in counter.iteritems():
             heappush(pq, (-count, char))

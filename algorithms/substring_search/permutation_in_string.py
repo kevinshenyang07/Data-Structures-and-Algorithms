@@ -1,14 +1,15 @@
+from collections import Counter
+
+# Permutaion In String
 # fixed-width sliding window
 class Solution(object):
-    def check_inclusion(self, s1, s2):
+    def checkInclusion(self, s1, s2):
         """
         :type s1: str
         :type s2: str
         :rtype: bool
         """
-        counter = {}
-        for char in s1:
-            counter[char] = counter.get(char, 0) + 1
+        counter = Counter(s1)
 
         for i, char in enumerate(s2):
             counter[char] = counter.get(char, 0) - 1

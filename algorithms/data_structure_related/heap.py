@@ -1,5 +1,5 @@
+from collections import Counter
 from heapq import heappush, heappop
-
 
 # Merge K Sorted Lists
 class ListNode(object):
@@ -122,12 +122,9 @@ class Element(object):
 
 
 def top_k_frequent(words, k):
-    counter = {}
-    for word in words:
-        counter[word] = counter.get(word, 0) + 1
-
+    word_to_count = Counter(words)
     pq = []
-    for word, cnt in counter.iteritems():
+    for word, cnt in word_to_count.iteritems():
         heappush(pq, Element(cnt, word))
         if len(pq) > k:
             heappop(pq)
