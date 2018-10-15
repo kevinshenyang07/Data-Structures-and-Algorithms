@@ -17,6 +17,15 @@ bin(num).count('1')  # for a positive integer return number of "1"s in its binar
 copied = [row[:] for row in matrix]  # copy a matrix
 
 #
+# interval utils
+
+# two start and end positions
+# covers all cases
+def overlaps(s1, e1, s2, e2):
+    return max(s1, s2) < min(e1, e2)
+
+
+#
 # string utils
 
 # strings are immutable in Python, so this solution takes same space
