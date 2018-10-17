@@ -16,7 +16,8 @@ class UnionFind(object):
 
     # when merging tree b to tree a, calculate the adjustment multiple
     # by the ratio provided, then propagate it to every node in tree b
-    # O(n) time because of that for loop
+    # if we always merge smaller group to larger one, all union() calls
+    # cost O(n) time, the amortized cost is still O(1)
     def union(self, p, q, ratio):
         parent_p = self.find(p)
         parent_q = self.find(q)
