@@ -6,17 +6,22 @@ def trap(height):
     """
     if len(height) <= 2:
         return 0
-    vol = 0
+
+    # highest[i] = min(max(height[:i]), max(height[:i+1]))
     highest = [0] * len(height)
-    # max height looking left, both ends cannot contain water
+
+    # both ends cannot contain water
+    # find highest bar look left
     for i in range(1, len(height) - 1):
         highest[i] = max(highest[i - 1], height[i - 1])
-    # update if max height looking right is lower than max height looking left
-    for j in range(len(height) - 2, -1, -1):
-        highest[j] = min(highest[j], max(highest[j + 1], height[j + 1]))
-    # vol trapped on each slot
-    for k in range(1, len(height) - 1):
-        if highest[k] > height[k]:
-            vol += highest[k] - height[k]
+    # find highest bar look right
+    for i in range(len(height) - 2, -1, -1):
+        highest_right = max(highest[i + 1], height[i + 1])
+        highest[i] = min(highest[i], highest_right)
+
+    vol = 0
+    for i in range(1, len(height) - 1):
+        if highest[i] > height[i]:
+            vol += highest[i] - height[i]  # volume trapped on each slot
     return vol
 # O(n) time and space
