@@ -28,11 +28,17 @@ permutation: O(n!)
 动态规划：O(状态总数 * 计算每个状态的时间复杂度)
 分治法(包括二叉树)：O(节点个数 * 每个节点的计算时间)
 
-时间推算
+根据input推算所需时间复杂度
 CPU: 2GHz, ~ 2G ops ~ 2 * 10 ^ 9 per sec (单核单线程)
 - overhead of memory access / branching (if/else)
 - large const factor (hashset O(100) is slower than O(log100))
 ~ 10 ^ 7 ops per sec
+
+n <= 100: n^3 ~ n!
+n <= 1000: n^ 2
+n <= 10^6: n ~ nlogn
+n <= 10^9: logn
+
 
 Search
 -------------------
