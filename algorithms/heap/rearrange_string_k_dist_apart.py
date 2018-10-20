@@ -1,5 +1,5 @@
 from collections import Counter
-from heapq import heappush, heappop
+from heap import Heap
 
 # Rearrange String k Distance Apart
 # Given a non-empty string s and an integer k, rearrange the string such that
@@ -8,6 +8,8 @@ from heapq import heappush, heappop
 # If it is not possible to rearrange the string, return an empty string "".
 # f("aabbcc", 3) => "abcabc"
 # f("aaabc", 3) => ""
+
+# similar to Task Schedular
 class Solution(object):
     def rearrangeString(self, s, k):
         """
@@ -18,23 +20,26 @@ class Solution(object):
         if k == 0: return s
 
         counter = Counter(s)
-        pq = []
-        for char, count in counter.iteritems():
-            heappush(pq, (-count, char))
+        heap = Heap(lambda t: (-t[1], t[0]))
+        for char, count in counter.items():
+            heap.push((char, count))
 
         res = []
         while len(res) < len(s):
-            group = []
-            for _ in range(min(len(s) - len(res), k)):
-                if not pq:
-                    return ''
-                neg_count, char = heappop(pq)
-                res.append(char)
-                if neg_count < -1:
-                    group.append((neg_count + 1, char))
+            curr_group = []  # each group except the last has k chars
 
-            for pair in group:
-                heappush(pq, pair)
+            for _ in range(min(k, len(s) - len(res))):
+                # no other distinct chars to fill
+                if len(heap) == 0:
+                    return ''
+
+                char, cnt = heap.pop()
+                res.append(char)
+                if cnt > 1:
+                    curr_group.append((char, cnt - 1))
+
+            for pair in curr_group:
+                heap.push(pair)
 
         return ''.join(res)
 # O(nlog(c)) time, O(c) space, given c to be possible types of chars

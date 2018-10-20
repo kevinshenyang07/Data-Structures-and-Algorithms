@@ -19,19 +19,19 @@ class Solution(object):
         n = len(quality)
         workers = sorted((float(wage[i]) / quality[i], quality[i]) for i in range(n))
 
-        heap = []
+        pq = []  # max heap on quality
         qsum = 0  # sum of quality of the k workers picked
         res = float('inf')
 
         for i in range(n):
-            r, q = workers[i]
-            heapq.heappush(heap, -q)
+            r, q = workers[i]  # r to be the current highest ratio from 0 to i
+            heappush(pq, -q)
             qsum += q
 
-            if len(heap) > K:
+            if len(pq) > K:
                 # drop the worker with highest quality to minize cost
-                qsum += heapq.heappop(heap)  # qsum -= q
-            if len(heap) == K:
+                qsum += heappop(pq)  # qsum -= q
+            if len(pq) == K:
                 res = min(res, qsum * r)
 
         return res
