@@ -1,6 +1,5 @@
 from collections import Counter
-from heapq import heappush, heappop
-
+from heap import Heap
 
 # Task Scheduler
 # Given a char array representing tasks CPU need to do.
@@ -23,27 +22,29 @@ class SolutionV1(object):
         :rtype: int
         """
         counter = Counter(tasks)
-        pq = []
-        for k, v in counter.iteritems():
-            heappush(pq, (-v, k))
+        heap = Heap(lambda t: (-t[1], t[0]))
+        for task, cnt in counter.items():
+            heap.push((task, cnt))
 
-        # with tasks from biggest occurrences to smallest
-        intervals_last_cycle = 0
-        while pq:
+        # each cycle has n + 1 intervals
+        # the idle intervals in last cycle don't count
+        cycles = curr_cycle_num_tasks = 0
+
+        while len(heap) > 0:
             cycles += 1
-            intervals_last_cycle = min(n + 1, len(pq))
+            curr_cycle_num_tasks = min(n + 1, len(heap))
             curr_cycle = []  # tasks that have been scheduled in the cycle
 
-            for _ in range(intervals_last_cycle):
+            for _ in range(curr_cycle_num_tasks):
                 # fill the cycle with taks of currently largest occurrence
-                neg_cnt, k = heappop(pq)
-                if neg_cnt < -1:
-                    curr_cycle.append((neg_cnt + 1, k))
+                task, cnt = heap.pop()
+                if cnt > 1:
+                    curr_cycle.append((task, cnt - 1))
 
             for pair in curr_cycle:
-                heappush(pq, pair)
+                heap.push(pair)
 
-        return (n + 1) * (cycles - 1) + intervals_last_cycle
+        return (n + 1) * (cycles - 1) + curr_cycle_num_tasks
 
 
 # greedy solution, hard to prove, not recommended
