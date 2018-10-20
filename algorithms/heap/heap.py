@@ -15,6 +15,7 @@ class Heap(object):
     def pop(self):
         return heappop(self.data)[1]
 
+    # optional
     def peek(self):
         if self.data:
             return self.data[0][1]
