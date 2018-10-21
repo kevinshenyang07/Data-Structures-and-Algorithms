@@ -1,4 +1,3 @@
-from collections import defaultdict
 from union_find import UnionFind
 
 # Accpimts Merge
@@ -19,7 +18,6 @@ class Solution(object):
                 uf.union(p, q)
 
         # collect emails by tree
-        id_to_emails = defaultdict(list)  # id => emails
         for email, p in email_to_id.iteritems():
             parent = uf.find(p)
             id_to_emails[parent].append(email)

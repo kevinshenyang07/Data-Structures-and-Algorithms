@@ -1,5 +1,3 @@
-from collections import deque
-
 # Surrounded Regions
 # approach: introducing a new state 'T'
 class Solution(object):
@@ -8,7 +6,7 @@ class Solution(object):
             return
 
         m, n = len(board), len(board[0])
-        queue = deque()
+        queue = collections.deque()
 
         # add coordinates on the edge
         for i in range(m):

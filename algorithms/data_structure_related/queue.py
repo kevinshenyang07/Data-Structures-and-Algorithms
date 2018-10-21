@@ -1,9 +1,7 @@
-from collections import deque
-
 # assumption: array is not empty, 1 <= k <= len(nums)
 def max_sliding_window(nums, k):
     result = []
-    dq = deque()  # decreasing deque
+    dq = collections.deque()  # decreasing deque
     for i, num in enumerate(nums):
         # add num to the deque
         # since num is the newest element, elements in deque that are
@@ -28,7 +26,7 @@ def max_sliding_window(nums, k):
 # Implement Stack using Queues
 class QueueStack(object):
     def __init__(self):
-        self._queue = deque()
+        self._queue = collections.deque()
 
     def push(self, x):
         q = self._queue

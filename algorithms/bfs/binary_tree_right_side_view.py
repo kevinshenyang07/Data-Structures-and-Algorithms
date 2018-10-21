@@ -1,5 +1,3 @@
-from collections import deque
-
 # Binary Tree Right Side View
 class BfsSolution(object):
     def right_side_view(self, root):
@@ -8,7 +6,7 @@ class BfsSolution(object):
             return []
 
         res = []
-        queue = deque([root])
+        queue = collections.deque([root])
 
         while queue:
             count = len(queue)

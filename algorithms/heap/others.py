@@ -1,4 +1,3 @@
-from collections import Counter
 from heapq import heappush, heappop
 
 # Merge K Sorted Lists
@@ -122,7 +121,7 @@ class Element(object):
 
 
 def top_k_frequent(words, k):
-    word_to_count = Counter(words)
+    word_to_count = collections.Counter(words)
     pq = []
     for word, cnt in word_to_count.iteritems():
         heappush(pq, Element(cnt, word))

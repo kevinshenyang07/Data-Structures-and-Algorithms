@@ -1,4 +1,3 @@
-from collections import Counter
 from heap import Heap
 
 # Task Scheduler
@@ -21,7 +20,7 @@ class SolutionV1(object):
         :type n: int
         :rtype: int
         """
-        counter = Counter(tasks)
+        counter = collections.Counter(tasks)
         heap = Heap(lambda t: (-t[1], t[0]))
         for task, cnt in counter.items():
             heap.push((task, cnt))
@@ -50,7 +49,7 @@ class SolutionV1(object):
 # greedy solution, hard to prove, not recommended
 class SolutionV2(object):
     def leastInterval(self, tasks, n):
-        counter = Counter(tasks)
+        counter = collections.Counter(tasks)
         # count number of tasks with largest occurrence
         counts = counter.values()
         max_cnt = max(counts)

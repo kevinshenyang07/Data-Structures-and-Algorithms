@@ -1,5 +1,3 @@
-from collections import deque
-
 # topological ordering: starting from vertices with no in-edge, to the vertices with no out-edge
 # the vertices in the cycle won't be added to queue, which can be used to determine if valid
 
@@ -21,7 +19,7 @@ def can_finish(num_courses, prerequisites):
         in_degrees[pre] += 1
 
     # vertices that have no in edges
-    queue = deque(i for i in range(num_courses) if in_degrees[i] == 0)
+    queue = collections.deque(i for i in range(num_courses) if in_degrees[i] == 0)
     while queue:
         course = queue.popleft()
         for pre in graph[course]:
@@ -78,7 +76,7 @@ def alien_order(words):
 
     # 3. start topological sort
     # vertices that have no in edges
-    queue = deque(char for char in chars if in_degrees[char] ==0)
+    queue = collections.deque(char for char in chars if in_degrees[char] ==0)
     order = []
     while queue:
         char = queue.popleft()

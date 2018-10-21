@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 # Accounts Merge
 # think Number of Islands
 # assumption: if two accounts shares one email, the account name is the same
@@ -11,7 +9,7 @@ class Solution(object):
         """
         res = []
         self.visited = [False] * len(accounts)
-        self.mapping = defaultdict(list)  # email => indices of connected accounts that contains that email
+        self.mapping = collections.defaultdict(list)  # email => indices of connected accounts that contains that email
 
         # generate edges from node (email) to sub-graph (account)
         for i, account in enumerate(accounts):

@@ -1,5 +1,3 @@
-from collections import deque
-
 # Closest Binary Search Tree Value
 # Given a non-empty binary search tree and a target value,
 # find the value in the BST that is closest to the target.
@@ -45,7 +43,7 @@ class Solution(object):
         :rtype: List[int]
         """
         # inorder traversal of BST => sorted values
-        queue = deque()
+        queue = collections.deque()
         self.inorder(root, target, k, queue)
         return queue
 

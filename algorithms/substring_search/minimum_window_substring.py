@@ -1,5 +1,3 @@
-from collections import Counter
-
 '''
 general approach to substring search problems:
 1. have two pointers from the start, keep track of current state
@@ -18,7 +16,7 @@ class Solution(object):
         """
         res = ''
         missing = len(t)
-        counter = Counter(t)
+        counter = collections.Counter(t)
         # move right pointer as far as possible to find a valid substring
         # then move left pointer as far as possible to minimize that substring
         i = 0

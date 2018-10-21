@@ -1,4 +1,3 @@
-from collections import Counter
 from heap import Heap
 
 # Rearrange String k Distance Apart
@@ -19,7 +18,7 @@ class Solution(object):
         """
         if k == 0: return s
 
-        counter = Counter(s)
+        counter = collections.Counter(s)
         heap = Heap(lambda t: (-t[1], t[0]))
         for char, count in counter.items():
             heap.push((char, count))

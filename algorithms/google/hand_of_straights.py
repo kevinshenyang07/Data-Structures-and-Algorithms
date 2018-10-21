@@ -1,5 +1,3 @@
-from collections import Counter
-
 # Hand of Straights
 # Alice has a hand of cards, given as an array of integers.
 # Now she wants to rearrange the cards into groups so that each group is size W,
@@ -14,7 +12,7 @@ class Solution(object):
         :type W: int
         :rtype: bool
         """
-        counter = Counter(hand)
+        counter = collections.Counter(hand)
 
         for n in sorted(counter.keys()):
             if counter[n] > 0:

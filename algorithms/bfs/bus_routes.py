@@ -1,5 +1,3 @@
-from collections import defaultdict, deque
-
 # Bus Routes
 # each routes[i] is a bus route that the i-th bus repeats forever
 # we start at bus stop S and we want to go to bus stop T
@@ -12,15 +10,13 @@ class Solution(object):
         :type T: int
         :rtype: int
         """
-        stop_to_routes = defaultdict(set)
+        stop_to_routes = collections.defaultdict(set)
 
         for i, route in enumerate(routes):
             for stop in route:
                 stop_to_routes[stop].add(i)
 
         visited_stops = set([S])
-        visited_routes = set()  # further reduce time complexity
-        queue = deque([(S, 0)])  # if S == T , no need to take a bus
 
         while queue:
             stop, num_bus = queue.popleft()

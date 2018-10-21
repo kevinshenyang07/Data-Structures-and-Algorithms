@@ -1,5 +1,3 @@
-from collections import deque
-
 # Shortest Distance from All Buildings
 # 0: empty land, 1: building, 2: obstacle
 # can only move four directions
@@ -43,7 +41,7 @@ class Solution(object):
         return min_dist if min_dist < float('inf') else -1
 
     def bfs(self, i, j, grid, distances, updated_times):
-        queue = deque([(i, j, 0)])
+        queue = collections.deque([(i, j, 0)])
         visited = [[False for _ in range(len(grid[0]))] for _ in range(len(grid))]
         visited[i][j] = True
         connected = 0  # number of other buildings connected

@@ -1,5 +1,3 @@
-from collections import defaultdict, deque
-
 # All Nodes Distance K in Binary Tree
 # return a list of values of all nodes that have a distance K from the target node
 # distance between two nodes = length of shortest path
@@ -17,7 +15,7 @@ class Solution(object):
         graph = self.build_graph(root)
 
         visited = set([target.val])
-        queue = deque([(target.val, 0)])
+        queue = collections.deque([(target.val, 0)])
         res = []
 
         while queue:
@@ -33,9 +31,9 @@ class Solution(object):
         return res
 
     def build_graph(self, root):
-        graph = defaultdict(set)
+        graph = collections.defaultdict(set)
 
-        queue = deque([root])
+        queue = collections.deque([root])
         while queue:
             node = queue.popleft()
             if node.left:

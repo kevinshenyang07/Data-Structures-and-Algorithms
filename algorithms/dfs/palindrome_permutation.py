@@ -1,5 +1,3 @@
-from collections import Counter
-
 # Palindrome Permutation II
 # Given a string s, return all the palindromic permutations (without duplicates) of it.
 # Return an empty list if no palindromic permutation could be form.
@@ -10,7 +8,7 @@ class Solution(object):
         :type s: str
         :rtype: List[str]
         """
-        counter = Counter(s)
+        counter = collections.Counter(s)
         seed = ''
         for char, count in counter.iteritems():
             if count % 2 == 1:

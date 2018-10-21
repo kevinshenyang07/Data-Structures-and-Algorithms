@@ -1,6 +1,3 @@
-from collections import defaultdict
-
-
 # Network Delay Time
 # There are N network nodes, labelled 1 to N. Given times, a list of travel times as directed edges times[i] = (u, v, w),
 # where u is the source node, v is the target node, and w is the time it takes for a signal to travel from source to target.
@@ -13,7 +10,7 @@ class Solution(object):
         :type K: int
         :rtype: int
         """
-        adj_map = defaultdict(dict)
+        adj_map = collections.defaultdict(dict)
         dist = { i: float('inf') for i in range(1, N + 1) }
         dist[K] = 0  # make sure BFS starts with K
 

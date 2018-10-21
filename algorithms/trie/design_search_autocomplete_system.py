@@ -1,5 +1,3 @@
-from collections import deque
-
 # Design Search Autocomplete System
 # since it's locked and long, description refer to http://www.cnblogs.com/grandyang/p/7897166.html
 class TrieNode(object):
@@ -56,7 +54,7 @@ class AutocompleteSystem(object):
             curr = curr.children[char]
 
         res = []
-        queue = deque([curr])
+        queue = collections.deque([curr])
 
         while queue:
             node = queue.popleft()

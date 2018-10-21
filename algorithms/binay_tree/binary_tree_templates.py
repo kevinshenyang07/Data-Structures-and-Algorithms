@@ -1,5 +1,3 @@
-from collections import deque
-
 # preorder: root - left subtree - right subtree (root is pre-children)
 # inorder: left subtree - root - right subtree (root is in-children)
 
@@ -77,7 +75,7 @@ def is_valid_bst(root):
 def level_order(root):
     if not root:
         return []
-    queue = deque([root])
+    queue = collections.deque([root])
     visited = []
     while queue:
         level = []

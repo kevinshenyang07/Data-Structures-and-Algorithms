@@ -1,5 +1,3 @@
-from collections import Counter
-
 # Permutaion In String
 # fixed-width sliding window
 class Solution(object):
@@ -9,7 +7,7 @@ class Solution(object):
         :type s2: str
         :rtype: bool
         """
-        counter = Counter(s1)
+        counter = collections.Counter(s1)
 
         for i, char in enumerate(s2):
             counter[char] = counter.get(char, 0) - 1

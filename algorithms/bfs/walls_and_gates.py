@@ -1,5 +1,3 @@
-from collections import deque
-
 # Walls and Gates
 class Solution(object):
     def walls_and_gates(self, rooms):
@@ -9,7 +7,7 @@ class Solution(object):
         """
         if not any(rooms): return
 
-        queue = deque()
+        queue = collections.deque()
 
         for i in range(len(rooms)):
             for j in range(len(rooms[0])):

@@ -1,4 +1,3 @@
-from collections import defaultdict
 from linked_list import LinkedList, ListNode
 
 # LFU Cache
@@ -18,7 +17,7 @@ class LFUCache(object):
         self.capacity = capacity
         self.node_map = {}  # key => node
         self.counter = {}  # key => count
-        self.cnt_map = defaultdict(LinkedList)  # count => list
+        self.cnt_map = collections.defaultdict(LinkedList)  # count => list
         self.min = 0
 
     def get(self, key):

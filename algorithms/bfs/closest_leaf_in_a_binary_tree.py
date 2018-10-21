@@ -1,5 +1,3 @@
-from collections import defaultdict, deque
-
 # Closest Leaf in a Binary Tree
 # Given a binary tree where every node has a unique value, and a target key k,
 # find the value of the nearest leaf node to target k in the tree.
@@ -28,7 +26,7 @@ class Solution(object):
 
         graph, leaves = self.to_graph_and_leaves(root)
 
-        queue = deque([k])
+        queue = collections.deque([k])
         while queue:
             val = queue.popleft()
             if val in leaves:
@@ -40,13 +38,11 @@ class Solution(object):
 
         return -1
 
-    def to_graph_and_leaves(self, root):
-        graph = defaultdict(list)
         leaves = set()
         # need to keep track of leaves since there are cases that root having one child
         # len(graph[n]) does not necessarily mean n is a leaf
 
-        queue = deque([root])
+        queue = collections.deque([root])
         while queue:
             node = queue.popleft()
 

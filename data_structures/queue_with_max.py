@@ -1,10 +1,8 @@
-from collections import deque
-
 class QueueWithMax(object):
 
     def __init__(self):
-        self.queue = deque()
-        self.max_queue = deque()
+        self.queue = collections.deque()
+        self.max_queue = collections.deque()
 
     def enqueue(self, ele):
         self.queue.append(ele)
