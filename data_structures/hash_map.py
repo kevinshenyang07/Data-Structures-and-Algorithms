@@ -78,8 +78,8 @@ if __name__ == '__main__':
         hash_map[keys[i]] = i
     print hash_map
     print "a" in hash_map  # True
-    del hash_map["a"]
-    del hash_map["b"]
+    hash_map.pop("a")
+    hash_map.pop("b")
     print hash_map
     # it should call resize() when enough items are inserted
     # it should rehash existing values

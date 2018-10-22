@@ -17,7 +17,7 @@ class Solution(object):
                 matches[pattern[0]] = word[:i]
                 if self.dfs(pattern[1:], word[i:], matches):
                     return True
-                del matches[pattern[0]]  # this pattern does not work
+                matches.pop(pattern[0])  # this pattern does not work
             # pattern[0] was previously matched in the same way
             elif pattern[0] in matches and matches[pattern[0]] == word[:i]:
                 if self.dfs(pattern[1:], word[i:], matches):

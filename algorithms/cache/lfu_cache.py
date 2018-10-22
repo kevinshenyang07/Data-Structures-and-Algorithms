@@ -51,7 +51,7 @@ class LFUCache(object):
             return
         if len(self.node_map) == self.capacity:
             evicted = self.evict_least_freq()
-            del self.node_map[evicted.key]
+            self.node_map.pop(evicted.key)
         node = ListNode(key, value)
         self.node_map[key] = node
         self.cnt_map[1].append(node)

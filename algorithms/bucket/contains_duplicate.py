@@ -40,7 +40,7 @@ class Solution(object):
             # maintain a window of size k
             if i > k:
                 last_j = nums[i - k - 1] / (t + 1)
-                del buckets[last_j]
+                buckets.pop(last_j)
             # duplicate can only appear in current or nearby buckets
             j = num / (t + 1)
             if j in buckets:

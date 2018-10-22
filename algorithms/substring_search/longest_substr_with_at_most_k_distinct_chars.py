@@ -15,7 +15,7 @@ class Solution(object):
 
             if len(mapping) > k:
                 j = min(mapping.values())
-                del mapping[s[j]]
+                mapping.pop(s[j])
                 left = j + 1
 
             max_length = max(max_length, i - left + 1)

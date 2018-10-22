@@ -26,7 +26,7 @@ class Logger(object):
         # use .keys() to avoid deleting keys during dict iteration
         for ts in self.logged.keys():
             if timestamp - ts >= 10:
-                del self.logged[ts]
+                self.logged.pop(ts)
             elif message in self.logged[ts]:
                 return False
         # do not add message to cache if already logged in last 10 sec

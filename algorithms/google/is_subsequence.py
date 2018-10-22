@@ -10,6 +10,7 @@
 class Solution(object):
     def isSubsequence(self, s, t):
         # this should be done before the call
+        # can also cache completed query
         indices_map = collections.defaultdict(list)  # char => indices on t
         for i, char in enumerate(t):
             indices_map[char].append(i)

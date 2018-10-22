@@ -44,7 +44,7 @@ class LRUCache(object):
         if len(self.node_map) == self.capacity:
             # eject the least recent node and remove from mapping
             first = self.list.popleft()
-            del self.node_map[first.key]
+            self.node_map.pop(first.key)
         node = ListNode(key, value)
         self.list.append(node)
         self.node_map[key] = node

@@ -12,7 +12,7 @@ def my_atoi(s):
 
     sign = -1 if chars[0] == '-' else 1
     if chars[0] in ['+', '-']:
-        del chars[0]
+        chars.pop(0)
 
     res, i = 0, 0
     digits = '0123456789'
