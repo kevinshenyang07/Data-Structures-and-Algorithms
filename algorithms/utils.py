@@ -1,11 +1,6 @@
 # prefer list comprehension over map() and filter()
 # Python has no switch case, just if / elif
 
-import string
-string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-string.lowercase # a-z
-string.digits  # 0-9
-
 # range of 32-bit signed integer is [- 2 ** 31, 2 ** 31 - 1]
 # sys.maxint not the same on diffrent systems, and is deprecated in py3
 float('-inf')
@@ -16,6 +11,11 @@ bin(num).count('1')  # for a positive integer return number of "1"s in its binar
 
 copied = [row[:] for row in matrix]  # copy a matrix
 
+import random
+random.random()
+random.randint(start, end)  # inclusive on both ends
+random.choice(seq)
+
 #
 # interval utils
 
@@ -24,9 +24,13 @@ copied = [row[:] for row in matrix]  # copy a matrix
 def overlaps(s1, e1, s2, e2):
     return max(s1, s2) < min(e1, e2)
 
-
 #
 # string utils
+
+import string
+string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+string.lowercase # a-z
+string.digits  # 0-9
 
 # strings are immutable in Python, so this solution takes same space
 # and actually is slower than s[::-1], since the slicing is optimzed by CPython

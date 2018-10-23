@@ -1,6 +1,7 @@
+from heap import Heap
+
 # Exam Room
 # Assume ExamRoom.leave(p) are calls are valid.
-
 class ExamRoom(object):
 
     def __init__(self, N):
