@@ -5,8 +5,8 @@ def max_subarray(nums):
     curr_sum = nums[0]
     max_sum = nums[0]
     for i in range(1, len(nums)):
-        # if curr_sum < 0, have a new start, otherwise accumulate
-        curr_sum = max(nums[i], curr_sum + nums[i])
+        # if curr_sum + nums[i] < 0, have a new start, otherwise accumulate
+        curr_sum = max(curr_sum + nums[i], nums[i])
         max_sum = max(max_sum, curr_sum)
     return max_sum
 
