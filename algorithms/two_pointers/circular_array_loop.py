@@ -9,14 +9,21 @@ class Solution(object):
         :rtype: bool
         """
         for i in range(len(steps)):
-            slow, fast = i, self.next(steps, i)
+            if steps[i] == 0:
+                continue
 
-            while slow >= 0 and fast >= 0 and slow != fast:
+            slow = fast = i
+            while slow >= 0 and fast >= 0:
                 slow = self.next(steps, slow)
                 fast = self.next(steps, self.next(steps, fast))
+                if slow >= 0 and slow == fast:
+                    return True
 
-            if slow >= 0 and slow == fast:
-                return True
+            slow = i
+            while slow >= 0 and steps[i] * steps[slow] > 0:
+                next_slow = self.next(steps, slow)
+                steps[slow] = 0
+                slow = next_slow
 
         return False
 
