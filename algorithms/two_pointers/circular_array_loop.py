@@ -1,0 +1,36 @@
+# Circular Array Loop
+# A loop starts and ends at a particular index with more than 1 element along the loop.
+# The loop must be "forward" or "backward'. Assume no zeros in the array.
+# similar to find circle in linked list
+class Solution(object):
+    def circularArrayLoop(self, steps):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        for i in range(len(steps)):
+            slow, fast = i, self.next(steps, i)
+
+            while slow >= 0 and fast >= 0 and slow != fast:
+                slow = self.next(steps, slow)
+                fast = self.next(steps, self.next(steps, fast))
+
+            if slow >= 0 and slow == fast:
+                return True
+
+        return False
+
+    def next(self, steps, i):
+        if i < 0:  # for fast pointer
+            return -1
+
+        n = len(steps)
+        next_i = (i + steps[i] + n) % n  # both pos and neg situations
+
+        if steps[i] * steps[next_i] < 0:  # different directions
+            return -1
+        if i == next_i:  # self loop
+            return -1
+
+        return next_i
+# O(n) time, O(1) space
