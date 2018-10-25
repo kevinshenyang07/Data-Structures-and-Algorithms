@@ -5,21 +5,21 @@
 
 # approach: bottom up with postorder since it can carry info from children
 class Solution(object):
-    def count_unival_subtrees(self, root):
+    def countUnivalSubtrees(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        res = [0]
-        self.postorder(root, res)
-        return res[0]
+        self.cnt = 0
+        self.postorder(root)
+        return self.cnt
 
-    def postorder(self, node, res):
+    def postorder(self, node):
         if not node:
             return True
 
-        valid_left = self.postorder(node.left, res)
-        valid_right = self.postorder(node.right, res)
+        valid_left = self.postorder(node.left)
+        valid_right = self.postorder(node.right)
 
         univalue = True
         if node.left and node.left.val != node.val:
@@ -28,6 +28,6 @@ class Solution(object):
             univalue = False
 
         if valid_left and valid_right and univalue:
-            res[0] += 1
+            self.cnt += 1
             return True
         return False
