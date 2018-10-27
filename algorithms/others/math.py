@@ -45,6 +45,7 @@ def factorize(n):
     return prime_factors
 
 
+# greatest common divisor
 def gcd(a, b):
     # b cannot be 0
     if a % b == 0:
@@ -52,6 +53,24 @@ def gcd(a, b):
     return gcd(b, a % b)
 # O(log(a+b)) time
 
+
+# lowest common multiply
+def lcm(a, b):
+    return a * b / gcd(a, b)
+
+
+# Mirror Reflection
+# imagine the walls can be mirrored upward, each time the ray hit
+# the left or right wall it goes up by q vertically
+def mirror_reflection(p, q):
+    lcm = lcm(p, q)
+
+    if lcm / q % 2 == 0:
+        return 2
+    if lcm / p % 2 == 1:
+        return 1
+    if lcm / p % 2 != 1:
+        return 0
 
 # Find the Derangement of An Array
 # a derangement is a permutation of the elements of a set,
