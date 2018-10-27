@@ -3,9 +3,9 @@ class ListNode(object):
     def __init__(self, key, val, expire_at=-1):
         self.key = key
         self.val = val
-        self.expire_at = expire_at  # only for map with expiration
         self.prev = None
         self.next = None
+        self.expire_at = expire_at  # only for map with expiration
 
 
 class LinkedList(object):
