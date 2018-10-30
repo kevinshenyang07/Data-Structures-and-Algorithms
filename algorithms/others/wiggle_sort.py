@@ -1,6 +1,6 @@
 # Wiggle Sort
 # reorder it in-place such that nums[0] <= nums[1] >= nums[2] <= nums[3]...
-class SolutionQ1(object):
+class Solution(object):
     def wiggleSort(self, nums):
         """
         :type nums: List[int]

@@ -4,7 +4,7 @@
 # Next Greater Element I
 # find_nums = [4, 1, 2], nums = [1, 3, 4, 2]
 # result = [-1, 3, -1] (array not circular)
-class SolutionQ1(object):
+class Solution(object):
     def nextGreaterElement(find_nums, nums):
         next_greater = {}
         stack = []  # decreasing stack
@@ -23,7 +23,7 @@ class SolutionQ1(object):
 
 # Next Greater Element II
 # nums = [3, 1, 2, 1], result = [-1, 2, 3, 3] (array is circular)
-class SolutionQ2(object):
+class Solution(object):
     def nextGreaterElements(self, nums):
         ans = [-1] * len(nums)
         stack = []

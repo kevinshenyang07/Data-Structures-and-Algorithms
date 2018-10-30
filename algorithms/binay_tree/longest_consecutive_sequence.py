@@ -2,7 +2,7 @@
 # Given a binary tree, find the length of the longest consecutive sequence path.
 # The path needs to be from parent to child (cannot be the reverse).
 # "consecutive" means increasing by 1 each time
-class SolutionQ1(object):
+class Solution(object):
     def longest_consecutive(self, root):
         """
         :type root: TreeNode
@@ -34,7 +34,7 @@ class SolutionQ1(object):
 #  / \
 # 1   3
 # => 3
-class SolutionQ2(object):
+class Solution(object):
     def longest_consecutive(self, root):
         """
         :type root: TreeNode

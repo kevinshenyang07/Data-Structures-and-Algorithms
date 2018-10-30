@@ -6,7 +6,7 @@ from union_find import UnionFind
 # in each pair [u, v], u < v, and the edge is undirected
 # return an edge that can be removed to make it tree again
 # if there are multiple answers, return the answer that occurs last in the given input
-class SolutionQ1(object):
+class Solution(object):
     def findRedundantConnection(self, edges):
         """
         :type edges: List[List[int]]
@@ -28,7 +28,7 @@ class SolutionQ1(object):
 # each pair [u, v] means u is a parent of v
 # return an edge that can be removed to make it a ROOTED tree again
 # if there are multiple answers, return the answer that occurs last in the given input
-class SolutionQ2(object):
+class Solution(object):
     def findRedundantDirectedConnection(self, edges):
         """
         :type edges: List[List[int]]

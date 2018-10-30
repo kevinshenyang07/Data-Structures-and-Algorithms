@@ -1,7 +1,7 @@
 from prefix_tree import TrieNode
 
 # Word Search
-class SolutionQ1(object):
+class Solution(object):
     def exist(self, board, word):
         if not any(board):
             return False
@@ -35,7 +35,7 @@ class SolutionQ1(object):
 
 
 # Word Search II
-class SolutionQ2(object):
+class Solution(object):
     def findWords(self, board, words):
         """
         :type board: List[List[str]]
