@@ -5,7 +5,6 @@ class ListNode(object):
         self.val = val
         self.prev = None
         self.next = None
-        self.expire_at = expire_at  # only for map with expiration
 
 
 class LinkedList(object):

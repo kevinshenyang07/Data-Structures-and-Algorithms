@@ -22,14 +22,13 @@ class Solution(object):
 
     def subset_sum_ways(self, nums, subtotal):
         """
-        dp[i]: ways to pick a subset of nums that sum up to i
+        dp[i]: ways to pick a subset of nums that sum up to i (target)
         dp[i] = dp[i - nums[0]] + ... + dp[i - nums[-1]]
         """
         dp = [0] * (subtotal + 1)
         dp[0] = 1  # one way to pick nothing
 
-        # let the index of num to be i, able to pick numbers
-        # from index 0 to i in current iteration
+        # use numbers from 0 to index of current num
         for num in nums:
             # to avoid num being used twice
             for i in range(subtotal, num - 1, -1):
