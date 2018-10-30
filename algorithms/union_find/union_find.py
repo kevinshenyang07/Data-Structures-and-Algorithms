@@ -1,4 +1,8 @@
 class UnionFind(object):
+    '''
+    beware that if an element has never been called in .find(),
+    its parent might not be the final parent
+    '''
     def __init__(self, n):
         self.parents = range(n)
         self.sizes = [1] * n
