@@ -2,6 +2,7 @@ class UnionFind(object):
     def __init__(self, n):
         self.parents = range(n)
         self.sizes = [1] * n
+        self.num_groups = n
 
     # amortized O(1) time:
     def find(self, p):
@@ -22,6 +23,7 @@ class UnionFind(object):
         if parent_p != parent_q:
             self.parents[parent_q] = parent_p
             self.sizes[parent_p] += self.sizes[parent_q]
+            self.num_groups -= 1
 
 # proof of time complexity of #find
 # imagine there's only one tree with n nodes, and each node
