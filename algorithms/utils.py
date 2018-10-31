@@ -51,6 +51,19 @@ def is_palindrome(s):
             return False
     return True
 
+# test if s is a subseq of t, could be slow if t is large
+def naive_is_subsequence(s, t):
+    if not s:
+        return False
+    i = 0  # on s
+    for char in t:
+        if char == s[i]:
+            i += 1
+        if i == len(s):
+            return True
+    return False
+
+
 #
 # linked list utils
 
