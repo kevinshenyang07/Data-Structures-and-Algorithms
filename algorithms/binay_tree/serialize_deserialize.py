@@ -16,17 +16,20 @@ class Codec(object):
         return ' '.join([str(node.val), left, right])
 
     def deserialize(self, data):
-        return self.build_tree(iter(data.split(' ')))
+        queue = collections.deque(data.split(' '))
+        return self.build_tree(queue)
 
-    def build_tree(self, it):
-        frag = next(it)
-        if frag == '#':
+    def build_tree(self, queue):
+        # guaranteed to have element to pop since the last ones must be '#
+        val = queue.popleft()
+
+        if val == '#':
             return None
-
-        root = TreeNode(int(frag))
-        root.left = self.build_tree(it)
-        root.right = self.build_tree(it)
-        return root
+        else:
+            node = TreeNode(int(val))
+            node.left = self.build_tree(queue)
+            node.right = self.build_tree(queue)
+            return node
 
 
 # Serialize and Deserialize N-ary Tree
@@ -43,21 +46,23 @@ class Codec(object):
         return ' '.join([str(root.val)] + children_s)
 
     def deserialize(self, data):
-        return self.build_tree(iter(data.split(' ')))
+        queue = collections.deque(data.split(' '))
+        return self.build_tree(queue)
 
-    def build_tree(self, it):
-        frag = next(it)
-        if frag == '#':
+    def build_tree(self, queue):
+        val = queue.popleft()
+
+        if val == '#':
             return None
+        else:
+            node = Node(int(val), [])
 
-        root = Node(int(frag), [])
-        # until all nodes under root has been visited
-        while True:
-            child = self.build_tree(it)
-            if not child:
-                break
-            root.children.append(child)
-        return root
+            while True:
+                child = self.build_tree(queue)
+                if not child:
+                    break
+                node.children.append(child)
+            return node
 
 
 # Serialize and Deserialize BST
@@ -68,10 +73,12 @@ class Codec:
         return ' '.join(str(v) for v in visited)
 
     def preorder(self, root, visited):
-        if root:
-            visited.append(root.val)
-            self.preorder(root.left, visited)
-            self.preorder(root.right, visited)
+        if not root:
+            return
+
+        visited.append(root.val)
+        self.preorder(root.left, visited)
+        self.preorder(root.right, visited)
 
     def deserialize(self, data):
         if not data:
@@ -82,11 +89,12 @@ class Codec:
 
     def build_tree(self, queue, min_val, max_val):
         # every node on the left should be smaller than val, and vice versa
-        if queue and min_val < queue[0] < max_val:
-            val = queue.popleft()
-            node = TreeNode(val)
+        if not queue or not (min_val < queue[0] < max_val):
+            return None
 
-            node.left = self.build_tree(queue, min_val, val)
-            node.right = self.build_tree(queue, val, max_val)
+        val = queue.popleft()
+        node = TreeNode(val)
 
-            return node
+        node.left = self.build_tree(queue, min_val, val)
+        node.right = self.build_tree(queue, val, max_val)
+        return node
