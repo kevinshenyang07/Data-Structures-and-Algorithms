@@ -22,8 +22,7 @@ class WordDictionary(object):
         """
         curr = self.root
         for char in word:
-            if char not in curr.children:
-                curr.children[char] = TrieNode()
+            curr.children[char] = curr.children.get(char, TrieNode())
             curr = curr.children[char]
         curr.is_word = True
 

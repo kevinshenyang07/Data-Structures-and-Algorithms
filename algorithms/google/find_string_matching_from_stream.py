@@ -1,13 +1,63 @@
 # find string matching from stream
 # given a char stream with two APIs next() and hasNext(), and words List[str] as target
 # whenever a target word appears in the stream, print it out
-def find_matched(stream, words):
-    pass
+# Approach:
+# build a trie from last char to first char, and keep track of chars read from stream
+# whenever a new char comes in traverse down the trie to find matches
+class Stream(object):
+    def __init__(self, chars):
+        self.chars = chars
+        self.i = 0
 
-# 把词典的word逆序后建Trie树 ，再用一个vector存最近遇到的
-# max_length_of_word_in_dict个char，每次来一个char就逆序构造string到Trie中查找
-# 例：
-# stream里已有aabca，新来一个字符t，变成aabcat。
-# 字典里有"cat","bcat","aabcat"。
-# 反建trie的话得到t->a->c (isWord) ->b (isWord) ->a->a (isWord)。
-# aabcat从后往前遍历一次在trie里就能找到所有词。
+    def next(self):
+        char = self.chars[self.i]
+        self.i += 1
+        return char
+
+    def has_next(self):
+        return self.i < len(self.chars)
+
+
+class TrieNode(object):
+    def __init__(self):
+        self.parent = {}
+        self.is_start = False
+        self.data = None
+
+
+class WordLogger(object):
+    def __init__(self, words):
+        self.root = self.build_trie(words)
+
+    def build_trie(self, words):
+        root = TrieNode()
+
+        for word in words:
+            curr = root
+            for i in range(len(word) - 1, -1, -1):
+                char = word[i]
+                curr.parent[char] = curr.parent.get(char, TrieNode())
+                curr = curr.parent[char]
+            curr.is_start = True
+            curr.data = word
+
+        return root
+
+    def find_matched(self, stream):
+        chars = []
+        while stream.has_next():
+            chars.append(stream.next())
+
+            i = len(chars) - 1
+            curr = self.root
+            while i >= 0 and chars[i] in curr.parent:
+                curr = curr.parent[chars[i]]
+                i -= 1
+                if curr.is_start:
+                    print curr.data
+
+
+if __name__ == '__main__':
+    stream = Stream('aabcate')
+    logger = WordLogger(['cat', 'aabcat', 'cate'])
+    logger.find_matched(stream)
