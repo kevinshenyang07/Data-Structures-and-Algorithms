@@ -10,9 +10,11 @@ def can_finish(num_courses, prerequisites):
     :type num_courses: courses labeled from 0 to num_courses - 1
     :type prerequisites: array of [post, pre] course pairs
     :rtype: boolean
+
+    do not use defaultdict since we need to count nodes with in-degree 0!
     """
-    graph = collections.defaultdict(set)  # course => corresponding prerequisite courses
-    in_degrees = collections.defaultdict(int)  # course => number of prerequisite courses
+    graph = { i: set() for i in range(num_courses) }  # course => corresponding prerequisite courses
+    in_degrees = { i: 0 for i in range(num_courses) }  # course => number of prerequisite courses
 
     for post, pre in prerequisites:
         graph[post].add(pre)
@@ -57,8 +59,8 @@ def alien_order(words):
         for char in word:
             chars.add(char)
 
-    graph = collections.defaultdict(set)  # char => chars after
-    in_degrees = collections.defaultdict(int)  # char => number of chars before it
+    graph = { char: set() for char in chars }  # char => chars after
+    in_degrees = { char: 0 for char in chars }  # char => number of chars before it
 
     # 2. map edges to node => set of nodes
     for i in range(len(words) - 1):

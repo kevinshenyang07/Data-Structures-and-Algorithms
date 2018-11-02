@@ -13,19 +13,19 @@ class Solution(object):
 
         n = len(nums)
         uf = UnionFind(n)
-        idx_map = {}  # num => index
+        pos = {}  # num => index
 
         for i, num in enumerate(nums):
             # skip duplicate numbers
-            if num in idx_map:
+            if num in pos:
                 continue
 
-            idx_map[num] = i
+            pos[num] = i
             # always union into larget group
-            if num - 1 in idx_map:
-                uf.union(idx_map[num - 1], i)
-            if num + 1 in idx_map:
-                uf.union(idx_map[num + 1], i)
+            if num - 1 in pos:
+                uf.union(pos[num - 1], i)
+            if num + 1 in pos:
+                uf.union(pos[num + 1], i)
 
         return max(uf.sizes)
 # O(n) time and space
