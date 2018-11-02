@@ -3,13 +3,13 @@ def subarray_sum_optimized(nums, k):
     subtotal = ans = 0
     counter = { 0: 1 }
     # let current index to be i
-    # key: an element in prefix_sum built so far
-    # val: numbers of indices j that satifies k = prefix_sum[i+1] - prefix_sum[j], while j < i
-    # e.g. if prefix_sum[i+1] = 5, k = 2, then any j that makes prefix_sum[j] == 5 - 2
-    #      will make nums[j:i+1] add up to k, since k = prefix_sum[i+1] - prefix_sum[j]
+    # key: an element in pre_sum built so far
+    # val: numbers of indices j that satifies k = pre_sum[i+1] - pre_sum[j], while j < i
+    # e.g. if pre_sum[i+1] = 5, k = 2, then any j that makes pre_sum[j] == 5 - 2
+    #      will make nums[j:i+1] add up to k, since k = pre_sum[i+1] - pre_sum[j]
 
     for num in nums:
-        subtotal += num  # prefix_sum[i]
+        subtotal += num  # pre_sum[i]
 
         if subtotal - k in counter:
             ans += counter[subtotal - k]

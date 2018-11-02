@@ -15,11 +15,11 @@ class BIT(object):
 
     def query(self, i):
         i += 1
-        prefix_sum = 0  # sum from range [0, i] per se
+        pre_sum = 0  # sum from range [0, i] per se
         while i > 0:
-            prefix_sum += self.sums[i]
+            pre_sum += self.sums[i]
             i -= (i & -i)
-        return prefix_sum
+        return pre_sum
 # O(logn) for #accumulate and #query
 #
 # sums[i] = sum of the original values of the whole subtree on i

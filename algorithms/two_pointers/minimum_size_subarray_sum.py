@@ -4,7 +4,7 @@
 # If there isn't one, return 0 instead.
 
 # sliding window version
-class SolutionV1(object):
+class Solution(object):
     def minSubArrayLen(self, s, nums):
         if not nums:
             return 0
@@ -28,32 +28,32 @@ class SolutionV1(object):
 
 
 # followup to provide another version: prefix sum + binary search
-class SolutionV2(object):
+class Solution(object):
     def minSubArrayLen(self, s, nums):
         if not nums:
             return 0
         # since prefix sum is ascending, it can be used to find
         # the smallest window from index i with range sum >= s
-        prefix_sum = [0] * len(nums)
-        prefix_sum[0] = nums[0]
+        pre_sum = [0] * len(nums)
+        pre_sum[0] = nums[0]
         for i in range(1, len(nums)):
-            prefix_sum[i] = prefix_sum[i - 1] + nums[i]
+            pre_sum[i] = pre_sum[i - 1] + nums[i]
 
         min_len = float('inf')
         for i in range(len(nums)):
-            curr_min_len = self.smallest_window(s, prefix_sum, i)
+            curr_min_len = self.smallest_window(s, pre_sum, i)
             min_len = min(min_len, curr_min_len)
 
         return min_len if min_len < float('inf') else 0
 
-    def smallest_window(self, s, prefix_sum, i):
-        left, right = i, len(prefix_sum) - 1
+    def smallest_window(self, s, pre_sum, i):
+        left, right = i, len(pre_sum) - 1
         # important! handle the case when querying range from 0
-        offset = 0 if i == 0 else prefix_sum[i - 1]
+        offset = 0 if i == 0 else pre_sum[i - 1]
 
         while left + 1 < right:
             mid = left + (right - left) / 2
-            subtotal = prefix_sum[mid] - offset
+            subtotal = pre_sum[mid] - offset
             if subtotal < s:
                 left = mid
             elif subtotal > s:
@@ -61,9 +61,9 @@ class SolutionV2(object):
             else:
                 return mid - i + 1
 
-        if prefix_sum[left] - offset >= s:
+        if pre_sum[left] - offset >= s:
             return left - i + 1
-        if prefix_sum[right] - offset >= s:
+        if pre_sum[right] - offset >= s:
             return right - i + 1
         return float('inf')
 # O(nlogn) time, O(n) space

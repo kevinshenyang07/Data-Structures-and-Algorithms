@@ -33,4 +33,3 @@ class Solution(object):
                 dp[i][j] = range_min
 
         return dp[1][n]
-
