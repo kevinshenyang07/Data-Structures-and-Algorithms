@@ -12,16 +12,28 @@ class Solution(object):
         return sum(self.is_expressive(S, W) for W in words)
 
     def is_expressive(self, S, W):
-        j, n = 0, len(W)  #
+        i = j = 0
 
-        for i in range(len(S)):
-            if j < n and S[i] == W[j]:
-                j += 1
-            # if S[i] is not a stretched word, it cannot be compressed to W[j - 1]
-            # S[-2:2] == ''
-            elif S[i - 2:i + 1] != S[i] * 3 and S[i - 1:i + 2] != S[i] * 3:
+        while i < len(S) and j < len(W):
+            if S[i] != W[j]:
                 return False
-        return j == n
+
+            char = S[i]
+
+            cnt_S = 0
+            while i < len(S) and S[i] == char:
+                i += 1
+                cnt_S += 1
+
+            cnt_W = 0
+            while j < len(W) and W[j] == char:
+                j += 1
+                cnt_W += 1
+
+            if cnt_S < cnt_W or (cnt_S == 2 and cnt_W == 1):
+                return False
+
+        return i == len(S) and j == len(W)
 # test cases
 # S = "heeellooo", words = ["hello", "hi", "helo"] => 1
 # S = "zzzzzyyyyy", words = ["zzyy","zy","zyy"] => 3

@@ -17,6 +17,8 @@ class Solution(object):
                 stop_to_routes[stop].add(i)
 
         visited_stops = set([S])
+        visited_routes = set()
+        queue = collections.deque([(S, 0)])
 
         while queue:
             stop, num_bus = queue.popleft()
