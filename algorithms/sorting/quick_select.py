@@ -1,22 +1,56 @@
-# find kth largest = find (n-k)th smallest
+# Kth Largest ELement in an Array
+# k to be one-indexed
 def find_kth_largest(nums, k):
-    if not nums or k <= 0 or k > len(nums):
+    if not nums or k < 1 or k > len(nums):
         return 0
     return quick_select(nums, 0, len(nums) - 1, len(nums) - k)
+# O(n) time, O(1) space
+
+
+# Wiggle Sort II
+def wiggle_sort(nums):
+    n = len(nums)
+    k = (n + 1) / 2
+    median = quick_select(nums, 0, n - 1, k - 1)
+
+    # three-way partition in particular order
+    # weaving them will guarantee correct order (with medians on both side)
+    left = []  # use medians first, then numbers < median
+    right = []  # use numbers > median first, then medians
+
+    for i, num in enumerate(nums):
+        if num < median:
+            left.append(num)
+        elif num > median:
+            right.append(num)
+
+    while len(left) < k:
+        left.append(median)
+
+    for i in range(0, n, 2):
+        nums[i] = left.pop()
+
+    for i in range(1, n, 2):
+        if right:
+            nums[i] = right.pop()
+        else:
+            nums[i] = median  # the rest must be medians
+# O(n) time and space
+
 
 # find kth smallest in range
-def quick_select(nums, i, j ,k):
-    if i == j:
-        return nums[i]
-
-    pivot = partition(nums, i, j)
-    # narrow the partition range by pivot index
-    if pivot < k:
-        return quick_select(nums, pivot + 1, j, k)
-    elif pivot > k:
-        return quick_select(nums, i, pivot - 1, k)
-    else:
-        return nums[pivot]
+# k to be zero-indexed
+def quick_select(nums, i, j, k):
+    while i < j:
+        pivot = partition(nums, i, j)
+        # narrow the partition range by pivot index
+        if pivot < k:
+            i = pivot + 1
+        elif pivot > k:
+            j = pivot - 1
+        else:
+            break
+    return nums[i]
 
 # partition with two pointers, returns a partition index where
 # every element on the left is <= nums[i] (pivot value)
@@ -42,6 +76,20 @@ def partition(nums, i, j):
 # the first call of partition takes O(n), the next take an average of O(n/2)...
 # worst case happens on selecting maximum on a sorted list, using 0 as pivot index
 
+
 if __name__ == '__main__':
-    nums = [10, 4, 5, 8, 6, 11, 26]
-    print find_kth_largest(nums, 4)  # 8
+    print find_kth_largest([1, 2], 1)  # 2
+    print find_kth_largest([10, 4, 5, 8, 6, 11, 26], 4)  # 8
+    print find_kth_largest([1, 2, 1, 1, 2, 1, 2], 4)  # 1
+
+    nums1 = [1, 1, 2, 1, 2]
+    wiggle_sort(nums1)
+    print nums1  # [1, 2, 1, 2, 1]
+
+    nums2 = [1, 3, 2, 2, 3, 1]
+    wiggle_sort(nums2)
+    print nums2 # [2,3,1,3,1,2]
+
+    nums3 = [2, 3,3, 2, 2, 2, 1, 1]
+    wiggle_sort(nums3)
+    print nums3  # [2,3,2,3,1,2,1,2]
