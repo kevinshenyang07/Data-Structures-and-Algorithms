@@ -13,8 +13,8 @@ def wiggle_sort(nums):
     k = (n + 1) / 2
     median = quick_select(nums, 0, n - 1, k - 1)
 
-    # three-way partition in particular order
-    # weaving them will guarantee correct order (with medians on both side)
+    # weave left and right part in particular order
+    # weave so that if medians in both parts won't ever meet
     left = []  # use medians first, then numbers < median
     right = []  # use numbers > median first, then medians
 
