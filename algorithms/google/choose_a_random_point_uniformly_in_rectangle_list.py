@@ -1,5 +1,7 @@
-import random
-
+# choose a random point uniformly in the list of rectangles
+# given a list of rectangles which are not intersect with others, and each rectangle has four points
+# write a method to choose a point uniformly for the list of rectangles
+# assume the rectangle is parallel to x axis
 class Point(object):
     def __init__(self, x, y):
         self.x = x

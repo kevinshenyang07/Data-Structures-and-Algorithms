@@ -1,5 +1,3 @@
-import random
-
 # Random Pick with Weight
 class Solution(object):
 
