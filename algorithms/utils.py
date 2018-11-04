@@ -28,6 +28,8 @@ def overlaps(s1, e1, s2, e2):
 #
 # string utils
 
+# s[i:j] takes O(j - i) time
+
 import string
 string.letters  # 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 string.lowercase # a-z
