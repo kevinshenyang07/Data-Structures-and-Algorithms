@@ -21,17 +21,17 @@ class Solution(object):
         queue = collections.deque([(S, 0)])
 
         while queue:
-            stop, num_bus = queue.popleft()
+            stop, routes_taken = queue.popleft()
 
             if stop == T:
-                return num_bus
+                return routes_taken
 
             for route_id in stop_to_routes[stop]:
                 if route_id not in visited_routes:
 
                     for next_stop in routes[route_id]:
                         if next_stop not in visited_stops:
-                            queue.append((next_stop, num_bus + 1))
+                            queue.append((next_stop, routes_taken + 1))
                             visited_stops.add(next_stop)
 
                     visited_routes.add(route_id)
