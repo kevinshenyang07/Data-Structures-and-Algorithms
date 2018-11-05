@@ -41,3 +41,4 @@ class SuccessionOrder(object):
             order.append(person)
         for child in person.children:
             self.dfs(child, order)
+# followup: how to optimize space complexity

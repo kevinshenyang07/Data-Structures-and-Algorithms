@@ -1,4 +1,6 @@
-# assume the initial intervals are sorted and non-overlapping
+# give an array of sorted and non-overlapping intervals, insert a number
+# if the number is next to the start or end of an interval, merge nearby intervals
+# otherwise insert [num, num] into the intervals
 def insert(intervals, num):
     # insert [num, num] into intervals
     insert_idx = -1

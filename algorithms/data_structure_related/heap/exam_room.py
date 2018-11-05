@@ -62,3 +62,8 @@ class ExamRoom(object):
 
         return (e - s) / 2
 # O(logn) for seat(), O(n) for leave(), which cna be reduced to O(logn) with hashmap
+# Followup:
+# 1. what if there're multiple rooms?
+#    maintain k heaps, each time pop the one with largest distance
+# 2. what if the data won't fit into memory
+#    write to file
