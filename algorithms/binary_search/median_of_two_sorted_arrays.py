@@ -2,7 +2,7 @@
 # do it in O(log(m+n)) time
 # give this first, then try to optimize
 class Solution(object):
-    def find_median_sorted_arrays(self, A, B):
+    def findMedianSortedArrays(self, A, B):
         m, n = len(A), len(B)
         total = m + n
 

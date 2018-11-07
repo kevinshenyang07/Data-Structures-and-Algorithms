@@ -1,3 +1,4 @@
+# Sort Colors
 # one-pass, in-place
 class Solution(object):
     def sort_colors(self, nums):
@@ -5,8 +6,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-        # [0, i) is color 0, [i, j) is color 1
-        # [j, k) is unknown, [k, len(nums)) is color 2
+        # [0, i) is color 0, [i, j) is color 1, [j, k] is unknown, (k, n) is color 2
         i, j, k = 0, 0, len(nums) - 1
 
         while j <= k:

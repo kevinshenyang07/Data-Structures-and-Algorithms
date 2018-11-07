@@ -13,6 +13,9 @@
 # permutation time complexity: O(n!)
 # => n options picking first element, n - 1 options for second, and so on
 
+# why not nesting dfs method in the main method?
+# inner class cannot be pickled, nested classes and methods cannot be directly tested
+
 def subsets(nums):
     result = [[]]
     for num in sorted(nums):
