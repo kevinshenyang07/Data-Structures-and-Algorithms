@@ -9,19 +9,24 @@ class Solution(object):
         m, n = len(board), len(board[0])
         queue = collections.deque()
 
-        # add coordinates on the boarder
+        # add coordinates on the border
+        # avoid doing BFS on every cell, use only one queue
         for i in range(m):
             for j in [0, n - 1]:
-                queue.append((i, j))
+                if board[i][j] == 'O':
+                    queue.append((i, j))
+
         for i in [0, m - 1]:
             for j in range(n):
-                queue.append((i, j))
+                if board[i][j] == 'O':
+                    queue.append((i, j))
 
         while queue:
             i, j = queue.popleft()
-            if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
-                board[i][j] = 'T'
-                for x, y in ((i, j - 1), (i, j + 1), (i - 1, j), (i + 1, j)):
+            board[i][j] = 'T'
+
+            for x, y in ((i, j - 1), (i, j + 1), (i - 1, j), (i + 1, j)):
+                if 0 <= x < m and 0 <= y < n and board[x][y] == 'O':
                     queue.append((x, y))
 
         for i in range(m):
