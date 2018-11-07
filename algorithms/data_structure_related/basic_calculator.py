@@ -10,6 +10,8 @@ class Solution(object):
                 stack.append([])
             elif char == ')':
                 stack[-1].append(num)
+                # !! do not append ans to stack[-1], update num instead
+                # to be used on other closing ')' or end of string
                 num = self.calc(stack.pop())
             elif char in '+-':
                 stack[-1].append(num)
@@ -22,16 +24,17 @@ class Solution(object):
         return self.calc(stack[-1])
 
     def calc(self, elements):
-        ans, sign = 0, 1
+        res = 0
         sign = 1
-
         for element in elements:
             if isinstance(element, int):
-                ans += sign * element
+                res += sign * element
             else:
                 sign = 1 if element == '+' else -1
-
-        return ans
+        return res
+# test cases:
+# '()' => 0
+# '2-(5-6)' => 3
 
 
 # Basic Calculator II

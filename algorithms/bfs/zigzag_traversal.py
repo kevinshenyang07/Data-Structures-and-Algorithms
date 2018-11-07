@@ -5,28 +5,28 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        if not root: return []
+        if not root:
+            return []
 
-        levels = []
-        queue = collections.deque([root])
+        level = [root]
         reverse = False
+        visited = []
+        # each level keeps its original order, but saved to visited depending on the flag
+        while level:
+            if reverse:
+                vals = [level[i].val for i in range(len(level) - 1, -1, -1)]
+            else:
+                vals = [level[i].val for i in range(len(level))]
 
-        while queue:
-            level = []
-            # traverse by level as usual
-            for _ in range(len(queue)):
-                node = queue.popleft()
-                # add visited node differently
-                if reverse:
-                    level.insert(0, node.val)
-                else:
-                    level.append(node.val)
+            visited.append(vals)
+            reverse = not reverse
+
+            next_level = []
+            for node in level:
                 if node.left:
-                    queue.append(node.left)
+                    next_level.append(node.left)
                 if node.right:
-                    queue.append(node.right)
+                    next_level.append(node.right)
+            level = next_level
 
-            levels.append(level)
-            reverse = False if reverse else True
-
-        return levels
+        return visited

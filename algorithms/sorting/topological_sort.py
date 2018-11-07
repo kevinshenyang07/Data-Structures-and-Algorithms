@@ -1,5 +1,6 @@
 # topological ordering: starting from vertices with no in-edge, to the vertices with no out-edge
 # the vertices in the cycle won't be added to queue, which can be used to determine if valid
+# which also implies visited set is not needed
 
 # Course Schedule
 # an in-edge from vertex v1 to v2 => v1 is a prerequisite to v2
@@ -16,22 +17,23 @@ def can_finish(num_courses, prerequisites):
     graph = { i: set() for i in range(num_courses) }  # course => corresponding prerequisite courses
     in_degrees = { i: 0 for i in range(num_courses) }  # course => number of prerequisite courses
 
-    for post, pre in prerequisites:
-        graph[post].add(pre)
-        in_degrees[pre] += 1
+    for pre, post in prerequisites:
+        graph[pre].add(post)
+        in_degrees[post] += 1
 
-    # vertices that have no in edges
     queue = collections.deque(i for i in range(num_courses) if in_degrees[i] == 0)
+    count = 0  # number of finishable courses
+
     while queue:
         course = queue.popleft()
-        for pre in graph[course]:
-            in_degrees[pre] -= 1
-            # each time an in-edge is removed, if a vertex no longer has in-edges,
-            # add that vertex to check list
-            if in_degrees[pre] == 0:
-                queue.append(pre)
+        count += 1
 
-    return all([d == 0 for d in in_degrees.values()])
+        for post in graph[course]:
+            in_degrees[post] -= 1
+            if in_degrees[post] == 0:
+                queue.append(post)
+
+    return count == num_courses
 # O(V+E) time and space
 
 
