@@ -3,35 +3,50 @@ from prefix_tree import TrieNode
 # Word Search
 class Solution(object):
     def exist(self, board, word):
-        if not any(board):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        if not board:
             return False
-
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if self.dfs(board, i, j, word):
+        m, n = len(board), len(board[0])
+        for i in range(m):
+            for j in range(n):
+                if self.is_match(board, i, j, word, 0):
                     return True
         return False
 
-    def dfs(self, board, i, j, word):
-        m, n = len(board), len(board[0])
-        # end condition
-        if word == '':
+    # use dfs instead of bfs that visits each cell once, see test case 2
+    def is_match(self, board, i, j, word, k):
+        if k == len(word) - 1 and board[i][j] == word[k]:
             return True
-        # stop conditions
-        if i < 0 or i >= m or j < 0 or j >= n or word[0] != board[i][j]:
+        if board[i][j] != word[k]:
             return False
-        # mark visited, save as tmp
-        tmp = board[i][j]
-        board[i][j] = "#"
-        # search each direction
-        result = False
-        for x, y in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
-            if self.dfs(board, x, y, word[1:]):
-                result = True
-                break
-        # restore the value of the current slot
-        board[i][j] = tmp
-        return result
+
+        m, n = len(board), len(board[0])
+
+        # backtracking
+        char = board[i][j]
+        board[i][j] = ''
+
+        for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
+            if 0 <= x < m and 0 <= y < n and self.is_match(board, x, y, word, k + 1):
+                return True
+
+        board[i][j] = char
+
+        return False
+# test case 1:
+# [["a"]]
+# "a"
+# => true
+# test case 2:
+# [["A","B","C","E"],
+#  ["S","F","E","S"],
+#  ["A","D","E","E"]]
+# "ABCESEEEFS"
+# => true
 
 
 # Word Search II
