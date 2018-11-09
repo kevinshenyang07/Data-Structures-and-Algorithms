@@ -24,7 +24,7 @@ class Solution(object):
         shuffled = [num for num in self.nums]
         # modern Knuth's algo
         for i in range(n):
-            j = int(random.random() * n)
+            j = random.randint(0, n - 1)
             shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
         return shuffled
 # haven't found a good proof yet, but to generate a random permutation,

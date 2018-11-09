@@ -18,8 +18,8 @@ class Rectangle(object):
 
 class PointPicker(object):
     def select_from_single(self, rect):
-        new_x = rect.x1 + random.random() * (rect.x2 - rect.x1)
-        new_y = rect.y1 + random.random() * (rect.y2 - rect.y1)
+        new_x = rect.x1 + random.randint(0, rect.x2 - rect.x1)
+        new_y = rect.y1 + random.randint(0, rect.y2 - rect.y1)
         return Point(new_x, new_y)
 
     def select_from_multi_non_overlapping(self, rects):
