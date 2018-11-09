@@ -8,6 +8,9 @@ from linked_list import LinkedList, ListNode
 #                   When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item.
 #                   For the purpose of this problem, when there is a tie (i.e., two or more keys that have the same frequency),
 #                   the least recently used key would be evicted.
+# Frequency incremented on both get() and put()
+# Approach:
+# 1.
 class LFUCache(object):
 
     def __init__(self, capacity):
@@ -16,25 +19,19 @@ class LFUCache(object):
         """
         self.capacity = capacity
         self.node_map = {}  # key => node
-        self.counter = {}  # key => count
         self.cnt_map = collections.defaultdict(LinkedList)  # count => list
-        self.min = 0
+        self.counter = {}  # key => count
+        self.min = 0  # smallest frequency
 
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
-        if key not in self.node_map: return -1
-
+        if key not in self.node_map:
+            return -1
         node = self.node_map[key]
-        cnt = self.counter[key]
-        self.cnt_map[cnt].remove(node)
-        self.cnt_map[cnt + 1].append(node)
-        # handle count and min
-        self.counter[key] += 1
-        if self.min == cnt and self.cnt_map[cnt].is_empty():
-            self.min += 1
+        self.update(node)
         return node.val
 
     def put(self, key, value):
@@ -43,27 +40,40 @@ class LFUCache(object):
         :type value: int
         :rtype: void
         """
-        if key in self.node_map:
-            self.get(key)
-            self.node_map[key].val = value
-            return
         if self.capacity == 0:
             return
+        if key in self.node_map:
+            node = self.node_map[key]
+            node.val = value
+            self.update(node)
+            return
+        # evict first
         if len(self.node_map) == self.capacity:
-            evicted = self.evict_least_freq()
-            self.node_map.pop(evicted.key)
+            self.evict_least_freq()
+        # then insert
         node = ListNode(key, value)
         self.node_map[key] = node
         self.cnt_map[1].append(node)
         self.counter[key] = 1
         self.min = 1
 
+    # update frequency and related mappings
+    def update(self, node):
+        """
+        :type node: ListNode
+        :rtype: void
+        """
+        cnt = self.counter[node.key]
+        self.cnt_map[cnt].remove(node)
+        self.cnt_map[cnt + 1].append(node)
+        self.counter[node.key] += 1
+        if self.min == cnt and self.cnt_map[cnt].is_empty():
+            self.min += 1
+
     def evict_least_freq(self):
         """
-        :rtype: ListNode
+        :rtype: void
         """
         curr_list = self.cnt_map[self.min]
         node = curr_list.popleft()
-        if curr_list.is_empty():
-            self.min += 1
-        return node
+        self.node_map.pop(node.key)
