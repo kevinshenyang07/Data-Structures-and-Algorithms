@@ -1,35 +1,33 @@
-import string
-
 # Word Ladder
 class Solution(object):
-    def ladder_length(begin_word, end_word, word_list):
-        # all the words after begin_word need to be in word list
-        if end_word not in word_list:
-            return 0
-        length = 2
-        left, right = set([begin_word]), set([end_word])
+    def ladderLength(self, begin_word, end_word, word_list):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
         word_set = set(word_list)
-        # two-end BFS
-        while left:
-            left = get_adj_words(left, word_set)
-            if left & right:
-                return length
-            length += 1
-            # swap to generate smaller set
-            if len(left) > len(right):
-                left, right = right, left
-            # avoid cycle
-            # only remove the words in the left when the left is determined
-            # since left is end of current path
-            word_set -= left
+        queue = collections.deque()
+        queue.append((begin_word, 1))
+
+        while queue:
+            word, dist = queue.popleft()
+            if word == end_word:
+                return dist
+            for next_word in self.next_words(word, word_set):
+                queue.append((next_word, dist + 1))
+
         return 0
 
-    def get_adj_words(source_words, word_set):
-        adj_words = set([])
-        for word in source_words:
-            for i in range(len(word)):
-                for char in string.lowercase:
-                    candidate_word = word[:i] + char + word[i+1:]
-                    if candidate_word in word_set:
-                        adj_words.add(candidate_word)
-        return adj_words
+    def next_words(self, word, word_set):
+        words = []
+        for i in range(len(word)):
+            for char in string.lowercase:
+                next_word = word[:i] + char + word[i+1:]
+                # once a valid next_word is found it must be on a shortest path
+                # so we can greedily remove it word_set
+                if next_word != word and next_word in word_set:
+                    words.append(next_word)
+                    word_set.remove(next_word)
+        return words
