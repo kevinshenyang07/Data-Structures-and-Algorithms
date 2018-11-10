@@ -19,9 +19,9 @@ class LFUCache(object):
         """
         self.capacity = capacity
         self.node_map = {}  # key => node
-        self.cnt_map = collections.defaultdict(LinkedList)  # count => list
+        self.list_map = collections.defaultdict(LinkedList)  # count => list with latest node at the end
         self.counter = {}  # key => count
-        self.min = 0  # smallest frequency
+        self.min_cnt = 0  # smallest frequency
 
     def get(self, key):
         """
@@ -53,9 +53,9 @@ class LFUCache(object):
         # then insert
         node = ListNode(key, value)
         self.node_map[key] = node
-        self.cnt_map[1].append(node)
+        self.list_map[1].append(node)
         self.counter[key] = 1
-        self.min = 1
+        self.min_cnt = 1
 
     # update frequency and related mappings
     def update(self, node):
@@ -64,16 +64,16 @@ class LFUCache(object):
         :rtype: void
         """
         cnt = self.counter[node.key]
-        self.cnt_map[cnt].remove(node)
-        self.cnt_map[cnt + 1].append(node)
+        self.list_map[cnt].remove(node)
+        self.list_map[cnt + 1].append(node)
         self.counter[node.key] += 1
-        if self.min == cnt and self.cnt_map[cnt].is_empty():
-            self.min += 1
+        if self.min_cnt == cnt and self.list_map[cnt].is_empty():
+            self.min_cnt += 1
 
     def evict_least_freq(self):
         """
         :rtype: void
         """
-        curr_list = self.cnt_map[self.min]
+        curr_list = self.list_map[self.min_cnt]
         node = curr_list.popleft()
         self.node_map.pop(node.key)

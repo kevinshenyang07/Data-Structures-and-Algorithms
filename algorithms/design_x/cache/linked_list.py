@@ -1,6 +1,6 @@
 # self.key is needed to delete the entry in cache.node_map when eject
 class ListNode(object):
-    def __init__(self, key, val, expire_at=-1):
+    def __init__(self, key, val):
         self.key = key
         self.val = val
         self.prev = None
