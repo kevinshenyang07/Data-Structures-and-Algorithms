@@ -1,5 +1,6 @@
 # preorder: root - left subtree - right subtree (root is pre-children)
 # inorder: left subtree - root - right subtree (root is in-children)
+# think of the stack to be the recursive function calls
 
 def preorder(root):
     if not root:

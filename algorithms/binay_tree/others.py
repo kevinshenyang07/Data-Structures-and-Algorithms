@@ -73,11 +73,6 @@ def has_path_sum(root, target):
 # Inorder Successor in BST
 # iterative version is hard to think of
 def inorder_successor(root, p):
-    """
-    :type root: TreeNode
-    :type p: TreeNode
-    :rtype: TreeNode
-    """
     if not root:
         return None
 
@@ -86,7 +81,19 @@ def inorder_successor(root, p):
     else:
         left = inorder_successor(root.left, p)
         return left if left else root
-# O(logn) time and space
+
+def inorder_successor_iterative(root, p):
+    successor = None
+
+    while root:
+        if p.val < root.val:
+            successor = root
+            root = root.left
+        else:
+            root = root.right
+
+    return successor
+# both O(h) time and space, h == logn in average, h == n in worse case
 
 
 # Verify Preorder Sequence in Binary Search Tree
