@@ -5,29 +5,32 @@
 # 1 1 1 1 1
 # 1 0 0 1 0
 # => 4
-
-# dp[i][j]: max length of the squares whose lower-right corners locate at (i-1, j-1)
-# dp[i][0] = dp[0][j] = 0  (base case)
-# dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1 if M[i-1][j-1] == '1'
-#          = 0                                             if M[i-1][j-1] == '0'
 class Solution(object):
     def maximalSquare(self, matrix):
         """
-        :type matrix: List[List[str]]
-        :rtype: int
+        dp[i][j]: max length of the squares whose lower-right corners locate at (i-1, j-1)
+        dp[i][0] = dp[0][j] = int(matrix[i][j])
+        dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1 if M[i-1][j-1] == '1'
+                 = 0                                             if M[i-1][j-1] == '0'
         """
-        if not any(matrix): return 0
+        if not any(matrix):
+            return 0
 
         m, n = len(matrix), len(matrix[0])
-        dp = [[0] * (n + 1) for _ in range(m + 1)]
-        max_length = 0  # of a square
+        dp = [[0] * n for _ in range(m)]
+        max_length = 0
 
-        for i in range(1, m + 1):
-            for j in range(1, n + 1):
-                if matrix[i-1][j-1] == '1':
-                    # smallest square guaranteed to be able to extend its length by one
-                    dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1
+        for i in range(m):
+            dp[i][0] = int(matrix[i][0])
+            max_length = max(max_length, dp[i][0])
+        for j in range(n):
+            dp[0][j] = int(matrix[0][j])
+            max_length = max(max_length, dp[0][j])
+
+        for i in range(1, m):
+            for j in range(1, n):
+                if int(matrix[i][j]):
+                    dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
                     max_length = max(max_length, dp[i][j])
 
         return max_length * max_length
-
