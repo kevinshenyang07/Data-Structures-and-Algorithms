@@ -66,6 +66,7 @@ class Codec(object):
 
 
 # Serialize and Deserialize BST
+# no '#' to save space
 class Codec:
     def serialize(self, root):
         visited = []

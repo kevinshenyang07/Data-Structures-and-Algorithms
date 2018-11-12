@@ -15,19 +15,20 @@ def clone_graph(node):
     '''
     if not node:
         return None
+
     mapping = {}  # original node => copied node
     mapping[node] = UndirectedGraphNode(node.label)
     queue = collections.deque([node])  # original nodes
+
     while queue:
         curr = queue.popleft()
-        # creating a new node here will cause neighbor not to be added
-        # in the queue since it's already in the mapping
-        for neighbor in curr.neighbors:
-            if neighbor not in mapping:
-                mapping[neighbor] = UndirectedGraphNode(neighbor.label)
-                queue.append(neighbor)
-            # append a copied neighbor
-            mapping[curr].neighbors.append(mapping[neighbor])
+
+        for nbr in curr.neighbors:
+            # avoid add the same node to queue again in self-cycle
+            if nbr not in mapping:
+                mapping[nbr] = UndirectedGraphNode(nbr.label)
+                queue.append(nbr)
+            mapping[curr].neighbors.append(mapping[nbr])
     return mapping[node]
 
 
