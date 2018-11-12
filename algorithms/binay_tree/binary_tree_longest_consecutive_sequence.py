@@ -3,28 +3,32 @@
 # The path needs to be from parent to child (cannot be the reverse).
 # "consecutive" means increasing by 1 each time
 class Solution(object):
-    def longest_consecutive(self, root):
+    def longestConsecutive(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        return self.preorder(root, root, 0)
+        if not root:
+            return 0
 
-    def preorder(self, node, parent, max_length):
-        """
-        returns longest consecutive path starting from node
-        """
-        if not node: return max_length
+        self.max_len = 1
+        self.preorder(root, 1)
+        return self.max_len
 
-        if node.val == parent.val + 1:
-            max_length += 1
-        else:
-            max_length = 1
+    def preorder(self, root, length):
+        self.max_len = max(self.max_len, length)
 
-        left_length = self.preorder(node.left, node, max_length)
-        right_length = self.preorder(node.right, node, max_length)
+        if root.left:
+            if root.val + 1 == root.left.val:
+                self.preorder(root.left, length + 1)
+            else:
+                self.preorder(root.left, 1)
 
-        return max(max_length, left_length, right_length)
+        if root.right:
+            if root.val + 1 == root.right.val:
+                self.preorder(root.right, length + 1)
+            else:
+                self.preorder(root.right, 1)
 
 
 # Binary Tree Longest Consecutive Sequence II
