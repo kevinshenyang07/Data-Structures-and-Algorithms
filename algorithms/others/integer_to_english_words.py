@@ -6,34 +6,31 @@ class Solution(object):
         :type num: int
         :rtype: str
         """
-        def helper(num):
-            million = 1000000
-            billion = million * 1000
-            res = ''
-
-            if num >= billion:
-                res = helper(num / billion) + ' Billion ' + helper(num % billion)
-            elif num >= million:
-                res = helper(num / million) + ' Million ' + helper(num % million)
-            elif num >= 1000:
-                res = helper(num / 1000) + ' Thousand ' + helper(num % 1000)
-            elif num >= 100:
-                res = helper(num / 100) + ' Hundred ' + helper(num % 100)
-            elif num >= 20:
-                res = tens[num / 10] + ' ' + helper(num % 10)
+        def format(num):
+            if num < 20:
+                res = BELOW_TWEENTY[num]
+            elif num < 100:
+                res = TENS[num / 10] + ' ' + BELOW_TWEENTY[num % 10]
+            elif num < 1000:
+                res = format(num / 100) + ' Hundred ' + format(num % 100)
+            elif num < MILLION:
+                res = format(num / 1000) + ' Thousand ' + format(num % 1000)
+            elif num < BILLION:
+                res = format(num / MILLION) + ' Million ' + format(num % MILLION)
             else:
-                res = below_tweenty[num]
-
+                res = format(num / BILLION) + ' Billion ' + format(num % BILLION)
             return res.strip()
 
-        if num == 0:
-            return "Zero"
-
-        below_tweenty = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+        # leetcode does not support Python class variable, those enclose here
+        BELOW_TWEENTY = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
             "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
-        tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
-
-        return helper(num)
+        TENS = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
+        MILLION = 1000000
+        BILLION = MILLION * 1000
+        # only for original num to be 0
+        if num == 0:
+            return 'Zero'
+        return format(num)
 
 # Examples:
 # f(123) => "One Hundred Twenty Three"
