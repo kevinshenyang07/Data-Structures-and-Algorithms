@@ -23,11 +23,12 @@ class Solution(object):
 
             if dist == K:
                 res.append(node_val)
-            else:
-                for nbr in graph[node_val]:
-                    if nbr not in visited:
-                        queue.append((nbr, dist + 1))
-                        visited.add(nbr)
+                continue
+            for nbr in graph[node_val]:
+                if nbr not in visited:
+                    queue.append((nbr, dist + 1))
+                    visited.add(nbr)
+
         return res
 
     def build_graph(self, root):
@@ -46,6 +47,3 @@ class Solution(object):
                 graph[node.right.val].add(node.val)
 
         return graph
-
-
-

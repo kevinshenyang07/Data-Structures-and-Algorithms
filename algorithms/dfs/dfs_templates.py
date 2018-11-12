@@ -56,34 +56,32 @@ def permute(nums):
 
 # an approach similar to subsets, add candidates for backtracking
 def permute_dfs(nums):
-    def dfs(depth, candidates, path):
-        if depth == len(nums):
-            result.append(path)  # only append full length permutation
+    def dfs(candidates, path):
+        if not candidates:
+            result.append(path)
             return
         for i in range(len(candidates)):
-            # construct dfs calls by level
-            # or use candidates.pop(i)
-            dfs(depth + 1, candidates[:i] + candidates[i + 1:], path + [candidates[i]])
+            dfs(candidates[:i] + candidates[i + 1:], path + [candidates[i]])
     nums.sort()  # optional
     result = []
-    dfs(0, nums, [])
+    dfs(nums, [])
     return result
 
 
 # nums can have duplicates, only return unique permutations
 def permute_unique(nums):
     def dfs(candidates, path):
-        if len(candidates) == 0:
+        if not candidates:
             result.append(path)
             return
         for i in range(len(candidates)):
-            # jump to next iteration if the candiate element is the same as previous
+            # otherwise would produce the same perms in previous iteration
             if i > 0 and candidates[i - 1] == candidates[i]:
                 continue
             dfs(candidates[:i] + candidates[i + 1:], path + [candidates[i]])
     nums.sort()  # necessary
     result = []
-    dfs(0, nums, [])
+    dfs(nums, [])
     return result
 
 
