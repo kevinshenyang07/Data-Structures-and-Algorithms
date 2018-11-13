@@ -7,6 +7,8 @@
 # 00001
 # 11011
 # => 3
+# Approach:
+# combine direction and recursion to form a string that present the path
 class Solution(object):
     def numDistinctIslands(self, grid):
         """
@@ -17,24 +19,28 @@ class Solution(object):
             return 0
 
         m, n = len(grid), len(grid[0])
-        paths = set()
+        islands = set()
+        directions = { 'u': (-1, 0), 'l': (0, -1), 'd': (1, 0), 'r': (0, 1) }
 
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1:
                     path = []
-                    self.dfs(i, j, grid, path)
-                    paths.add(''.join(path))
+                    self.dfs(i, j, grid, path, directions)
+                    islands.add(''.join(path))
 
-        return len(paths)
+        return len(islands)
 
-    def dfs(self, i, j, grid, path):
-        grid[i][j] = 0
-        for x, y, d in [(i - 1, j, 'u'), (i, j - 1, 'l'), (i + 1, j, 'd'), (i, j + 1, 'r')]:
-            if 0 <= x < len(grid) and 0 <= y < len(grid[0]) and grid[x][y] == 1:
+    def dfs(self, x, y, grid, path, directions):
+        m, n = len(grid), len(grid[0])
+        grid[x][y] = 0
+
+        for d in directions:
+            dx, dy = directions[d]
+            i, j = x + dx, y + dy
+
+            if 0 <= i < m and 0 <= j < n and grid[i][j]:
                 path.append(d)
-                self.dfs(x, y, grid, path)
+                self.dfs(i, j, grid, path, directions)
 
-        path.append('b')  # back to last level of recursion
-
-# combine direction and recursion to form a string that present the path
+        path.append('b')  # end of current recursion

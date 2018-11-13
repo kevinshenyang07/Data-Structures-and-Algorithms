@@ -1,0 +1,53 @@
+Abstract Class vs. Interface
+1. 只能继承一个抽象类，但可以实现多个界面
+2. 抽象类可以包含状态
+3. 抽象类不需要实现 其中的所有方法
+
+# python3 type annotation
+from typing import List
+Vector = List[float]  # type alias
+def func(scalar: float, vector: Vector) -> Vector:
+    pass
+
+解题步骤：
+1. 明确需求，划定范围 (what, how, who)
+2. 确定所需要的类以及映射关系 (Core Objects / UML)
+3. 确定需要实现的 use cases
+4. 填充所需要的状态和方法
+5. 检查自己的设计是否满足关键点
+
+围绕系统而非用户展开设计（简化人机交互的细节，比如把 draw_card() / shuffle() 安排在 Deck 而不是 Player 类）
+在白板上，每个类作为一个 column，状态和方法写在下面，use cases 写在左下角，Enum 写在左上角
+从组件开始，自下而上完成整个系统
+
+类图
+===================
+<<interface>>
+Enumerable
+-------------------
++ enumerate()
+
+<<enumeration>>
+Status
+-------------------
+Up
+Down
+
+Elevator
+-------------------
++ myPublicMethodOrAttr (visible by other classes)
+- myPrivateMethodOrAttr (visible by the class)
+# myProtectedMethodOrAttr (visible by the class and all subclasses)
+
+Enum Status
+-------------------
+up, down, idle
+
+Use Cases (a contract with interviewer)
+===================
+take external / internal request
+handle request
+open / close gate
+
+预定类
+search(criteria) => options => reserve(option) => checkin(option) / cancel(option)

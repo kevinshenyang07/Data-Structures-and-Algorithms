@@ -66,33 +66,31 @@ class Solution(object):
                 curr = curr.children[char]
             curr.is_word = True
 
-        found = []
+        self.matched = []
         for i in range(len(board)):
             for j in range(len(board[0])):
-                self.dfs(i, j, board, root, '', found)
+                self.dfs(i, j, board, root, '')
 
-        return found
+        return self.matched
 
-    def dfs(self, i, j, board, node, path, found):
+    def dfs(self, i, j, board, node, path):
         char = board[i][j]
-
+        # stop condition
         if char == '#' or char not in node.children:
             return
 
-        # add char after validation
         path += char
-        # find a valid word, but keep searching down
-        node_next = node.children[char]
-        if node_next.is_word:
-            found.append(path)
-            node_next.is_word = False  # avoid adding the same word twice
+        child = node.children[char]
+        # keep searching down after a valid word is found
+        if child.is_word:
+            self.matched.append(path)
+            child.is_word = False  # avoid adding the same word twice
 
         board[i][j] = '#'  # mark as visited
 
         for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
-                if x < 0 or x >= len(board) or y < 0 or y >= len(board[0]):
-                    continue
-                self.dfs(x, y, board, node_next, path, found)
+            if 0 <= x < len(board) and 0 <= y < len(board[0]):
+                self.dfs(x, y, board, child, path)
 
         board[i][j] = char  # reset as original value
 
