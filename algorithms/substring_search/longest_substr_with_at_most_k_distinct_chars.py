@@ -7,17 +7,18 @@ class Solution(object):
         :rtype: int
         """
         max_length = 0
-        left = 0  # [left, i] is the current valid window
+        i = 0
         mapping = {}  # char => largest index of this char appears so far
 
-        for i, char in enumerate(s):
-            mapping[char] = i
+        for j, char in enumerate(s):
+            # include current char first then eject if needed
+            mapping[char] = j
 
             if len(mapping) > k:
-                j = min(mapping.values())
-                mapping.pop(s[j])
-                left = j + 1
+                k = min(mapping.values())
+                mapping.pop(s[k])
+                i = k + 1
 
-            max_length = max(max_length, i - left + 1)
+            max_length = max(max_length, j - i + 1)
 
         return max_length

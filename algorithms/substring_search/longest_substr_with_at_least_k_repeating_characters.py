@@ -11,7 +11,7 @@ class Solution(object):
         """
         if not s or len(s) < k:
             return 0
-        if k <= 1:
+        if k == 0:
             return len(s)
 
         counter = collections.Counter(s)

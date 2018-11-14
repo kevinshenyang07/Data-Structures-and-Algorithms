@@ -1,0 +1,8 @@
+Sliding Window Steps
+-------------------
+1. initialize the window as [i, j), where i == j == 0
+2. create a count/index map by element
+2. in each iteration:
+   a. include the element to the map first if possible
+   b. increment i if the new element breaks the criteria of the window
+   c. update global max window

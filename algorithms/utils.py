@@ -12,6 +12,7 @@ bin(num).count('1')  # for a positive integer return number of "1"s in its binar
 copied = [row[:] for row in matrix]  # copy a matrix
 
 # random and collections provided by leetcode by default
+# all O(1) time complexity
 import random
 random.random()
 random.randint(start, end)  # inclusive on both ends

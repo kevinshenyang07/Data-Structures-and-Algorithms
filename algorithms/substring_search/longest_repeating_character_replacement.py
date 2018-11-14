@@ -14,15 +14,15 @@ class Solution(object):
         window = {}
         max_len = 0
         max_cnt = 0  # maximum number of chars in the window
-        left = 0  # start of the window
+        i = 0
 
-        for i, char in enumerate(s):
+        for j, char in enumerate(s):
             window[char] = window.get(char, 0) + 1
             max_cnt = max(max_cnt, window[char])
 
-            while i - left + 1 > max_cnt + k:
-                window[s[left]] -= 1
-                left += 1
-            max_len = max(max_len, i - left + 1)
+            while j - i + 1 > max_cnt + k:
+                window[s[i]] -= 1
+                i += 1
+            max_len = max(max_len, j - i + 1)
 
         return max_len
