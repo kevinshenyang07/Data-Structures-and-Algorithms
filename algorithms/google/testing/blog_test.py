@@ -34,8 +34,11 @@ class TestStringMethods(unittest.TestCase):
             s.split(2)
 
     # patch method with stubbed method
-    @patch.object(Blog, 'posts', side_effect=mock_posts)
-    # @patch('lib.Blog.posts', side_effect=mock_posts)  # alternative
+    # prefer below instead of patch.object()
+    # because if a class is defined in A but imported in B,
+    # and we want to patch a method of the class in B,
+    # the class will be imported in B before the patching takes place
+    @patch('lib.Blog.posts', side_effect=mock_posts)
     # @patch.dict('os.environ', { 'MY_VAR': 'testing' })  # patch dict
     def test_blog(self, posts):
         blog = Blog()
