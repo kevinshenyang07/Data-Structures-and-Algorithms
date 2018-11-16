@@ -12,8 +12,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not nums:
-            return 0
+        if not nums: return 0
 
         tree = {}  # position of a node => val
         for num in nums:

@@ -13,10 +13,8 @@ class Solution(object):
         the number of all possible attendance (with 'A') records with length n:
         ∑dp[i] *dp[n-1-i] i = 0,1,...,n-1
         """
-        if n == 1:
-            return 3
-        if n == 0:
-            return 0
+        if n == 0: return 0
+        if n == 1: return 3
 
         nums = [1, 1, 2]
         i = 2

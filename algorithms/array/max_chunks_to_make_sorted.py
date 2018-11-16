@@ -17,8 +17,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not any(nums):
-            return 0
+        if not any(nums): return 0
 
         max_chunks = 0
         curr_right = 0  # right bound of current window
@@ -41,8 +40,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not any(nums):
-            return 0
+        if not any(nums): return 0
 
         copied = sorted(nums)
         bal = {}  # balance of appeared numbers

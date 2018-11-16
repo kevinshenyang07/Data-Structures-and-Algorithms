@@ -13,8 +13,7 @@ class Solution(object):
         :type costs: List[List[int]]
         :rtype: int
         """
-        if not any(costs):
-            return 0
+        if not any(costs): return 0
 
         n, k = len(costs), len(costs[0])
         dp = costs[0]  # only for getting smallest two

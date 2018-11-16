@@ -1,7 +1,7 @@
 # Maximum Subarray
 def max_subarray(nums):
-    if not nums:
-        return 0
+    if not nums: return 0
+
     curr_sum = nums[0]
     max_sum = nums[0]
     for i in range(1, len(nums)):

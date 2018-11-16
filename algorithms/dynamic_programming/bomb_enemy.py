@@ -18,25 +18,26 @@ class Solution(object):
         if not any(grid): return 0
 
         m, n = len(grid), len(grid[0])
-        kills_curr_row = 0
-        kills_by_col = [0] * n  # can be reused
-        kills_max = 0
+        row_hits = 0
+        col_hits = [0] * n  # can be reused
+        max_hits = 0
 
         for i in range(m):
             for j in range(n):
-                if grid[i][j] == 'W':
-                    continue
+                # a wall on the left
                 if j == 0 or grid[i][j-1] == 'W':
-                    kills_curr_row = self.kills_on_row(grid, i, j)
+                    row_hits = self.curr_row_hits(grid, i, j)
+                # a wall on the top
                 if i == 0 or grid[i-1][j] == 'W':
-                    kills_by_col[j] = self.kills_on_col(grid, i, j)
+                    col_hits[j] = self.curr_col_hits(grid, i, j)
+
                 if grid[i][j] == '0':
-                    kills_max = max(kills_max, kills_curr_row + kills_by_col[j])
+                    max_hits = max(max_hits, row_hits + col_hits[j])
 
-        return kills_max
+        return max_hits
 
-    # count kills for row i from column j, until hitting the wall
-    def kills_on_row(self, grid, i, j):
+    # count hits on row i starting from column j, until hitting the wall
+    def curr_row_hits(self, grid, i, j):
         count = 0
         while j < len(grid[0]) and grid[i][j] != 'W':
             if grid[i][j] == 'E':
@@ -44,11 +45,13 @@ class Solution(object):
             j += 1
         return count
 
-    # count kills for column j from row i, until hitting the wall
-    def kills_on_col(self, grid, i, j):
+    # count hits on column j starting from row i, until hitting the wall
+    def curr_col_hits(self, grid, i, j):
         count = 0
         while i < len(grid) and grid[i][j] != 'W':
             if grid[i][j] == 'E':
                 count += 1
             i += 1
         return count
+# O(mn) time, O(n) space
+# the 2 inner loops will visit each cell at most twice => amortized O(1) inside

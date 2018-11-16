@@ -8,8 +8,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not nums:
-            return 0
+        if not nums: return 0
 
         n = len(nums)
         uf = UnionFind(n)

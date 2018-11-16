@@ -9,8 +9,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not nums:
-            return -1
+        if not nums: return -1
 
         start, end = 0, len(nums) - 1
         while start + 1 < end:

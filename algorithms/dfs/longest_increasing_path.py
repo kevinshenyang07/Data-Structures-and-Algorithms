@@ -5,8 +5,7 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: int
         """
-        if not any(matrix):
-            return 0
+        if not any(matrix): return 0
 
         m, n = len(matrix), len(matrix[0])
         memo = [[0] * n for _ in range(m)]

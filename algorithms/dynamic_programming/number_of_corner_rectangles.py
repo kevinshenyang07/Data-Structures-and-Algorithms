@@ -14,8 +14,7 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
         """
-        if not any(grid):
-            return 0
+        if not any(grid): return 0
 
         dp_set = []  # row idx => indices of ones
         ans = 0

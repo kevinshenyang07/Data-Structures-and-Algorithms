@@ -8,8 +8,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        if not root:
-            return 0
+        if not root: return 0
 
         self.max_len = 1
         self.preorder(root, 1)

@@ -20,8 +20,7 @@ class Solution(object):
 
     # get id of the subtree
     def postorder(self, node, dup_nodes, subtree_ids):
-        if not node:
-            return 0
+        if not node: return 0
 
         left_id = self.postorder(node.left, dup_nodes, subtree_ids)
         right_id = self.postorder(node.right, dup_nodes, subtree_ids)

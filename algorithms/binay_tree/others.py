@@ -3,14 +3,13 @@ from tree_node import TreeNode
 
 # divide & conquer version
 def depth(root):
-    if not root:
-        return 0
+    if not root: return 0
     return max(depth(root.left), depth(root.right)) + 1
 
 # iterative version, preorder
 def depth_iter(root):
-    if not root:
-        return 0
+    if not root: return 0
+
     stack_node = [root]
     stack_depth = [1]
     max_depth = 0
@@ -33,8 +32,7 @@ def is_balanced(root):
     return postorder(root) != -1
 
 def postorder(self, root):
-    if not root:
-        return 0
+    if not root: return 0
 
     left_depth = postorder(root.left)
     right_depth = postorder(root.right)

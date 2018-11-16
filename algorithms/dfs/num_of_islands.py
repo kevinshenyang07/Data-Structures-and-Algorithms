@@ -5,8 +5,8 @@ class Solution(object):
         :type grid: List[List[str]]
         :rtype: int
         """
-        if not any(grid):
-            return 0
+        if not any(grid): return 0
+
         m, n = len(grid), len(grid[0])
         count = 0
         for i in range(m):
