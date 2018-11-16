@@ -1,27 +1,27 @@
 # Integer To English Words
-# Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 231 - 1.
+# Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 2^31 - 1.
 class Solution(object):
     def numberToWords(self, num):
         """
         :type num: int
         :rtype: str
         """
-        def format(num):
+        def translate(num):
             if num < 20:
                 res = BELOW_TWEENTY[num]
             elif num < 100:
                 res = TENS[num / 10] + ' ' + BELOW_TWEENTY[num % 10]
             elif num < 1000:
-                res = format(num / 100) + ' Hundred ' + format(num % 100)
+                res = translate(num / 100) + ' Hundred ' + translate(num % 100)
             elif num < MILLION:
-                res = format(num / 1000) + ' Thousand ' + format(num % 1000)
+                res = translate(num / 1000) + ' Thousand ' + translate(num % 1000)
             elif num < BILLION:
-                res = format(num / MILLION) + ' Million ' + format(num % MILLION)
+                res = translate(num / MILLION) + ' Million ' + translate(num % MILLION)
             else:
-                res = format(num / BILLION) + ' Billion ' + format(num % BILLION)
+                res = translate(num / BILLION) + ' Billion ' + translate(num % BILLION)
             return res.strip()
 
-        # leetcode does not support Python class variable, those enclose here
+        # leetcode does not support Python class variable, thus enclosing here
         BELOW_TWEENTY = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
             "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
         TENS = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
@@ -30,7 +30,7 @@ class Solution(object):
         # only for original num to be 0
         if num == 0:
             return 'Zero'
-        return format(num)
+        return translate(num)
 
 # Examples:
 # f(123) => "One Hundred Twenty Three"

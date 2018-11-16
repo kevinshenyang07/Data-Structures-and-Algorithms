@@ -29,7 +29,6 @@ class SolutionV1(object):
 
 
 # if the array can be modified:
-#
 class SolutionV2(object):
     def findDuplicate(self, nums):
         """
