@@ -19,10 +19,8 @@ class Solution(object):
         for char in s:
             if char not in indices_map:
                 return False
-
-            indices = indices_map[char]
-            # j + 1 to be the smallest next index
-            j = self.binary_search(indices, j + 1)
+            # j + 1 to be the smallest possible next index
+            j = self.binary_search(indices_map[char], j + 1)
             if j == -1:
                 return False
 

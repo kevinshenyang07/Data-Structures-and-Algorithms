@@ -11,19 +11,17 @@ class Solution(object):
         tails = [0] * len(nums)
         size = 0
 
-        for x in nums:
+        for num in nums:
             i, j = 0, size
-
             # find the smallest tail for tails[i]
             while i < j:
                 m = (i + j) / 2
-                if tails[m] < x:
+                if tails[m] < num:
                     i = m + 1
                 else:
                     j = m
-
-            tails[i] = x
-            size = max(size, i + 1)  # if x is larger than all tails
+            tails[i] = num
+            size = max(size, i + 1)
 
         return size
 
