@@ -1,4 +1,4 @@
-Sliding Window Steps
+Basic Approach
 -------------------
 1. initialize the window as [i, j), where i == j == 0
 2. create a count/index map by element
