@@ -5,6 +5,7 @@ class Solution(object):
         n = len(s)
 
         # steps needed to go back to the first char of the next word
+        # which can not be used in current row
         steps_back = [0] * n
         first = 0
         for i in range(n):

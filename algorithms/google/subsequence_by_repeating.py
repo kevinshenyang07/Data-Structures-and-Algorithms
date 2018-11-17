@@ -1,3 +1,6 @@
+
+import path
+
 # given two strings S and T, determine if S can be a subsequence of n copies of T
 def subsequence_by_repeating(S, T):
     if not S: return 0
@@ -13,11 +16,7 @@ def subsequence_by_repeating(S, T):
         i += 1
         j += 1
 
-    if j % len(T) == 0:
-        return j / len(T)
-    else:
-        return j / len(T) + 1
-
+    return int(math.ceil(float(j) / T))
 
 def test():
     print subsequence_by_repeating("", "a")  # 0
