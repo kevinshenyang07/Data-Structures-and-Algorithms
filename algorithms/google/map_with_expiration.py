@@ -18,18 +18,15 @@ from heapq import heappush, heappop
 # 3. only one thread can execute code in the 'with' code block
 #    managed with RLock.acquire() and RLock.release()
 
-class Value(object):
-    def __init__(self, value, expire_at):
-        self.value = value
-        self.expire_at = expire_at
-
-
+# requirement questions:
+# 1. should expire_in be provided in put(), or just fixed expiration?
+# 2. limit of time complexity for put() and prune()?
 class MapWithExpiration(object):
 
     MAX_SIZE = 100
 
     def __init__(self):
-        self.map = {}  # key => Value obj
+        self.map = {}  # key => (expire_at, value)
         self.pq = []  # (expire_at, key)
         self.lock = threading.RLock()
         self.executor = ThreadPoolExecutor(max_workers=1)
@@ -41,7 +38,7 @@ class MapWithExpiration(object):
             return None
         if self.map[key].expire_at <= time.time():
             return None
-        return self.map[key].value
+        return self.map[key][1]
 
     # O(logn)
     def put(self, key, value, expire_in):
@@ -50,7 +47,7 @@ class MapWithExpiration(object):
 
         with self.lock:
             expire_at = time.time() + expire_in
-            self.map[key] = Value(value, expire_at)
+            self.map[key] = (expire_at, value)
             heappush(self.pq, (expire_at, key))
 
         if len(self.map) > MAX_SIZE:
@@ -68,8 +65,8 @@ class MapWithExpiration(object):
         while self.pruning and self.pq and self.pq[0][0] <= time.time():
             expire_at, key = heappop(self.pq)
             with self.lock:
-                # chekc expire_at again since it could be updated
-                if key in self.map and self.map[key].expire_at <= time.time():
+                # check expire_at again since it could be updated
+                if key in self.map and self.map[key][0] <= time.time():
                     self.map.pop(key)
 
         self.pruning = False
