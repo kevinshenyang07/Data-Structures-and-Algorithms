@@ -24,7 +24,6 @@ class Solution(object):
 
         return True
 
-# followup: given a 'words' list, and a target string, find out the isomorphic strings in the list
-# approach: if a word A is isomorphic to another word B in words, and B is isomorphic to
-#           the target string, then A is isomorphic to the target string two
-#           => uf.union(A, B) if isIsomorpthic(A, B)
+# followup: given a 'words' list, find the isomorphic string groups in the list
+# approach: get the 'signature' of each word, for example 'baz' => 'abc', 'foo' => 'abb'
+#           use a map { sig => set() } to keep track

@@ -21,12 +21,13 @@ class Solution(object):
         if memo[i][j] > 0:  # already searched
             return memo[i][j]
 
-        memo[i][j] = 1
+        m, n = len(matrix), len(matrix[0])
+        curr_path = 1
 
         for x, y in [(i - 1, j), (i, j - 1), (i + 1, j), (i, j + 1)]:
-            if 0 <= x < len(matrix) and 0 <= y < len(matrix[0]):
-                if matrix[i][j] < matrix[x][y]:
-                    memo[x][y] = self.dfs(x, y, matrix, memo)
-                    memo[i][j] = max(memo[i][j], memo[x][y] + 1)
+            if 0 <= x < m and 0 <= y < n and matrix[i][j] < matrix[x][y]:
+                next_path = self.dfs(x, y, matrix, memo)
+                curr_path = max(curr_path, 1 + next_path)
 
-        return memo[i][j]
+        memo[i][j] = curr_path
+        return curr_path
