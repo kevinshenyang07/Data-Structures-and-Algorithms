@@ -8,7 +8,7 @@ from heapq import heappush, heappop
 # If there is no such route, output -1.
 # Flights are directed, no duplicate flights or self-cycles.
 class Solution(object):
-    def findCheapestPrice(self, n, flights, src, dst, k):
+    def findCheapestPrice(self, n, flights, src, dst, K):
         """
         :type n: int
         :type flights: List[List[int]]
@@ -16,19 +16,22 @@ class Solution(object):
         :type dst: int
         :type K: int
         :rtype: int
-        """
-        g = { i : {} for i in range(n) }
-        for u, v, p in flights:
-            g[u][v] = p
 
-        pq = [(0, src, k)]
+        !! K stops => K + 1 flights
+        """
+        graph = { i : {} for i in range(n) }
+        for u, v, p in flights:
+            graph[u][v] = p
+
+        pq = [(0, src, K)]
         while pq:
             # Djikstra's algo that greedily look for closest next node
             cost, u, k = heappop(pq)
             if u == dst:
                 return cost
             if k >= 0:
-                for nbr in g[u]:
-                    new_cost = cost + g[u][nbr]
+                for nbr in graph[u]:
+                    new_cost = cost + graph[u][nbr]
                     heappush(pq, (new_cost, nbr, k - 1))
         return -1
+# O(m + nlogn) time, O(n) time
