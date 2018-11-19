@@ -27,6 +27,7 @@ class Solution(object):
 
             if mines > 0:
                 board[x][y] = str(mines)
+                # do not enqueue neighbor cells
             else:
                 board[x][y] = 'B'
                 for dx, dy in delta:

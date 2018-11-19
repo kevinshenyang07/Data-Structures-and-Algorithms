@@ -16,6 +16,5 @@ class Solution(object):
             if uf.find(p) == uf.find(q):
                 return False
             uf.union(p, q)
-        # if there're no cycles and no islands
-        # there must be n - 1 edges for n nodes
-        return len(edges) == n - 1
+
+        return uf.num_groups == 1
