@@ -21,35 +21,27 @@ class Solution(object):
 
     def get_coefficients(self, s):
         a = b = 0
-
         sign = 1
-        num = 0
-        is_x = False
+        i = j = 0
 
-        for i, char in enumerate(s):
-            if char == 'x':
-                if i == 0 or s[i - 1] in '+-':
-                    num = 1
-                # and "0x" works by default
-                is_x = True
-            elif char in '0123456789':
-                num = 10 * num + int(char)
+        while i < len(s):
+            if s[i] == '+':
+                sign = 1
+                i += 1
+            elif s[i] == '-':
+                sign = -1
+                i += 1
             else:
-                if is_x:
-                    a += sign * num
+                j = i
+                while j < len(s) and s[j] not in '+-':
+                    j += 1
+                token = s[i:j]
+                if token == 'x':
+                    a += sign
+                elif token[-1] == 'x':
+                    a += sign * int(token[:-1])
                 else:
-                    b += sign * num
-                # reset
-                if char == '+':
-                    sign = 1
-                else:
-                    sign = -1
-                num = 0
-                is_x = False
-        # add up the last token
-        if is_x:
-            a += sign * num
-        else:
-            b += sign * num
+                    b += sign * int(token)
+                i = j
 
         return a, b

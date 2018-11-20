@@ -1,4 +1,4 @@
-#  Minimum Swaps To Make Sequences Increasing
+# Minimum Swaps To Make Sequences Increasing
 class Solution(object):
     def minSwap(self, A, B):
         # since it's guaranteed to have a valid answer,

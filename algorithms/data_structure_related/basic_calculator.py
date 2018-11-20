@@ -5,22 +5,22 @@ class Solution(object):
     def calculate(self, s):
         stack = [[]]  # for s that starts without "("
         num = 0
-        for char in s:
-            if char == '(':
+        for i, char in enumerate(s):
+            if char == ' ':
+                continue
+            elif char == '(':
                 stack.append([])
             elif char == ')':
-                stack[-1].append(num)
-                # !! do not append ans to stack[-1], update num instead
-                # to be used on other closing ')' or end of string
-                num = self.calc(stack.pop())
+                subtotal = self.calc(stack.pop())
+                stack[-1].append(subtotal)
             elif char in '+-':
-                stack[-1].append(num)
-                num = 0
                 stack[-1].append(char)
             elif char.isdigit():
                 num = 10 * num + int(char)
+                if i == len(s) - 1 or not s[i + 1].isdigit():
+                    stack[-1].append(num)
+                    num = 0
 
-        stack[-1].append(num)  # add last number
         return self.calc(stack[-1])
 
     def calc(self, elements):

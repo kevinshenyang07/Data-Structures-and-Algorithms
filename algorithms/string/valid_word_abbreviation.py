@@ -17,11 +17,11 @@ class Solution(object):
                 continue
 
             # the number cannot start with 0
-            if abbr[j] not in '123456789':
+            if not abbr[j].isdigit():
                 return False
 
             skip = 0
-            while j < len(abbr) and abbr[j] in '0123456789':
+            while j < len(abbr) and abbr[j].isdigit():
                 skip = 10 * skip + int(abbr[j])
                 j += 1
             i += skip
