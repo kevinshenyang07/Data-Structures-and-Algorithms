@@ -41,6 +41,7 @@ class Solution(object):
         :type queries: List[List[str]]
         :rtype: List[float]
         """
+        # create index map first so that we know n for union find
         mapping = self.create_mapping(equations)
         uf = UnionFind(len(mapping))
 

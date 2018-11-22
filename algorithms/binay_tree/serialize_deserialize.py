@@ -38,12 +38,12 @@ class Codec(object):
         if not root:
             return '#'
 
-        children_s = []
+        serialized_children = []
         for child in root.children:
-            children_s.append(self.serialize(child))
-        children_s.append('#')
+            serialized_children.append(self.serialize(child))
+        serialized_children.append('#')
 
-        return ' '.join([str(root.val)] + children_s)
+        return ' '.join([str(root.val)] + serialized_children)
 
     def deserialize(self, data):
         queue = collections.deque(data.split(' '))
@@ -56,7 +56,6 @@ class Codec(object):
             return None
         else:
             node = Node(int(val), [])
-
             while True:
                 child = self.build_tree(queue)
                 if not child:
