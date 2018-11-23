@@ -13,41 +13,28 @@
 class HandshakeCounter(object):
 
     def num_ways(self, n):
-        state = range(1, n + 1)
-        self.memo = {}
-        return self.dfs(state)
+        return self.dfs(n, {})  # memo to prevent duplicates to be counted
 
-    def dfs(self, state):
-        if not state:
+    def dfs(self, n, memo):
+        if n == 0:
             return 1
-        if len(state) % 2 == 1:
+        if n % 2 == 1:
             return 0
-
-        key = self.memo_key(state)
-        if key in self.memo:
-            return self.memo[key]
+        if n in memo:
+            return memo[n]
 
         count = 0
-        for j in range(len(state)):
-            for i in range(j):
-                if self.memo_key(state[i:j + 1]) in self.memo:
-                    continue
-
-                new_state1 = state[i + 1:j]
-                new_state2 = state[0:i:-1] + state[j+1:]
-
-                sub_cnt1 = self.dfs(new_state1)
-                sub_cnt2 = self.dfs(new_state2)
-                count += sub_cnt1 * sub_cnt2
-
-        self.memo[key] = count
+        # picking person i and any of another person
+        # the table is divided into two with sizes of (i - 2) and (n - i)
+        for i in range(2, n + 1):
+            sub_cnt1 = self.dfs(i - 2, memo)
+            sub_cnt2 = self.dfs(n - i, memo)
+            count += sub_cnt1 * sub_cnt2
+        memo[n] = count
         return count
-
-    def memo_key(self, state):
-        return hash(tuple(state))
 
 
 if __name__ == '__main__':
     counter = HandshakeCounter()
-    for n in [4, 6, 8, 10]:
+    for n in [4, 6, 8, 10, 12, 14]:
         print "n = {}, count = {}".format(n, counter.num_ways(n))
