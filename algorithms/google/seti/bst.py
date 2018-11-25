@@ -50,3 +50,22 @@ def inorder(root):
                 prev = None
         if prev == curr.right:
             prev, curr = curr, curr.parent
+
+
+class BSTIterator(object):
+    def __init__(self, root):
+        self.stack = []
+        while root:
+            self.stack.append(root)
+            root = root.left
+
+    def hasNext(self):
+        return self.stack
+
+    def next(self):
+        node = self.stack.pop()
+        curr = node.right
+        while curr:
+            self.stack.append(curr)
+            curr = curr.left
+        return node.val

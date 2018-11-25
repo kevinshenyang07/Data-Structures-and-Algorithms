@@ -6,7 +6,7 @@ class Solution(object):
         :rtype: int
         """
         # tails[i] = the smallest tail of all increasing subseq with length i+1
-        # for example give [4, 5, 6, 3],
+        # for example given [4, 5, 6, 3],
         # tails[1] = 5 (from [4, 5], [5, 6])
         tails = [0] * len(nums)
         size = 0
