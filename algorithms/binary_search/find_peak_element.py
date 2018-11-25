@@ -11,22 +11,20 @@ class Solution(object):
         """
         if not nums: return -1
 
-        start, end = 0, len(nums) - 1
-        while start + 1 < end:
-            mid = start + (end - start) // 2
+        left, right = 0, len(nums) - 1
+        while left + 1 < right:
+            mid = left + (right - left) / 2
 
-            if nums[mid] > nums[mid - 1] and nums[mid] > nums[mid + 1]:
+            if nums[mid - 1] < nums[mid] > nums[mid + 1]:
                 return mid
-            elif nums[mid - 1] < nums[mid] < nums[mid + 1]:
-                # there must be a peak between [mid+1, -1] because
-                # if nums[mid + 1] > nums[mid + 2]: return mid + 1
-                # else nums[mid + 1] < nums[mid + 2]: repeat previous process
-                start = mid
+            # for cases when nums[mid - 1] > nums[mid] < nums[mid + 1],
+            # either left or right has an answer
+            if nums[mid - 1] < nums[mid] < nums[mid + 1]:
+                left = mid
             else:
-                # vice versa
-                end = mid
+                right = mid
 
-        if nums[start] >= nums[end]:
-            return start
+        if nums[left] < nums[right]:
+            return right
         else:
-            return end
+            return left
