@@ -12,9 +12,8 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: List[int]
         """
-        N = len(edges)
-        uf = UnionFind(N + 1)
-
+        uf = UnionFind(len(edges) + 1)
+        # find cycle in undirected graph
         for p, q in edges:
             if uf.find(p) == uf.find(q):
                 return [p, q]
@@ -25,7 +24,8 @@ class Solution(object):
 # in this problem, a rooted tree is a directed graph such that, there is exactly one node (the root)
 # for which all other nodes are descendants of this node, plus every node has exactly one parent,
 # except for the root node which has no parents.
-# each pair [u, v] means u is a parent of v
+# given a graph started as a rooted tree, with one additional edge added
+# each edge is a pair [u, v] taht means u is a parent of v
 # return an edge that can be removed to make it a ROOTED tree again
 # if there are multiple answers, return the answer that occurs last in the given input
 class Solution(object):
@@ -35,8 +35,7 @@ class Solution(object):
         :rtype: List[int]
         """
         uf = UnionFind(len(edges) + 1)
-        candidates = self.find_candidates(edges)  # edges that can be removed
-
+        candidates = self.find_candidates(edges)
         # no nodes have two parents: fall back to Q1
         if not candidates:
             for p, q in edges:
@@ -45,12 +44,13 @@ class Solution(object):
                 uf.union(p, q)
         # remove the last edge that makes the graph a valid tree
         else:
+            # union all edges except for the second candidate
+            # if a cycle is found during the process
+            # (not necessarily when the two nodes of first candidates are unioned)
+            # the first candidate must be removed
             for p, q in edges:
-                u, v = candidates[1]
-                # not using (remove) the last candidate edge
-                if p == u and q == v:
+                if p == candidates[1][0] and q == candidates[1][1]:
                     continue
-                # current edge has cycle
                 if uf.find(p) == uf.find(q):
                     return candidates[0]
                 uf.union(p, q)
@@ -60,7 +60,8 @@ class Solution(object):
     def find_candidates(self, edges):
         parents = range(len(edges) + 1)
         for p, q in edges:
-            if parents[q] != q:  # q is already a child of another node
+            # q is already a child of another node
+            if parents[q] != q:
                 return [[parents[q], q], [p, q]]
             parents[q] = p
         return []

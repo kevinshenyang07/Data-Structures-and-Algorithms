@@ -16,17 +16,18 @@ class Solution(object):
         """
         if not any(grid): return 0
 
-        dp_set = []  # row idx => indices of ones
-        ans = 0
+        ones_by_row = []  # row index => set of points on that row
+        count = 0
 
-        for y in range(len(grid)):
-            ones = set(idx for idx, val in enumerate(grid[y]) if val)
-            dp_set.append(ones)
+        for i in range(len(grid)):
+            ones_curr_row = set(j for j, val in enumerate(grid[i]) if val)
+            ones_by_row.append(ones_curr_row)
 
-            for prev in range(y):
-                matches = len(dp_set[y] & dp_set[prev])
+            for prev in range(i):
+                # worst case O(n), real world O(min(set1, set2))
+                matches = len(ones_by_row[prev] & ones_by_row[i])
                 if matches >= 2:
-                    ans += matches * (matches-1) / 2  # pick 2 from n
+                    count += matches * (matches - 1) / 2  # pick 2 from n
 
-        return ans
-# O(m * n ^ 2) time, O(m * n) space
+        return count
+# O(m ^ 2 * n) time, O(m * n) space
