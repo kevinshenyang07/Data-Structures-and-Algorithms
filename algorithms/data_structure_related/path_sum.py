@@ -24,19 +24,19 @@ def path_sum(root, target):
 # => knows max path sum of that node
 class Solution(object):
     def maxPathSum(self, root):
-        min_int = float('-inf')
-        if not root: return min_int
-        self.global_max = min_int  # int var won't be updated in recursion
+        if not root:
+            raise ValueError('Expecting root node of a tree, None provided')
 
+        self.max_path_sum = float('-inf')  # int var won't be updated in recursion
         self.dfs(root)
-        return self.global_max
+        return self.max_path_sum
 
     def dfs(self, root):
         if not root: return 0
-        # max of non-crossing path
+        # max of non-crossing path, do not include a path if its sum is negative
         left_max = max(self.dfs(root.left), 0)
         right_max = max(self.dfs(root.right), 0)
         # update with max of possibly crossing path
-        self.global_max = max(self.global_max, root.val + left_max + right_max)
+        self.max_path_sum = max(self.max_path_sum, root.val + left_max + right_max)
         # pick either left or right max
         return root.val + max(left_max, right_max)

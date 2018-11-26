@@ -1,8 +1,7 @@
 # Search in Rotated Sorted Array
 # assume no duplicates
 def search_rotated(nums, target):
-    if not nums:  # empty list or None
-        return -1
+    if not nums: return -1
 
     left, right = 0, len(nums) - 1
 
@@ -10,6 +9,9 @@ def search_rotated(nums, target):
         mid = left + (right - left) // 2
         if nums[mid] == target:
             return mid
+        # if there're duplicates:
+        # while left < mid and nums[left] == nums[mid]:
+        #     left += 1
         # length of rotated part < (right - left) / 2
         if nums[left] < nums[mid]:
             # continuous range on the left
@@ -29,3 +31,4 @@ def search_rotated(nums, target):
     if nums[right] == target:
         return right
     return -1
+

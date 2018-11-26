@@ -12,10 +12,11 @@ class Solution(object):
         repeating_times = int(math.ceil(float(len(B)) / len(A)))
 
         for i in range(2):
+            # optimized python substring search
             if B in A * (repeating_times + i):
               return repeating_times + i
         return -1
-# O(max(m, n)) time and space
+# O(m * n) time, O(n) space
 
 
 class SolutionV2(object):
@@ -29,7 +30,7 @@ class SolutionV2(object):
             while j < n and A[(i + j) % m] == B[j]:
                 j += 1
             if j == n:
-                return (i + j + m - 1) / m
+                return int(math.ceil((i + j) / float(m)))
 
         return -1
 # O(m * n) time, O(1) space

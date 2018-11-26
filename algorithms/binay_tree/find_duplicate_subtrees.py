@@ -1,38 +1,27 @@
 # Find Duplicate Subtrees
-# to compare any two subtrees, create an id for each subtree (called numbering method)
-# => fingerprint of each subtree is (root.val, left_id, right_id)
-# => in post order if a subtree has a new fingerprint, give it a new id
+# to compare any two subtrees, create a signature for each subtree
+# with root.val, signature of left / right
 class Solution(object):
     def findDuplicateSubtrees(self, root):
         """
         :type root: TreeNode
         :rtype: List[TreeNode]
         """
-        if not root:
-            return []
+        if not root: return []
 
-        dup_nodes = {}  # id => nodes
-        subtree_ids = {}  # (node, left_id, right_id) => id
-        self.postorder(root, dup_nodes, subtree_ids)
-
-        return [nodes[0] for nodes in dup_nodes.values() if len(nodes) > 1]
+        self.roots = collections.defaultdict(list)  # signature => list of roots
+        self.postorder(root)
+        return [roots[0] for roots in self.roots.values() if len(roots) > 1]
 
 
     # get id of the subtree
-    def postorder(self, node, dup_nodes, subtree_ids):
+    def postorder(self, node):
         if not node: return 0
 
-        left_id = self.postorder(node.left, dup_nodes, subtree_ids)
-        right_id = self.postorder(node.right, dup_nodes, subtree_ids)
-
-        fingerprint = (node.val, left_id, right_id)
-
-        if fingerprint not in subtree_ids:
-            subtree_ids[fingerprint] = len(subtree_ids) + 1
-
-        root_id = subtree_ids[fingerprint]
-        dup_nodes[root_id] = dup_nodes.get(root_id, [])
-        dup_nodes[root_id].append(node)
-
-        return root_id
+        left_sig = self.postorder(node.left)
+        right_sig = self.postorder(node.right)
+        # do not hash the sum of nodes since the values can have duplicates
+        rroot_sig = hash("{}/{}\{}".format(left_sig, node.val, right_sig))
+        self.roots[root_sig].append(node)
+        return root_sig
 # O(n) time and space
