@@ -1,3 +1,5 @@
+import collections
+
 # find string matching from stream
 # given a char stream with two APIs next() and hasNext(), and words List[str] as target
 # whenever a target word appears in the stream, print it out
@@ -28,6 +30,7 @@ class TrieNode(object):
 class WordLogger(object):
     def __init__(self, words):
         self.root = self.build_trie(words)
+        self.window_len = max(len(w) for w in words)
 
     def build_trie(self, words):
         root = TrieNode()
@@ -44,17 +47,23 @@ class WordLogger(object):
         return root
 
     def find_matched(self, stream):
-        chars = []
+        chars = collections.deque()
         while stream.has_next():
             chars.append(stream.next())
+            if len(chars) > self.window_len:
+                chars.popleft()
 
-            i = len(chars) - 1
             curr = self.root
-            while i >= 0 and chars[i] in curr.parent:
+            matched = []
+
+            while chars[-1] in curr.parent:
                 curr = curr.parent[chars[i]]
-                i -= 1
+                matched.append(chars.pop())
                 if curr.is_start:
                     print curr.data
+
+            while matched:
+                char.append(matched.pop())
 
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ arr[i]: array at i
 
 During Interview
 ===================
-最重要的是向考官展现你的思维能力
+最重要的是向考官展现你的思维能力 + 让面试官把握节奏 (let Interviewer drive)
 1. 跟考官沟通明确限制条件 (assumptions, edge cases)
 2. 提供brute force思路/复杂度，并进一步提供优化后解法思路
 3. 代码实现

@@ -65,3 +65,6 @@ class Solution(object):
                 return [[parents[q], q], [p, q]]
             parents[q] = p
         return []
+
+# followup for Q2:
+# what if the input is the root of a BST with a redundant edge?

@@ -54,12 +54,13 @@ def postorder(root):
     return visited
 
 
-# Validate BST, 理解并背诵
+# Validate BST
 def is_valid_bst(root):
-    if not root:
-        return True
+    if not root: return True
+
     stack = []
     prev, curr = None, root
+
     while curr or stack:
         while curr:
             stack.append(curr)
@@ -68,8 +69,8 @@ def is_valid_bst(root):
         # compare consecutive inorder nodes
         if prev and prev.val >= curr.val:
             return False
-        prev = curr
-        curr = curr.right  # go up if current node is not a root node
+        # go up if current node is not a root node
+        prev, curr = curr, curr.right
     return True
 
 
