@@ -4,31 +4,27 @@ class UnionFind(object):
         self.parents = range(n)
         self.values = [1.0] * n  # initial value for each node
 
-    # amortized O(1) time:
     def find(self, p):
         k = p
         while p != self.parents[p]:
+            # propagate the multiplier going up
+            self.values[p] *= self.values[self.parents[p]]
             # path compression
             self.parents[p] = self.parents[self.parents[p]]
             p = self.parents[p]
         # the length of the previous path is now halfed
         return p
 
-    # when merging tree b to tree a, calculate the adjustment multiple
-    # by the ratio provided, then propagate it to every node in tree b
-    # if we always merge smaller group to larger one, all union() calls
-    # cost O(n) time, the amortized cost is still O(1)
     def union(self, p, q, ratio):
         parent_p = self.find(p)
         parent_q = self.find(q)
 
         if parent_p == parent_q:  # p and q in one group
             return
-        # p = 1, q = 2, ratio = 4 => x = 1 / (2 * 4)
-        adj_mul = self.values[p] / (self.values[q] * ratio)
-        for i in range(len(self.parents)):
-            if self.parents[i] == parent_q:
-                self.values[i] *= adj_mul
+        # calculate the adjustment multiplier
+        # p = 1, q = 2, ratio = 4 => 1 / (2 * 4)
+        # which will be propagated in find()
+        self.values[parent_q] = self.values[p] / (self.values[q] * ratio)
         # merge tree parent_q to tree parent_p
         self.parents[parent_q] = parent_p
 
