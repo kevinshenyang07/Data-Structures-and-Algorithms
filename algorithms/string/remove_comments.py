@@ -10,11 +10,11 @@ class Solution(object):
         :type source: List[str]
         :rtype: List[str]
         """
-        substr = ''
         block = False
         formatted = []
 
         for s in source:
+            chars = []
             i = 0
             while i < len(s):
                 # start of line comment
@@ -23,19 +23,18 @@ class Solution(object):
                 # start of block comment
                 elif s[i:i+2] == '/*' and not block:
                     block = True
-                    i += 1
+                    i += 1  # skip current char
                 # end of block comment
                 elif s[i:i+2] == '*/' and block:
                     block = False
-                    i += 1
+                    i += 1  # skip current char
                 # normal character
                 elif not block:
-                    substr += s[i]
+                    chars.append(s[i])
                 # else: part of block comment
                 i += 1
 
-            if substr and not block:  # block not finished
-                formatted.append(substr)
-                substr = ''
+            if chars and not block:  # block not finished
+                formatted.append(''.join(chars))
 
         return formatted
