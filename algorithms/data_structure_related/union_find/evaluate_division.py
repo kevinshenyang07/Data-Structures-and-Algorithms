@@ -1,11 +1,14 @@
 # Evaluate Division
 class UnionFind(object):
-    def __init__(self, n):
-        self.parents = range(n)
-        self.values = [1.0] * n  # initial value for each node
+    def __init__(self):
+        self.parents = {}
+        self.values = {}
 
     def find(self, p):
-        k = p
+        # initialize
+        if p not in self.parents:
+            self.parents[p] = p
+            self.values[p] = 1.0
         while p != self.parents[p]:
             # propagate the multiplier going up
             self.values[p] *= self.values[self.parents[p]]
@@ -37,39 +40,21 @@ class Solution(object):
         :type queries: List[List[str]]
         :rtype: List[float]
         """
-        # create index map first so that we know n for union find
-        mapping = self.create_mapping(equations)
-        uf = UnionFind(len(mapping))
-
+        uf = UnionFind()
         for i in range(len(equations)):
             a, b = equations[i]
-            uf.union(mapping[a], mapping[b], ratios[i])
+            uf.union(a, b, ratios[i])
 
-        res = []
+        result = []
         for a, b in queries:
-            if a not in mapping or b not in mapping:
-                res.append(-1.0)
-            elif uf.find(mapping[a]) != uf.find(mapping[b]):
-                res.append(-1.0)
+            if a not in uf.parents or b not in uf.parents:
+                result.append(-1.0)
+            elif uf.find(a) != uf.find(b):
+                result.append(-1.0)
             else:
-                res.append(uf.values[mapping[a]] / uf.values[mapping[b]])
+                result.append(uf.values[a] / uf.values[b])
 
-        return res
-
-    def create_mapping(self, equations):
-        mapping = {}  # str => id
-        n = 0
-
-        for i in range(len(equations)):
-            a, b = equations[i]
-            if a not in mapping:
-                mapping[a] = n
-                n += 1
-            if b not in mapping:
-                mapping[b] = n
-                n += 1
-
-        return mapping
+        return result
 # O(N * E + Q) time, O(N) space
 # N being number of strings
 # E being number of equations

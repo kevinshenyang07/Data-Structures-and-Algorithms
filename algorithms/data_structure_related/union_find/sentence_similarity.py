@@ -1,4 +1,4 @@
-from union_find import UnionFind
+from union_find import UnionFindWithMap as UnionFind
 
 # Sentence Similarity II
 # Note: cannot use union find if similarity is not symmetric (has direction)
@@ -14,32 +14,18 @@ class Solution(object):
         if len(words1) != len(words2):
             return False
 
-        mapping = self.create_mapping(pairs)
-        uf = UnionFind(len(mapping))
-
+        uf = UnionFind()
         for s1, s2 in pairs:
-            uf.union(mapping[s1], mapping[s2])
+            uf.union(s1, s2)
 
         for i in range(len(words1)):
             w1, w2 = words1[i], words2[i]
-            # ! be careful about conditions when word is not mapping
             if w1 == w2:
                 continue
-            if w1 not in mapping or w2 not in mapping:
+            # ! be careful about conditions when word is not mapping
+            if w1 not in uf.parents or w2 not in uf.parents:
                 return False
-            if uf.find(mapping[w1]) != uf.find(mapping[w2]):
+            if uf.find(w1) != uf.find(w2):
                 return False
 
         return True
-
-    def create_mapping(self, pairs):
-        mapping = {}
-        idx = 0
-        for s1, s2 in pairs:
-            if s1 not in mapping:
-                mapping[s1] = idx
-                idx += 1
-            if s2 not in mapping:
-                mapping[s2] = idx
-                idx += 1
-        return mapping
