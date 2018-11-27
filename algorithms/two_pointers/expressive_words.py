@@ -29,7 +29,8 @@ class Solution(object):
             while j < len(W) and W[j] == char:
                 j += 1
                 cnt_W += 1
-
+            # one char in W cannot be extended to 2 chars in S
+            # but two same chars in W can be extended to 3+
             if cnt_S < cnt_W or (cnt_S == 2 and cnt_W == 1):
                 return False
 

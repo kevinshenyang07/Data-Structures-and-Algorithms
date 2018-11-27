@@ -6,23 +6,19 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        stack = [[1, '']]  # repeat curr_n, pattern
-        curr_n = 0
+        stack = [[1, '']]  # repeat curr_num, pattern
+        curr_num = 0
 
         for i, char in enumerate(s):
             if char.isdigit():
-                curr_n = 10 * curr_n + int(char)
-                if not s[i + 1].isdigit():  # number cannot be the last char
-                    stack.append([curr_n, ''])
-                    curr_n = 0
+                curr_num = 10 * curr_num + int(char)
             elif char == '[':
-                continue
+                stack.append([curr_num, ''])
+                curr_num = 0
             elif char == ']':
-                # !!avoid overwriting curr_n with n
-                n, pattern = stack.pop()
-                repeated = n * pattern
-                stack[-1][1] = stack[-1][1] + repeated
+                times, pattern = stack.pop()
+                stack[-1][1] += times * pattern
             else:
-                stack[-1][1] = stack[-1][1] + char
+                stack[-1][1] += char
 
         return stack[0][1]
