@@ -34,3 +34,22 @@ class Solution(object):
                 return False
 
         return bal_L == bal_R == 0
+
+def test():
+    solution = Solution()
+    f = solution.canTransform
+    print f('RL', 'LR')  # False
+    print f('XRXXLX', 'XXXRLX') # True
+    print f('XRXXLX', 'XXLRXX') # False
+    print f('XRXXLX', 'XRLXXX') # True
+    print f('XRXXLX', 'RXLXXX')  # False
+    print f('XRXXLX', 'RXLXXL')  # False
+    print f('XRXXXL', 'XRLXXR')  # False
+    print f('XRXXXL', 'XRXXXX')  # False
+
+    print f('XRXRXLLX', 'XXXRRLLX') # True
+    print f('XRXRXLLX', 'XXRXRXLL') # False
+    # and other corner cases
+
+if __name__ == '__main__':
+    test()

@@ -13,7 +13,14 @@ import math
 # If there isn't such day, output -1.
 
 # brute force: on each day, when a flower blooms, look k distance back / forward
-# which is O(nk) time, O(n) space
+# => O(nk) time, O(n) space
+# improvement: build a BST on the fly, each node being the position of the next flower
+#              find the node's next smaller / larger node then compare
+# => O(nlogn) time, O(n) space
+# optimal: partition slots into buckets with size to be k + 1
+#          so that even the max - min element in one bucket would not qualify
+#          range of bucket[0]: [1, k + 1], bucket[1]: [k + 2, 2k + 2] ...
+# => O(n) time and space
 class Solution(object):
     def kEmptySlots(self, flowers, k):
         """
@@ -24,9 +31,6 @@ class Solution(object):
         if not flowers:
             return -1
 
-        # partition slots into buckets with size to be k + 1
-        # so that even the max - min element in one bucket would not qualify
-        # range of bucket[0]: [1, k + 1], bucket[1]: [k + 2, 2k + 2] ...
         num_buckets = int(math.ceil(len(flowers) / (k + 1.0)))
         bucket_mins = [float('inf')] * num_buckets
         bucket_maxs = [float('-inf')] * num_buckets

@@ -8,15 +8,15 @@ class Solution(object):
         """
         max_length = 0
         i = 0
-        mapping = {}  # char => largest index of this char appears so far
+        counter = {}  # char => largest index of this char appears so far
 
         for j, char in enumerate(s):
             # include current char first then eject if needed
-            mapping[char] = j
+            counter[char] = j
 
-            if len(mapping) > k:
-                k = min(mapping.values())
-                mapping.pop(s[k])
+            if len(counter) > k:
+                k = min(counter.values())
+                counter.pop(s[k])
                 i = k + 1
 
             max_length = max(max_length, j - i + 1)

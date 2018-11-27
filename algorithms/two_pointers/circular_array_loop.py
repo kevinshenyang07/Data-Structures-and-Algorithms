@@ -28,7 +28,7 @@ class Solution(object):
         return False
 
     def next(self, steps, i):
-        if i < 0:  # for fast pointer
+        if i < 0:  # case when the fast pointer has reached an invalid state
             return -1
 
         n = len(steps)
