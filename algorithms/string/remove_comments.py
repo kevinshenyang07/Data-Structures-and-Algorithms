@@ -12,29 +12,30 @@ class Solution(object):
         """
         block = False
         formatted = []
+        chars = []
 
         for s in source:
-            chars = []
             i = 0
             while i < len(s):
-                # start of line comment
-                if s[i:i+2] == '//' and not block:
-                    i = len(s) # advance pointer to end of current s
-                # start of block comment
-                elif s[i:i+2] == '/*' and not block:
-                    block = True
-                    i += 1  # skip current char
-                # end of block comment
-                elif s[i:i+2] == '*/' and block:
-                    block = False
-                    i += 1  # skip current char
-                # normal character
-                elif not block:
-                    chars.append(s[i])
-                # else: part of block comment
-                i += 1
+                if not block:
+                    if s[i:i+2] == '//':
+                        break
+                    if s[i:i+2] == '/*':
+                        block = True
+                        i += 2
+                    else:
+                        chars.append(s[i])  # normal chars
+                        i += 1
+                else:
+                    if s[i:i+2] == '*/':
+                        block = False
+                        i += 2
+                    else:
+                        i += 1  # skip chars in block
 
-            if chars and not block:  # block not finished
+             # only append when block has finished (see case 3)
+            if chars and not block:
                 formatted.append(''.join(chars))
+                chars = []
 
         return formatted
