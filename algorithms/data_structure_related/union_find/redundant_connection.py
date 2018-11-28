@@ -12,8 +12,9 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: List[int]
         """
+
         uf = UnionFind(len(edges) + 1)
-        # find cycle in undirected graph
+
         for p, q in edges:
             if uf.find(p) == uf.find(q):
                 return [p, q]

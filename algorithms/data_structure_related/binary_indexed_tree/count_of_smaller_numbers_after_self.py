@@ -50,24 +50,26 @@ class TreeNode(object):
         self.count = 1
         self.left_size = 0
 
-    def insert(self, node):
-        if self.val < node.val:
-            curr_count = self.count + self.left_size
-            if self.right:
-                return curr_count + self.right.insert(node)
-            else:
-                self.right = node
-                return curr_count
+    def insert(self, val):
+        node = TreeNode(val)
+        count = 0
+        prev = root = self
 
-        if self.val > node.val:
-            self.left_size += node.count
-            if self.left:
-                return self.left.insert(node)
+        while root:
+            if root.val < val:
+                count += root.count + root.left_size
+                prev, root = root, root.right
+            elif root.val > val:
+                root.left_size += 1
+                prev, root = root, root.left
             else:
-                self.left = node
-                return 0
+                root.count += 1
+                return count + root.left_size
 
-        if self.val == node.val:
-            self.count += 1
-            return self.left_size
+        if prev.val < val:
+            prev.right = node
+        else:
+            prev.left = node
+
+        return count
 # O(nlogn) time in average, but could be O(n^2) if nums == sorted(nums)

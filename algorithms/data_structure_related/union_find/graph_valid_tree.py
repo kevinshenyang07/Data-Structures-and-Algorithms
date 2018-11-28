@@ -16,5 +16,5 @@ class Solution(object):
             if uf.find(p) == uf.find(q):
                 return False
             uf.union(p, q)
-
+        # no forest
         return uf.num_groups == 1

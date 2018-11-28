@@ -47,10 +47,9 @@ def factorize(n):
 
 # greatest common divisor
 def gcd(a, b):
-    # b cannot be 0
-    if a % b == 0:
-        return b
-    return gcd(b, a % b)
+    while b:
+        a, b = b, a % b
+    return a
 # O(log(a+b)) time
 
 
