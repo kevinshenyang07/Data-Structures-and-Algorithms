@@ -17,12 +17,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if not any(nums): return 0
-
         max_chunks = 0
         curr_right = 0  # right bound of current window
 
         for i, num in enumerate(nums):
+            # update current window
             curr_right = max(curr_right, num)
             # sorted(nums[:i+1]) == range(i+1)
             if curr_right == i:

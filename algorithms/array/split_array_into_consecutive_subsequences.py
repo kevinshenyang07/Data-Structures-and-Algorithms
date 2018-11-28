@@ -1,4 +1,9 @@
 # Split Array into Consecutive Subsequences
+# You are given an integer array sorted in ascending order (may contain duplicates)
+# you need to split them into several subsequences, where each subsequences consist
+# of at least 3 consecutive integers. Return whether you can make such a split.
+# [1,2,3,3,4,4,5,5] => true
+# [1,2,3,4,4,5] => false
 class Solution(object):
     def isPossible(self, nums):
         """
@@ -14,7 +19,7 @@ class Solution(object):
                 continue
 
             counter[num] -= 1
-
+            # guaranteed to work since nums array is sorted start of each subsequence is known
             if following[num] > 0:
                 # append num to one of the subseqs that end at num - 1
                 following[num] -= 1

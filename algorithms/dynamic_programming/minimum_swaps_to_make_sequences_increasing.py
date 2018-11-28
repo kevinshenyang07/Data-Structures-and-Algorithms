@@ -17,10 +17,10 @@ class Solution(object):
                 # if we have to swap on i, we also swap on i - 1 to cancel it out
                 swap[i] = swap[i - 1] + 1
                 no_swap[i] = no_swap[i - 1]
-            # swapping with make A, B increasing
+            # swapping on either i - 1 or i will make A, B increasing
             if A[i - 1] < B[i] and B[i - 1] < A[i]:
-                swap[i] = min(swap[i], no_swap[i - 1] + 1)  # compare with swapping on i
-                no_swap[i] = min(no_swap[i], swap[i - 1])  # compare with swapping on i - 1
-
+                swap[i] = min(swap[i], no_swap[i - 1] + 1)  # swap on i
+                no_swap[i] = min(no_swap[i], swap[i - 1])  # swap on i + 1
+            # otherwise A[i] == B[i]
         return min(swap[-1], no_swap[-1])
 # O(n) time and space (can optimize space to O(1))
