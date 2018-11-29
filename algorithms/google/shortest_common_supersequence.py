@@ -35,4 +35,4 @@ def shortest_common_seq_with_dup(subseqs):
 
 
 if __name__ == '__main__':
-    print shortest_common_seq([[1, 9, 7], [1, 4], [4, 9], [2]])  # [1, 4, 9, 7]
+    print shortest_common_seq([[1, 9, 7], [1, 4], [4, 9], [2]])  # [1, 4, 9, 7, 2]

@@ -9,19 +9,19 @@ class Solution(object):
         """
         if not root: return []
 
-        self.roots = collections.defaultdict(list)  # signature => list of roots
+        self.sigs = set()
+        self.dups = {}  # signature => root of duplicate subtree
         self.postorder(root)
-        return [roots[0] for roots in self.roots.values() if len(roots) > 1]
+        return self.dups.values()
 
-
-    # get id of the subtree
     def postorder(self, node):
         if not node: return 0
 
         left_sig = self.postorder(node.left)
         right_sig = self.postorder(node.right)
         # do not hash the sum of nodes since the values can have duplicates
-        rroot_sig = hash("{}/{}\{}".format(left_sig, node.val, right_sig))
+        root_sig = hash("{}/{}\{}".format(left_sig, node.val, right_sig))
+
         self.roots[root_sig].append(node)
         return root_sig
 # O(n) time and space
