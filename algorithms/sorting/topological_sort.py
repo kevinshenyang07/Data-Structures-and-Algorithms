@@ -1,6 +1,6 @@
 # topological ordering: starting from vertices with no in-edge, to the vertices with no out-edge
 # the vertices in the cycle won't be added to queue, which can be used to determine if valid
-# which also implies visited set is not needed
+# a -> b: a needs to be processed before b, and b has in-degree of 1
 
 # Course Schedule
 # an in-edge from vertex v1 to v2 => v1 is a prerequisite to v2

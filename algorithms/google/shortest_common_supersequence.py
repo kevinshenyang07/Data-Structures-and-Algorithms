@@ -1,6 +1,6 @@
 import collections
 
-def shortest_common_seq(subseqs):
+def shortest_common_superseq(subseqs):
     graph = collections.defaultdict(set)
     in_degrees = collections.defaultdict(int)
 

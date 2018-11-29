@@ -40,14 +40,16 @@ class Solution(object):
             # maintain a window of size k
             if i > k:
                 last_j = nums[i - k - 1] / (t + 1)
+                # we can always pop last_j since if there's i - k - 1 < idx < i that
+                # makes nums[idx] in the bucket last_j, it would have returned true
                 buckets.pop(last_j)
             # duplicate can only appear in current or nearby buckets
             j = num / (t + 1)
             if j in buckets:
                 return True
-            if j - 1 in buckets and abs(num - buckets[j - 1]) <= t:
+            if j - 1 in buckets and num - buckets[j - 1] <= t:
                 return True
-            if j + 1 in buckets and abs(num - buckets[j + 1]) <= t:
+            if j + 1 in buckets and buckets[j + 1] - num <= t:
                 return True
             buckets[j] = num
 
