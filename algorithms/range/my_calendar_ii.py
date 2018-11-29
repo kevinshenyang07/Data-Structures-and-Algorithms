@@ -1,13 +1,6 @@
 # My Calendar II
-class Node(object):
-    def __init__(self, s, e):
-        self.start = s
-        self.end = e
-        self.left = None
-        self.right = None
-        self.overlapped = False
-
 class MyCalendarTwo(object):
+
     def __init__(self):
         self.root = None
 
@@ -17,54 +10,62 @@ class MyCalendarTwo(object):
         :type end: int
         :rtype: bool
         """
-        if not self.insertable(self.root, start, end):
-            return False
-
-        self.root = self.insert(self.root, start, end)
-        return True
-
-    def insertable(self, node, s, e):
-        if not node:
+        if not self.root:
+            self.root = TreeNode(start, end)
             return True
-        # no overlap
-        if node.start >= e:
-            return self.insertable(node.left, s, e)
-        if node.end <= s:
-            return self.insertable(node.right, s, e)
-        # already double-booked
-        if node.overlapped:
+        if not self.root.insertable(start, end):
             return False
-        # test range(s) out of [node.start, node.end)
-        if s < node.start and not self.insertable(node.left, s, node.start):
-            return False
-        if node.end < e and not self.insertable(node.right, node.end, e):
-            return False
+        self.root.insert(start, end)
         return True
-
-    def insert(self, node, s, e):
-        # base case
-        if not node:
-            return Node(s, e)
-        # no overlap
-        if node.start >= e:
-            node.left = self.insert(node.left, s, e)
-        elif node.end <= s:
-            node.right = self.insert(node.right, s, e)
-        # otherwise update current node's range
-        else:
-            s1 = min(node.start, s)
-            s2 = max(node.start, s)
-            e1 = min(node.end, e)
-            e2 = max(node.end, e)
-
-            node.overlapped = True
-            node.start = s2
-            node.end = e1
-            # insert range(s) out of [s2, e1)
-            if s1 < node.start:
-                node.left = self.insert(node.left, s1, node.start)
-            if node.end < e2:
-                node.right = self.insert(node.right, node.end, e2)
-
-        return node
 # O(logn) ~ O(n) time for each book() call, since in worst case BST will be a list
+
+class TreeNode(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+        self.left = None
+        self.right = None
+        self.count = 1
+
+    def insertable(self, start, end):
+        # non-overlapping
+        if self.end <= start:
+            if not self.right:
+                return True
+            return self.right.insertable(start, end)
+        elif self.start >= end:
+            if not self.left:
+                return True
+            return self.left.insertable(start, end)
+        # overlapping
+        else:
+            if self.count > 1:
+                return False
+            if self.end < end and not self.insertable(self.end, end):
+                return False
+            if self.start > start and not self.insertable(start, self.start):
+                return False
+            return True
+
+    def insert(self, start, end):
+        # non-overlapping
+        if self.end <= start:
+            if not self.right:
+                self.right = TreeNode(start, end)
+            else:
+                self.right.insert(start, end)
+        elif self.start >= end:
+            if not self.left:
+                self.left = TreeNode(start, end)
+            else:
+                self.left.insert(start, end)
+        # overlapping
+        else:
+            s_min, s_max = sorted([self.start, start])
+            e_min, e_max = sorted([self.end, end])
+            # shrink the range of current node, insert extra range(s)
+            self.start = s_max
+            self.end = e_min
+            self.count += 1
+            self.insert(s_min, s_max)
+            self.insert(e_min, e_max)

@@ -5,13 +5,13 @@ class Solution(object):
         n = len(s)
 
         # steps needed to go back to the first char of the next word
-        # which can not be used in current row
+        # if s[i] != ' ', then s[pos_first:?] will not be used in current row
         steps_back = [0] * n
-        first = 0
+        pos_first = 0
         for i in range(n):
             if s[i] == ' ':
-                first = i + 1
-            steps_back[i] = i - first
+                pos_first = i + 1  # actually taking a step forward to next char
+            steps_back[i] = i - pos_first
 
         # index of the first char in next word => number of chars used overall
         pos = 0
