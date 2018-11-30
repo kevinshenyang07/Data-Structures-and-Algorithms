@@ -8,20 +8,20 @@ class Solution(object):
         """
         if len(A) != len(B):
             return False
+        if A == B and len(A) > len(set(A)):
+            return True
 
-        diff_chars = []
+        diff = []
         for i in range(len(A)):
-            if A[i] != B[i]:
-                if not diff_chars:
-                    diff_chars.append((A[i], B[i]))
-                elif len(diff_chars) == 2:
-                    return False
-                elif diff_chars[0] != (B[i], A[i]):
-                    return False
-                else:
-                    diff_chars.append((A[i], B[i]))
+            if A[i] == B[i]:
+                continue
+            diff.append((A[i], B[i]))
+            if len(diff) > 2:
+                return False
+            if len(diff) == 2 and (B[i], A[i]) not in diff:
+                return False
 
-        return len(diff) == 2 or len(A) > len(set(A))
+        return len(diff) == 2
 # test cases:
 # 1. 'ab', 'ba' => true
 # 2. 'aa', 'aa' => true

@@ -39,6 +39,10 @@ n <= 1000: n^ 2
 n <= 10^6: n ~ nlogn
 n <= 10^9: logn
 
+Tree
+-------------------
+complete(root) = (full(root.left) and complete(root.right)) or (complete(root.left) and full(root.right))
+balanced(root) = balanced(root.left) and balanced(root.right) and abs(height(root.left) - height(root.right)) <= 1
 
 Search
 -------------------
