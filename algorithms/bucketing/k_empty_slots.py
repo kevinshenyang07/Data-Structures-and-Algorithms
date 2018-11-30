@@ -28,27 +28,23 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        if not flowers:
-            return -1
-
+        if not flowers: return -1
+        # two flowers with distance k => abs(pos1 - pos2) is k + 1
         num_buckets = int(math.ceil(len(flowers) / (k + 1.0)))
         bucket_mins = [float('inf')] * num_buckets
         bucket_maxs = [float('-inf')] * num_buckets
 
         for i, pos in enumerate(flowers):
-            # update the range of corresponding bucket on the go
+            # minus 1 since pos is in range [1, N]
             j = (pos - 1) / (k + 1)
-            if pos <= bucket_mins[j]:
-                bucket_mins[j] = pos
-                # compare with left max
-                if j > 0 and bucket_mins[j] - bucket_maxs[j - 1] == k + 1:
-                    return i + 1
-            if pos >= bucket_maxs[j]:
-                bucket_maxs[j] = pos
-                # compare with right min
-                if j < num_buckets - 1 and bucket_mins[j + 1] - bucket_maxs[j] == k + 1:
-                    return i + 1
+            # update the range of corresponding bucket on the fly
+            bucket_mins[j] = min(bucket_mins[j], pos)
+            bucket_maxs[j] = max(bucket_maxs[j], pos)
             # if pos is between min and max, there won't be an answer for that flower
+            if pos == bucket_mins[j] and j > 0 and pos - bucket_maxs[j - 1] == k + 1:
+                return i + 1
+            if pos == bucket_maxs[j] and j < num_buckets - 1 and bucket_mins[j + 1] - pos == k + 1:
+                return i + 1
 
         return -1
 # O(n) time, O(n/(k+1)) space
