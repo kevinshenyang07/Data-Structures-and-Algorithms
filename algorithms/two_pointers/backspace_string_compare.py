@@ -8,7 +8,8 @@ class Solution(object):
         """
         i, j = len(S) - 1, len(T) - 1
         back_s = back_t = 0
-
+        # using or since there could be case when the extra chars
+        # are cleared out in the end
         while i >= 0 or j >= 0:
             while i >= 0 and (back_s or S[i] == '#'):
                 if S[i] == '#':
@@ -25,9 +26,6 @@ class Solution(object):
                 j -= 1
 
             if i >= 0 and j >= 0 and S[i] != T[j]:
-                return False
-            # still remaining chars in S or T after inner while loops
-            if i * j < 0:
                 return False
 
             i -= 1

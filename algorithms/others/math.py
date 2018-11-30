@@ -61,6 +61,7 @@ def lcm(a, b):
 # Mirror Reflection
 # imagine the walls can be mirrored upward, each time the ray hit
 # the left or right wall it goes up by q vertically
+# so the question is basically finding integers i, j that satisfy / minimize i * p = j * q
 def mirror_reflection(p, q):
     lcm = lcm(p, q)
 

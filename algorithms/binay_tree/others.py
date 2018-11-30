@@ -27,7 +27,7 @@ def depth_iter(root):
 
 
 # Balanced Binary Tree
-# the depth of the two subtrees of every node never differ by more than 1
+# balanced(root) = balanced(root.left) and balanced(root.right) and abs(height(root.left) - height(root.right)) <= 1
 def is_balanced(root):
     return postorder(root) != -1
 
