@@ -14,7 +14,7 @@
 # (not printed on ts=10, so on ts=11 the last ts "foo" is printed is 1)
 class Logger(object):
     def __init__(self):
-        self.logged = {}
+        self.logged = {}  # message => ts
 
     def shouldPrintMessage(self, timestamp, message):
         """
@@ -23,15 +23,9 @@ class Logger(object):
         :type message: str
         :rtype: bool
         """
-        # use .keys() to avoid deleting keys during dict iteration
-        for ts in self.logged.keys():
-            if timestamp - ts >= 10:
-                self.logged.pop(ts)
-            elif message in self.logged[ts]:
-                return False
-        # do not add message to cache if already logged in last 10 sec
-        self.logged[timestamp] = self.logged.get(timestamp, set())
-        self.logged[timestamp].add(message)
+        if message in self.logged and timestamp - self.logged[message] < 10:
+            return False
+        self.logged[message] = timestamp
         return True
 
 
