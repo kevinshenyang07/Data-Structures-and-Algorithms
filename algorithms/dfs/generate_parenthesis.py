@@ -10,17 +10,12 @@ class Solution(object):
         self.dfs("", 0, 0)
         return self.result
 
-    def dfs(self, string, open_parens, close_parens):
-        n = self.n
-        # stop on invalid cases
-        if open_parens < close_parens:
-            return
-        # end on full length
-        if open_parens == n and close_parens == n:
-            self.result.append(string)
+    def dfs(self, substr, open_parens, close_parens):
+        if open_parens == close_parens == self.n:
+            self.result.append(substr)
             return
 
-        if open_parens <= n:
-            self.dfs(string + "(", open_parens + 1, close_parens)
-        if close_parens <= n:
-            self.dfs(string + ")", open_parens, close_parens + 1)
+        if open_parens < self.n:
+            self.dfs(substr + "(", open_parens + 1, close_parens)
+        if open_parens > close_parens and close_parens < self.n:
+            self.dfs(substr + ")", open_parens, close_parens + 1)

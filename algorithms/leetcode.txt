@@ -70,5 +70,6 @@ merge sort / quick sort
 图论
 -------------------
 无向图是一个合法的树: 没有环，只有一个根节点
+无向图是否存在环：Union Find
 有向图是一个合法的树：没有环，只有一个根节点，每个节点最多只有一个父节点
-有向图是否存在环： DFS / Topological Sort
+有向图是否存在环：DFS / Topological Sort
