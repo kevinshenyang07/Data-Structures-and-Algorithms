@@ -2,10 +2,10 @@
 # Python has no switch case, just if / elif
 
 # range of 32-bit signed integer is [- 2 ** 31, 2 ** 31 - 1]
-# sys.maxint not the same on diffrent systems, and is deprecated in py3
+# sys.maxint / sys.maxsize does not work in Leetcode
+# math.inf needs import, stick to float!
 float('-inf')
 
-3.bit_length() == 2
 1 << (x-1).bit_length()  # smallest power of 2 greater than x
 bin(num).count('1')  # for a positive integer return number of "1"s in its binary format
 
